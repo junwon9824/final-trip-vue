@@ -3,46 +3,61 @@
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <div class="container-fluid">
-
-    <router-link to="/">
-    <a class="navbar-brand" href="javascript:void(0)">Logo</a>
-  </router-link>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="mynavbar">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <router-link to="/conqueredmountain">
-          <a class="nav-link" href="javascript:void(0)">정복한 산</a>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-light mt-0 p-0">
+    <div class="container-lg my-0 py-0">
+      <div class="d-flex flex-row">
+        <router-link to="/" class="d-flex flex-row align-items-center nav-link">
+          <a class="navbar-brand nav-link" href="javascript:void(0)">
+            <img
+              src="@/assets/—Pngtree—vector mountains icon_4154096.png"
+              class="rounded mx-auto d-block"
+              alt="..."
+            />
+          </a>
+          <h3 class="text-muted"><strong>산들바람</strong></h3>
+        </router-link>
+      </div>
+      <div class="col-4 d-flex flex-row justify-content-between">
+        <div>
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <router-link to="/conqueredmountain" class="nav-link">
+                <h5 class="text-primary">정복한 산</h5>
+              </router-link>
+              
+            </li>
+            <li class="nav-item">
+              <router-link to="/search" class="nav-link">
+                <h5 class="text-primary">검색</h5>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/board" class="nav-link">
+                <h5 class="text-primary">게시판</h5>
+              </router-link>
+            </li>
+          </ul>
+        </div>
+        <div class="d-flex flex-row align-items-center">
+          <router-link to="/login" class="px-1">
+            <button type="button" class="btn btn-primary rounded-pill text-white">로그인</button>
           </router-link>
 
-        </li>
-        <li class="nav-item">
-          <router-link to="/search">
-            <a class="nav-link" href="javascript:void(0)">검색</a>
+          <router-link to="/regist" class="px-1">
+            <button type="button" class="btn btn-primary rounded-pill text-white">회원가입</button>
           </router-link>
-
-        </li>
-        <li class="nav-item">
-          <router-link to="/board">
-          <a class="nav-link" href="javascript:void(0)">게시판</a>
-          </router-link>
-
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="text" placeholder="Search">
-        <button class="btn btn-primary" type="button">Search</button>
-      </form>
+        </div>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 </template>
 
 <style scoped>
+
+img{
+    height: 111px;
+    text-align: left;
+}
+
+
 </style>

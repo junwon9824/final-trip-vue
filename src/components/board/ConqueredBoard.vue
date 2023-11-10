@@ -1,0 +1,66 @@
+<script setup>
+import { ref } from 'vue';
+
+const mountains = ref([]);
+const editedMountainName = ref('');
+const editedRegDate = ref('');
+const editedFileInfo = ref('');
+
+const handleImageChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+            editedFileInfo.value = reader.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+};
+
+const insertData = () => {
+    // Implement the logic to insert data or perform an action
+    console.log('Insert button clicked!');
+    console.log('Mountain Name:', editedMountainName.value);
+    console.log('Registration Date:', editedRegDate.value);
+    console.log('File Info:', editedFileInfo.value);
+};
+
+</script>
+
+<template>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h1 class="card-title mb-4">
+                            <input v-model="editedMountainName" class="form-control" placeholder="이름 Name" />
+                        </h1>
+
+                        <p class="card-text">
+                            <input v-model="editedRegDate" class="form-control" placeholder="등록일자 Date" />
+                        </p>
+
+                        <div class="card-body">
+                            <input type="file" @change="handleImageChange" class="form-control" accept="image/*" />
+                            <img :src="editedFileInfo" class="img-fluid rounded mx-auto d-block"   />
+                        </div>
+
+                        <button @click="insertData" class="btn btn-primary">등록</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style scoped>
+ .btn btn-primary{
+    margin-left: 90%;
+}
+
+</style>

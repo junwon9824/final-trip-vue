@@ -13,6 +13,7 @@ app.use(router)
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '../scss/main.scss';
  
 
 app.mount('#app')
