@@ -1,5 +1,5 @@
 <script setup>
-import RecordCardItem from './item/RecordCardItem.vue';
+import RecordCardItem from './RecordCardItem.vue';
 import { ref } from 'vue';
 const recordList = [
   {

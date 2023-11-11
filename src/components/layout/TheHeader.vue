@@ -37,12 +37,12 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/board" class="nav-link">
+              <router-link to="/plan" class="nav-link">
                 <h5 class="text-primary">계획</h5>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/board" class="nav-link">
+              <router-link to="/mypage" class="nav-link">
                 <h5 class="text-primary">마이페이지</h5>
               </router-link>
             </li>

@@ -38,6 +38,22 @@ const router = createRouter({
       component: () => import('../views/Board.vue')
     }, 
     {
+      path: '/plan',
+      name: 'plan',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/Plan.vue')
+    }, 
+    {
+      path: '/mypage',
+      name: 'mypage',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/MyPage.vue')
+    }, 
+    {
       path: '/boardwrite',
       name: 'boardwrite',
       // route level code-splitting
