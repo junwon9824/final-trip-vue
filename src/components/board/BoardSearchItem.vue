@@ -2,11 +2,12 @@
 import { defineProps } from 'vue';
 
 const props = defineProps(['boardsearch']);
+
 </script>
 
 <template>
     <div class="d-flex">
-        <p>{{ props }}</p>
+        <p>{{ boardsearch  }}</p>
     </div>
     
 </template>

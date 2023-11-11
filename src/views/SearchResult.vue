@@ -8,10 +8,12 @@ const editedMountainName = ref('');
 const searchMountain = () => {
     // Implement the logic for searching
     console.log('Searching for:', editedMountainName.value);
-    // You can add more logic here based on your requirements
-
+    console.log(editedMountainName);
+    
 
 };
+
+
 </script>
 
 <template>
@@ -26,8 +28,10 @@ const searchMountain = () => {
 
                     <button @click="searchMountain" class="btn btn-primary">Search</button>
                     <BoardSearchItem></BoardSearchItem>
+
                 </div>
             </div>
+
         </div>
     </div>
 </template>
