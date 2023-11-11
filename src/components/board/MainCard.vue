@@ -18,7 +18,7 @@ const props = defineProps({
               alt="..."
             />
             <div class="text-container">
-              <h1 class="card-title mb-0 position-absolute top-40 start-50 translate-middle">
+              <h1 class="card-title mb-0 position-absolute top-30 start-50 translate-middle">
                 {{ MainCard.mntiname }}
               </h1>
               <p class="card-text position-absolute bottom-0 start-50 translate-middle">
