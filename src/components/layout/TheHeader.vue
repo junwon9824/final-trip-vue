@@ -17,7 +17,7 @@
           <h3 class="text-muted"><strong>산들바람</strong></h3>
         </router-link>
       </div>
-      <div class="col-4 d-flex flex-row justify-content-between">
+      <div class="col-7 d-flex flex-row justify-content-between">
         <div>
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
@@ -34,6 +34,16 @@
             <li class="nav-item">
               <router-link to="/board" class="nav-link">
                 <h5 class="text-primary">게시판</h5>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/board" class="nav-link">
+                <h5 class="text-primary">계획</h5>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/board" class="nav-link">
+                <h5 class="text-primary">마이페이지</h5>
               </router-link>
             </li>
           </ul>

@@ -36,17 +36,20 @@ const items = [
             to="/boardwrite"
             class="d-flex flex-row align-items-center nav-link"
           >
-            <button type="button" class="btn btn-primary col-md-2 ms-2 mb-0">
+            <button type="button" class="btn btn-primary col-md-12 ms-2 mb-0">
               글쓰기
             </button>
           </router-link>
         </div>
 
-        <BoardCard
-          v-for="item in items"
-          :key="item.articleNo"
-          :board="item"
-        ></BoardCard>
+        <div>
+            <BoardCard
+            v-for="item in items"
+            :key="item.articleNo"
+            :board="item"
+            ></BoardCard>
+        </div>
+
       </div>
     </div>
   </div>
