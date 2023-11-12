@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <div class="row position-relative">
- 
       <div class="col-md-8">
         <div class="dropdown" style="z-index: 1000">
           <button
@@ -42,20 +41,24 @@
         </div>
         <div id="map" style="height: 400px"></div>
         <div>
-            <p>내 위시리스트</p>
-            <MyWIshList v-for="wishlist  in wishlists" :key="wishlists" :wishlists="wishlist"></MyWIshList>
-
+          <p>내 위시리스트</p>
+          <MyWishList
+            v-for="wishlist in wishlists"
+            :key="wishlist"
+            :wishlists="wishlist"
+          ></MyWishList>
         </div>
-
       </div>
 
       <div class="col-md-4">
         <p>이런 산은 어때요?</p>
+        <div class="d-flex flex-wrap">
         <RecommendCard
           v-for="item in items"
           :key="index"
           :RecommendCard="item"
         ></RecommendCard>
+      </div>
       </div>
     </div>
   </div>
@@ -64,7 +67,7 @@
 <script setup>
 import { onMounted } from "vue";
 import RecommendCard from "../components/board/RecommendCard.vue";
-//  import MyWishList from "../components/wishlist/MyWishList.vue";
+import MyWishList from "../components/wishlist/MyWishList.vue";
 
 const wishlists = [
   {

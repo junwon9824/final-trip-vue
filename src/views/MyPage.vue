@@ -9,7 +9,7 @@
           >
             <h1 class="mb-2 me-3 col-md-6 text-center">내가 정복한 산</h1>
             <router-link
-              to="/boardwrite"
+              to="/conqueredmountain"
               class="d-flex flex-row align-items-center nav-link"
             >
               <button type="button" class="btn btn-primary col-md-12 ms-2 mb-0">

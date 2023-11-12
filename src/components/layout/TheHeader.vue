@@ -9,7 +9,7 @@
         <router-link to="/" class="d-flex flex-row align-items-center nav-link">
           <a class="navbar-brand nav-link" href="javascript:void(0)">
             <img
-              src="@/assets/—Pngtree—vector mountains icon_4154096.png"
+              src="@/assets/mtnlogo.png"
               class="rounded mx-auto d-block"
               alt="..."
             />
@@ -20,12 +20,12 @@
       <div class="col-7 d-flex flex-row justify-content-between">
         <div>
           <ul class="navbar-nav me-auto">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link to="/conqueredmountain" class="nav-link">
                 <h5 class="text-primary">정복한 산</h5>
               </router-link>
               
-            </li>
+            </li> -->
             <li class="nav-item">
               <router-link to="/search" class="nav-link">
                 <h5 class="text-primary">검색</h5>

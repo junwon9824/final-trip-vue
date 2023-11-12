@@ -21,6 +21,15 @@ const router = createRouter({
     }, 
 
     {
+      path: '/modify',
+      name: 'modify',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/ModifyView.vue')
+    }, 
+    
+    {
       path: '/conqueredmountain',
       name: 'conqueredmountain',
       // route level code-splitting

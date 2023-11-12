@@ -37,8 +37,11 @@ const addToWishlist = () => {
               </p>
             </div>
           </div>
-          
-          <div @click="addToWishlist"> 내 위시리스트 담기 </div>
+
+          <!-- Use router-link instead of div for wishlist -->
+          <router-link to="/plan" @click="addToWishlist">
+            내 위시리스트 담기
+          </router-link>
         </div>
       </div>
     </div>

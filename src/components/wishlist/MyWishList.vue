@@ -19,8 +19,8 @@ const props = defineProps({'wishlist': Object });
                         </div>
 
                         <div class="card-body">
-                            <h1 class="card-title mb-6">{{  wishlist.subject }} </h1>
-                            <p class="card-text"> {{  wishlist. content }}</p>
+                            <h1 class="card-title mb-6"> </h1>
+                            <p class="card-text">  </p>
                         </div>
 
                     </div>
