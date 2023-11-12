@@ -17,11 +17,7 @@ const toggleEditing = () => {
 const deleteUser = () => {
   // 탈퇴 로직 구현
 };
-
-const saveChanges = () => {
-  // 수정 저장 로직 구현
-};
-
+ 
 // 기타 필요한 로직 추가
 </script>
 
