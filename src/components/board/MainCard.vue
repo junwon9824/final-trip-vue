@@ -17,13 +17,18 @@ const props = defineProps({
               class="img-fluid rounded mx-auto d-block"
               alt="..."
             />
+
             <div class="text-container">
               <h1 class="card-title mb-0 position-absolute top-30 start-50 translate-middle">
                 {{ MainCard.mntiname }}
               </h1>
-              <p class="card-text position-absolute bottom-0 start-50 translate-middle">
-                둘러보기
-              </p>
+              
+              <router-link to="">
+                <p class="card-text position-absolute bottom-0 start-50 translate-middle">
+                  둘러보기
+                </p>
+              </router-link>
+
             </div>
           </div>
         </div>

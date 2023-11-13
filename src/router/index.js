@@ -105,6 +105,16 @@ const router = createRouter({
     }, 
 
     {
+      path: '/mountainview',
+      name: 'mountainview',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/MountainView.vue')
+    }, 
+    
+
+    {
       path: '/regist',
       name: 'regist',
       // route level code-splitting

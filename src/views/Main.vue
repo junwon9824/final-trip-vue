@@ -57,7 +57,6 @@ const items = [
   </div>
 
   <div class="d-flex">
-
       <MainCard v-for="item in items" :key="item.mntilistno" :MainCard="item"></MainCard>
     </div>
 

@@ -15,4 +15,6 @@ const props = defineProps(['boardsearch']);
 
 <style scoped>
 /* Add your styles here */
+
+
 </style>
