@@ -10,10 +10,11 @@ const addToWishlist = () => {
 };
 </script>
 
+
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-12 mx-auto">
+      <div class="col-md-9 mx-auto"> <!-- Adjust the width by changing col-md-6 -->
         <div class="card position-relative">
           <div>{{ props.RecommendCard.gugun_code }}</div>
 
@@ -25,6 +26,7 @@ const addToWishlist = () => {
             />
 
             <div class="text-container">
+
               <h1
                 class="card-title mb-0 position-absolute top-30 start-50 translate-middle"
               >
@@ -35,7 +37,11 @@ const addToWishlist = () => {
               >
                 {{ props.RecommendCard.mntidetails }}
               </p>
+
+
             </div>
+
+            
           </div>
 
           <!-- Use router-link instead of div for wishlist -->
@@ -69,22 +75,17 @@ const addToWishlist = () => {
 
 .card-title,
 .card-text {
-  color: white; /* Set the text color */
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-  ); /* Set the background color with transparency */
-  padding: 10px; /* Adjust padding as needed */
-  margin: 0; /* Remove margin to bring text higher */
+  color: white;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  margin: 0;
 }
 
 .card-title {
-  top: 40%; /* Adjust the percentage to move the title higher */
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 20px; /* Set the font size */
+  font-size: 20px;
 }
 
 .card-text {

@@ -40,8 +40,9 @@
           </ul>
         </div>
         <div id="map" style="height: 400px"></div>
-        <div>
-          <p>내 위시리스트</p>
+        <p>내 위시리스트</p>
+
+        <div class="d-flex">
           <MyWishList
             v-for="wishlist in wishlists"
             :key="wishlist"
@@ -55,7 +56,7 @@
         <div class="d-flex flex-wrap">
         <RecommendCard
           v-for="item in items"
-          :key="index"
+          :key="item.mntilistno"
           :RecommendCard="item"
         ></RecommendCard>
       </div>

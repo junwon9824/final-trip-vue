@@ -15,12 +15,12 @@ const props = defineProps({'wishlist': Object });
 
                         <div class="card-body">
                             <img src="@/assets/mountain_car.png" class="img-fluid rounded mx-auto d-block" alt="..." />
-
                         </div>
 
                         <div class="card-body">
                             <h1 class="card-title mb-6"> </h1>
                             <p class="card-text">  </p>
+                            
                         </div>
 
                     </div>

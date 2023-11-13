@@ -50,13 +50,12 @@ const insertData = () => {
                         </div>
 
                         <button @click="insertData" class="btn btn-primary">등록</button>
-                       
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </template>
 
 <style scoped>
