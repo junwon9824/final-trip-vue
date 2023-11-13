@@ -31,7 +31,8 @@ const deleteUser = () => {
         </button>
       </div>
       <div class="flex-shrink-0">
-        <img src="..." alt="..." class="rounded-circle" />
+        <img src="@/assets/mountain_car.png" class="img-fluid rounded mx-auto d-block" alt="..." />
+        
       </div>
       <div class="flex-grow-1 ms-3">
         <h5>ID: {{ props.userId }}</h5>

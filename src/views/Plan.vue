@@ -67,7 +67,7 @@
 
 <script setup>
 import { onMounted } from "vue";
-import RecommendCard from "../components/board/RecommendCard.vue";
+import RecommendCard from "../components/Plan/RecommendCard.vue";
 import MyWishList from "../components/wishlist/MyWishList.vue";
 
 const wishlists = [

@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from 'vue';
+import { ref } from 'vue';
 const saveId = ref(false);
 
 const handleIdSaveClick = () => {
@@ -9,33 +9,38 @@ const handleIdSaveClick = () => {
 const handlePasswordRecoveryClick = () => {
   console.log('비밀번호 찾기 clicked');
 };
-
 </script>
 
 <template>
-
-  <div class="container ">
+  <div class="container">
     <div class="row">
       <div class="col-md-6">
         <h1>로그인</h1>
         <p>가입하신 이메일 주소로 로그인하세요.</p>
         <div class="mb-3">
           <label for="userId" class="form-label">아이디</label>
-          <input type="text" class="form-control" id="userId" placeholder="아이디를 입력하세요">
+          <input type="text" class="form-control" id="userId" placeholder="아이디를 입력하세요" />
         </div>
 
         <div class="mb-3">
           <label for="userPassword" class="form-label">비밀번호</label>
-          <input type="password" class="form-control" id="userPassword" placeholder="비밀번호를 입력하세요">
+          <input
+            type="password"
+            class="form-control"
+            id="userPassword"
+            placeholder="비밀번호를 입력하세요"
+          />
         </div>
 
         <div class="mb-3">
           <div class="form-check">
-            <input type="checkbox" id="saveIdCheckbox" v-model="saveId">
+            <input type="checkbox" id="saveIdCheckbox" v-model="saveId" />
             <label for="saveIdCheckbox">아이디 저장</label>
           </div>
 
-          <a href="#" @click="handlePasswordRecoveryClick" class="form-label d-inline">비밀번호 찾기</a>
+          <a href="#" @click="handlePasswordRecoveryClick" class="form-label d-inline"
+            >비밀번호 찾기</a
+          >
         </div>
 
         <div class="d-flex">
@@ -47,7 +52,6 @@ const handlePasswordRecoveryClick = () => {
       <div class="col-lg-6">
         <img src="@/assets/mountain_car.png" class="img-fluid rounded mx-auto d-block" alt="..." />
       </div>
-      
     </div>
   </div>
 </template>

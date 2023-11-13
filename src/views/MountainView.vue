@@ -9,6 +9,7 @@
                         <button type="button" class="btn btn-primary col-md-12 ms-2 mb-0">
                             추가하기
                         </button>
+
                     </router-link>
                 </div>
 
@@ -36,8 +37,7 @@
 </template>
   
 <script setup>
-import MyPageCard from "@/components/MyPageCard.vue";
-// Add your ref imports if needed
+ // Add your ref imports if needed
 
 const items = [
     {

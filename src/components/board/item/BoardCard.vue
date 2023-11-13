@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps } from 'vue';
 
-const props = defineProps({'wishlist': Object });
+const props = defineProps({'board': Object });
 
 
 </script>
@@ -19,8 +19,8 @@ const props = defineProps({'wishlist': Object });
                         </div>
 
                         <div class="card-body">
-                            <h1 class="card-title mb-6"> </h1>
-                            <p class="card-text">  </p>
+                            <h1 class="card-title mb-6">{{  board.subject }} </h1>
+                            <p class="card-text"> {{  board. content }}</p>
                         </div>
 
                     </div>

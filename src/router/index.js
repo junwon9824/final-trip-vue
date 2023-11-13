@@ -26,7 +26,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/ModifyView.vue')
+      component: () => import('@/views/ModifyView.vue')
     }, 
     
     {
@@ -35,7 +35,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/ConqueredMountain.vue')
+      component: () => import('@/views/ConqueredMountain.vue')
     }, 
 
     {
@@ -68,7 +68,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/BoardWrite.vue')
+      component: () => import('@/views/BoardWrite.vue')
     }, 
     {
       path: '/login',
@@ -107,10 +107,11 @@ const router = createRouter({
     {
       path: '/mountainview',
       name: 'mountainview',
+      
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/MountainView.vue')
+      component: () => import('@/views/MountainView.vue')
     }, 
     
 
