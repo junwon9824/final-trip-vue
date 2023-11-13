@@ -14,103 +14,79 @@ const router = createRouter({
     {
       path: '/rank',
       name: 'rank',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      
       component: () => import('../views/Rank.vue')
     }, 
 
     {
       path: '/modify',
       name: 'modify',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      
       component: () => import('@/views/ModifyView.vue')
     }, 
     
     {
       path: '/conqueredmountain',
       name: 'conqueredmountain',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      
       component: () => import('@/views/ConqueredMountain.vue')
     }, 
 
     {
       path: '/board',
       name: 'board',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      
       component: () => import('../views/Board.vue')
     }, 
     {
       path: '/plan',
       name: 'plan',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      
       component: () => import('../views/Plan.vue')
     }, 
     {
       path: '/mypage',
       name: 'mypage',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      
       component: () => import('../views/MyPage.vue')
     }, 
     {
       path: '/boardwrite',
       name: 'boardwrite',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      
       component: () => import('@/views/BoardWrite.vue')
     }, 
     {
       path: '/login',
       name: 'login',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      
       component: () => import('../views/Login.vue')
     }, 
     {
       path: '/register',
       name: 'register',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      
       component: () => import('../views/Regist.vue')
     }, 
     {
       path: '/search',
       name: 'search',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/SearchResult.vue')
+      
+      component: () => import('../views/Search.vue')
     }, 
     
     {
       path: '/login',
       name: 'login',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      
       component: () => import('../views/Login.vue')
     }, 
 
     {
       path: '/mountainview',
       name: 'mountainview',
+
       
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('@/views/MountainView.vue')
     }, 
     
@@ -118,9 +94,7 @@ const router = createRouter({
     {
       path: '/regist',
       name: 'regist',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      
       component: () => import('../views/Regist.vue')
     }, 
 

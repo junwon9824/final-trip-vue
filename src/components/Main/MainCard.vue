@@ -7,11 +7,11 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="card shadow-lg p-4 m-4" style="width: 600px">
+  <div class="card shadow-lg m-4" style="width: 600px">
     <img class="card-img-top" src="../../assets/mountain_car.png" alt="Card image" />
     <div class="card-img-overlay d-flex justify-content-between align-items-center flex-column">
-      <h4 class="card-title strong">{{ MainCard.mntiname }}</h4>
-      <a href="#" class="btn btn-white rounded-pill">둘러보기</a>
+      <p class="card-title text-light fs-2 fw-bold">{{ MainCard.mntiname }}</p>
+      <a href="#" class="btn btn-light btn-lg rounded-pill px-4 py-2">둘러보기<i class="bi bi-arrow-right"></i></a>
     </div>
   </div>
 </template>
