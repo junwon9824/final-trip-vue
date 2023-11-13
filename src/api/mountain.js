@@ -11,6 +11,7 @@ function detailMountain(mountainno, success, fail) {
     local.get(`/mountain/${mountainno}`).then(success).catch(fail);
 }
 
+
 function registerMountain(mountain, success, fail) {
     console.log("mountain.js mountain", mountain);
     local.post(`/mountain`, JSON.stringify(mountain)).then(success).catch(fail);
