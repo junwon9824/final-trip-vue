@@ -20,12 +20,14 @@
               <th scope="col">최근 등반 일자</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="table table-hover">
             <tr v-for="(item, index) in items" :key="index">
-              <router-link to="/mountainview">
-                <td>{{ item.mntiname }}</td>
-              </router-link>
-              
+              <td>
+                <router-link to="/mountainview">
+                  {{ item.mntiname }}
+                </router-link>
+              </td>
+
               <td>{{ item.mntihigh }}</td>
               <td>{{ item.mnticonquerednum }}</td>
               <td>{{ item.lastConqueredDate }}</td>

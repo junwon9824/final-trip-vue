@@ -1,24 +1,24 @@
 <script setup>
-import { ref } from "vue";
-import BoardSearchItem from "../components/board/BoardSearchItem.vue";
+import { ref } from 'vue';
+import BoardSearchItem from '../components/Search/item/BoardSearchItem.vue';
+import MountainSearchItem from '../components/Search/item/MountainSearchItem.vue';
 
 // import { getSearchResult } from "../api/mountain.js";
 
-const editedMountainName = ref("");
+const editedMountainName = ref('');
 const searchResult = ref([]);
 
 const searchMountain = async () => {
   // try {
   //   const response = await getSearchResult(editedMountainName.value);
   //   searchResult.value = response.data;
-  // } 
+  // }
   // catch (error) {
   //   console.error("Error searching for mountains:", error);
   // }
 
-  console.log("검색");
+  console.log('검색');
 };
-
 </script>
 
 <template>
@@ -36,17 +36,13 @@ const searchMountain = async () => {
             />
           </div>
 
-          <button
-            @click="searchMountain"
-            class="btn btn-primary btn-lg py-2 px-5 m-0 fw-bold"
-          >
+          <button @click="searchMountain" class="btn btn-primary btn-lg py-2 px-5 m-0 fw-bold">
             Search
           </button>
         </div>
 
         <!-- Display search results -->
         <BoardSearchItem :searchResult="searchResult"></BoardSearchItem>
-
       </div>
     </div>
   </div>
