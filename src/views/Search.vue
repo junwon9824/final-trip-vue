@@ -1,14 +1,34 @@
 <script setup>
-import { ref } from 'vue';
-import BoardSearchItem from '@/components/board/BoardSearchItem.vue';
+import { ref } from "vue";
+import axios from "axios";
+import BoardSearchItem from "../components/Search/item/BoardSearchItem.vue";
 
-const editedMountainName = ref('');
+const editedMountainName = ref("");
+const searchResult = ref([]);
 
-const searchMountain = () => {
-  // Implement the logic for searching
-  console.log('Searching for:', editedMountainName.value);
-  console.log(editedMountainName);
+const searchMountain = async () => {
+
+  try {
+    console.log(editedMountainName.value);
+    const response = await axios.get('http://localhost:80/mountain/search', {
+      params: {
+        word: editedMountainName.value,
+      }
+    });
+
+    console.log(response.data);
+
+    // 결과를 searchResult에 할당
+    searchResult.value = response.data;
+    console.log(searchResult.value);
+    
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
+  
 };
+
 </script>
 
 <template>
@@ -18,19 +38,33 @@ const searchMountain = () => {
         <div class="card-body d-flex align-items-center justify-content-center">
           <div class="input-group" style="width: 720px">
             <span class="input-group-text"><i class="bi bi-search"></i></span>
-            <input
-              v-model="editedMountainName"
-              type="text"
-              class="form-control fs-4 m-0 py-1"
-              placeholder=" 이름 검색  "
-            />
+            <input v-model="editedMountainName" type="text" class="form-control fs-4 m-0 py-1" placeholder=" 이름 검색  " />
           </div>
 
           <button @click="searchMountain" class="btn btn-primary btn-lg py-2 px-5 m-0 fw-bold">
             Search
           </button>
         </div>
-        <BoardSearchItem></BoardSearchItem>
+
+        <!-- <table>
+
+          <BoardSearchItem v-for="result in searchResult" :key="result.mntilistno" :searchResult="result"></BoardSearchItem>
+
+        </table> -->
+
+
+
+         <table class="table table-hover border-primary">
+      <tbody>
+        <tr>
+          <td></td>
+        </tr>
+        <BoardSearchItem v-for="result in searchResult" :key="result.mntilistno" :searchResult="result"></BoardSearchItem>
+      </tbody>
+
+    </table>
+         
+
       </div>
     </div>
   </div>
@@ -40,6 +74,7 @@ const searchMountain = () => {
 .btn-primary {
   margin-top: 10px;
 }
+
 .container {
   margin-top: 12%;
 }
