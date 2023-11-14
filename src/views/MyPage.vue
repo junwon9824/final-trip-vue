@@ -11,7 +11,7 @@
           </router-link>
         </div>
 
-        <table class="table">
+        <table class="table border-primary table-hover">
           <thead>
             <tr>
               <th scope="col">산 이름</th>
@@ -20,10 +20,10 @@
               <th scope="col">최근 등반 일자</th>
             </tr>
           </thead>
-          <tbody class="table table-hover">
+          <tbody>
             <tr v-for="(item, index) in items" :key="index">
               <td>
-                <router-link to="/mountainview">
+                <router-link to="/mountainview" style="text-decoration-line: none" class="text-dark">
                   {{ item.mntiname }}
                 </router-link>
               </td>
