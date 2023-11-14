@@ -1,5 +1,5 @@
 // mountain.js
-import { localAxios } from "@/util/http-commons";
+import { localAxios } from "../util/http-commons";
 
 const local = localAxios();
 

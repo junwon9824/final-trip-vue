@@ -2,19 +2,32 @@
 import { ref } from "vue";
 import BoardSearchItem from "../components/board/BoardSearchItem.vue";
 
-// import { getSearchResult } from "../api/mountain.js";
+import { getSearchResult } from "../api/mountain.js";
 
 const editedMountainName = ref("");
 const searchResult = ref([]);
 
 const searchMountain = async () => {
-  // try {
-  //   const response = await getSearchResult(editedMountainName.value);
-  //   searchResult.value = response.data;
-  // } 
-  // catch (error) {
-  //   console.error("Error searching for mountains:", error);
-  // }
+  try {
+    const response = await getSearchResult(editedMountainName.value);
+    searchResult.value = response.data;
+  } 
+  catch (error) {
+  console.error("Error searching for mountains:", error);
+  if (error.response) {
+    // The request was made and the server responded with a status code
+    // that falls out of the range of 2xx
+    console.error("Response status:", error.response.status);
+    console.error("Response data:", error.response.data);
+  } else if (error.request) {
+    // The request was made but no response was received
+    console.error("No response received");
+  } else {
+    // Something happened in setting up the request that triggered an Error
+    console.error("Request setup error:", error.message);
+  }
+}
+
 
   console.log("검색");
 };
@@ -25,6 +38,7 @@ const searchMountain = async () => {
   <div class="container">
     <div class="row">
       <div class="col-md-12 mx-auto">
+
         <div class="card-body d-flex align-items-center justify-content-center">
           <div class="input-group" style="width: 720px">
             <span class="input-group-text"><i class="bi bi-search"></i></span>
