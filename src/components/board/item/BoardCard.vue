@@ -1,34 +1,27 @@
 <script setup>
 import { defineProps } from 'vue';
 
-const props = defineProps({'board': Object });
-
-
+defineProps({ board: Object });
 </script>
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 mx-auto">
-                <div class="card">
+  <tr>
+    <td class="pt-3 pb-3 d-flex flex-row">
+      <div>
+        <img
+          src="@/assets/mountain_car.png"
+          class="img-fluid rounded mx-4 d-block"
+          alt="..."
+          style="width: 350px; height: 190px; object-fit: fill"
+        />
+      </div>
 
-                    <div class=" d-flex">
-
-                        <div class="card-body">
-                            <img src="@/assets/mountain_car.png" class="img-fluid rounded mx-auto d-block" alt="..." />
-
-                        </div>
-
-                        <div class="card-body">
-                            <h1 class="card-title mb-6">{{  board.subject }} </h1>
-                            <p class="card-text"> {{  board. content }}</p>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
+      <div class="card-body d-flex flex-column">
+        <p class="card-title fw-bold fs-3">{{ board.subject }}</p>
+        <p class="card-text pb-3 fs-5">{{ board.content }}</p>
+        <p class="mt-5">{{ board.registerTime }}</p>
+      </div>
+    </td>
+  </tr>
 </template>
 
 <style scoped></style>
