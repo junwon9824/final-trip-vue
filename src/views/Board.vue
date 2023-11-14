@@ -34,12 +34,12 @@ const items = [
 
 <template>
   <div class="container col-12 mt-5 d-flex flex-column align-items-center justify-content-center">
-    <div class="d-flex col-12 flex-row justify-content-end align-items-center bg-warning">
-      <p class="text-center fw-bold fs-2">우리들의 등산 이야기</p>
+    <div class="d-flex col-12 flex-row justify-content-start align-items-center bg-warning">
+      <p class="text-center fw-bold fs-2 col-11">우리들의 등산 이야기</p>
 
       <router-link
         to="/boardwrite"
-        class="d-flex flex-row align-items-center nav-link col-4 justify-content-end"
+        class="d-flex flex-row align-items-center nav-link justify-content-end"
       >
         <button type="button" class="btn btn-secondary rounded-pill">
           글쓰기 <i class="bi bi-arrow-right"></i>
