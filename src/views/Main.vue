@@ -58,8 +58,6 @@ try {
 
 onMounted(getrandomMountain);
 
-
-
 </script>
 
 <template>
