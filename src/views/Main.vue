@@ -4,6 +4,8 @@ import {ref, onMounted } from 'vue';
 import axios from 'axios';
 
 
+const prefix ="www.forest.go.kr/images/data/down/mountain";
+
 const items = ref([
   //   {
   //     mntilistno: 1,
