@@ -1,95 +1,31 @@
 <script setup>
-import { defineProps, ref } from "vue";
+import { defineProps, ref } from 'vue';
 
-const props = defineProps({
+defineProps({
   RecommendCard: Object,
 });
 
 const addToWishlist = () => {
-   console.log("위시리스트에 추가되었습니다.", props.RecommendCard.mntiname);
+  console.log('위시리스트에 추가되었습니다.', props.RecommendCard.mntiname);
 };
 </script>
 
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 mx-auto">
-        <div class="card position-relative">
-          <div>{{ props.RecommendCard.gugun_code }}</div>
-
-          <div class="card-body d-flex">
-            <img
-              src="@/assets/mountain_car.png"
-              class="img-fluid rounded mx-auto d-block"
-              alt="..."
-            />
-
-            <div class="text-container">
-              <h1
-                class="card-title mb-0 position-absolute top-30 start-50 translate-middle"
-              >
-                {{ props.RecommendCard.mntiname }}
-              </h1>
-              <p
-                class="card-text position-absolute bottom-0 start-50 translate-middle"
-              >
-                {{ props.RecommendCard.mntidetails }}
-              </p>
-            </div>
-          </div>
-
-          <!-- Use router-link instead of div for wishlist -->
-          <router-link to="/plan" @click="addToWishlist">
-            내 위시리스트 담기
-          </router-link>
-        </div>
+  <div class="card mb-3" style="max-width: 350px; height: 170">
+    <div class="d-flex flex-row g-0">
+      <div class="col-5 m-2">
+        <img src="@/assets/mountain_car.png" class="img-fluid rounded-start" alt="..." />
+      </div>
+      <div class="col-7 my-2 d-flex flex-column justify-content-between align-items-start">
+        <button type="button" class="btn btn-dark rounded-pill btn-sm m-0 py-1">
+          {{ RecommendCard.mntiadd }}
+        </button>
+        <p class="fs-5">{{ RecommendCard.mntiname }}</p>
+        <p class="fs-6">{{ RecommendCard.mntidetails }}</p>
+        <button type="button" class="btn btn-sm m-0 p-0">Basic</button>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-.card {
-  position: relative;
-}
-
-.card-body {
-  position: relative;
-}
-
-.card-body img {
-  width: 100%;
-  height: auto;
-}
-
-.text-container {
-  position: relative;
-  text-align: center;
-}
-
-.card-title,
-.card-text {
-  color: white; /* Set the text color */
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-  ); /* Set the background color with transparency */
-  padding: 10px; /* Adjust padding as needed */
-  margin: 0; /* Remove margin to bring text higher */
-}
-
-.card-title {
-  top: 40%; /* Adjust the percentage to move the title higher */
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px; /* Set the font size */
-}
-
-.card-text {
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-</style>
+<style scoped></style>

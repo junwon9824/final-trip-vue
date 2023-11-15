@@ -10,14 +10,14 @@ const route = useRoute();
 //   console.log('Setting showHeader to false');
 //   showHeader.value = false;
 // }
-
 </script>
 
 <template>
   <TheHeader></TheHeader>
+
   <router-view></router-view>
+
   <TheFooter></TheFooter>
 </template>
-
 
 <style scoped></style>
