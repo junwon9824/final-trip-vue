@@ -1,12 +1,15 @@
 <script setup>
+
 import { ref } from "vue";
 import axios from "axios";
 import BoardSearchItem from "../components/Search/item/BoardSearchItem.vue";
 
-const editedMountainName = ref("");
+
+const editedMountainName = ref('');
 const searchResult = ref([]);
 
 const searchMountain = async () => {
+
 
   try {
     console.log(editedMountainName.value);
@@ -27,8 +30,8 @@ const searchMountain = async () => {
     throw new Error(error);
   }
   
-};
 
+};
 </script>
 
 <template>
@@ -45,6 +48,7 @@ const searchMountain = async () => {
             Search
           </button>
         </div>
+
 
         <!-- <table>
 
@@ -65,6 +69,7 @@ const searchMountain = async () => {
     </table>
          
 
+
       </div>
     </div>
   </div>
@@ -77,5 +82,6 @@ const searchMountain = async () => {
 
 .container {
   margin-top: 12%;
+  min-height: 60vh;
 }
 </style>

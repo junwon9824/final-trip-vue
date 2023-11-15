@@ -1,34 +1,21 @@
 <script setup>
 import { defineProps } from 'vue';
 
-const props = defineProps({'wishlist': Object });
-
-
+defineProps({ wishlist: Object });
 </script>
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 mx-auto">
-                <div class="card">
-
-                    <div class=" d-flex">
-
-                        <div class="card-body">
-                            <img src="@/assets/mountain_car.png" class="img-fluid rounded mx-auto d-block" alt="..." />
-
-                        </div>
-
-                        <div class="card-body">
-                            <h1 class="card-title mb-6"> </h1>
-                            <p class="card-text">  </p>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
+  <div class="card mx-2 rounded-5 shadow" style="width: 200px">
+    <img
+      class="card-img-top p-2 rounded-5"
+      style="height: 150px"
+      src="@/assets/mountain_car.png"
+      alt="Card image"
+    />
+    <div class="card-body m-0 p-2">
+      <p class="fs-5 fw-bold">{{ wishlist.mntiname }}</p>
+      <p class="fs-6"><i class="bi bi-geo-alt-fill me-2 text-danger"></i>{{ wishlist.mntiadd }}</p>
     </div>
+  </div>
 </template>
 
 <style scoped></style>
