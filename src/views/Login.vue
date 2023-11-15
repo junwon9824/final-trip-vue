@@ -50,13 +50,13 @@ const login = async () => {
           <p class="fs-4 fw-bold">로그인</p>
           <p>가입하신 이메일 주소로 로그인하세요.</p>
           <div class="mb-3">
-            <label for="userId" class="form-label">아이디</label>
-            <input type="text" class="form-control" id="userId" placeholder="아이디를 입력하세요" v-model="id" />
+            <label for="userId" class="form-label fw-bold">아이디</label>
+            <input type="text" class="form-control py-2" id="userId" placeholder="아이디를 입력하세요" v-model="id" />
           </div>
 
           <div class="mb-3">
-            <label for="userPassword" class="form-label">비밀번호</label>
-            <input type="password" class="form-control" id="userPassword" placeholder="비밀번호를 입력하세요" v-model="password" />
+            <label for="userPassword" class="form-label fw-bold ">비밀번호</label>
+            <input type="password" class="form-control py-2" id="userPassword" placeholder="비밀번호를 입력하세요" v-model="password" />
           </div>
 
           <div class="mb-3 d-flex">
