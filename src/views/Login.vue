@@ -9,6 +9,17 @@ const handleIdSaveClick = () => {
 const handlePasswordRecoveryClick = () => {
   console.log('비밀번호 찾기 clicked');
 };
+
+const login = () => {
+  console.log('로그인 clicked');
+
+}
+
+
+const signup = () => {
+  console.log('로그인 clicked');
+
+}
 </script>
 
 <template>
@@ -24,12 +35,7 @@ const handlePasswordRecoveryClick = () => {
 
         <div class="mb-3">
           <label for="userPassword" class="form-label">비밀번호</label>
-          <input
-            type="password"
-            class="form-control"
-            id="userPassword"
-            placeholder="비밀번호를 입력하세요"
-          />
+          <input type="password" class="form-control" id="userPassword" placeholder="비밀번호를 입력하세요" />
         </div>
 
         <div class="mb-3">
@@ -38,14 +44,16 @@ const handlePasswordRecoveryClick = () => {
             <label for="saveIdCheckbox">아이디 저장</label>
           </div>
 
-          <a href="#" @click="handlePasswordRecoveryClick" class="form-label d-inline"
-            >비밀번호 찾기</a
-          >
+          <a href="#" @click="handlePasswordRecoveryClick" class="form-label d-inline">비밀번호 찾기</a>
         </div>
 
         <div class="d-flex">
-          <button type="button" class="btn btn-success flex-grow-1">로그인</button>
-          <button type="button" class="btn btn-success flex-grow-1">회원가입</button>
+          <button type="button" class="btn btn-success flex-grow-1" @click="login">로그인</button>
+
+          <router-link to="/regist">
+            <button type="button" class="btn btn-success flex-grow-1"  >회원가입</button>
+          </router-link>
+
         </div>
       </div>
 
@@ -68,13 +76,16 @@ button {
 }
 
 .d-flex {
-  margin-top: 10px; /* Adjust margin as needed */
+  margin-top: 10px;
+  /* Adjust margin as needed */
 }
 
 .flex-grow-1 {
   flex-grow: 1;
 }
+
 .container {
-  margin-top: 20px; /* Adjust the value as needed */
+  margin-top: 20px;
+  /* Adjust the value as needed */
 }
 </style>

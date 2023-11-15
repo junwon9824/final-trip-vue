@@ -25,7 +25,29 @@ const insertData = () => {
     console.log('Mountain Name:', editedMountainName.value);
     console.log('Registration Date:', editedRegDate.value);
     console.log('File Info:', editedFileInfo.value);
+
+    writeitem(editedMountainName.value );
 };
+
+const writeitem = async () => {
+  try {
+    const payload = {
+      word: editedMountainName.value,
+    //   articleNo: ,
+      content: editedRegDate.value, 
+      userId:  
+      
+    };
+
+    const response = await axios.post('http://localhost:80/article/write', payload);
+    // Handle the response if needed
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
+};
+
+
 
 </script>
 
