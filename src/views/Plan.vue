@@ -2,7 +2,7 @@
   <div class="container mt-5">
     <div class="row position-relative">
       <div class="col-md-8 bg-light rounded-5 shadow">
-        <div class="d-flex mt-3">
+        <div class="d-flex mt-3 mb-3">
           <div class="dropdown pe-3" style="z-index: 1000">
             <button
               class="btn btn-secondary dropdown-toggle"
@@ -64,18 +64,18 @@
       </div>
 
       <div class="col-md-4">
-        <img src="../assets/recomand_img1.png" class="card-img" alt="..." style="height: 100%" />
+        <img :src="folderimg" class="card-img" alt="..." style="height: 100%" />
         <div class="card-img-overlay d-flex flex-column align-items-end">
           <div class="mt-4 me-5">
             <div class="d-flex justify-content-around ms-4">
-              <button type="button" class="btn text-primary">
+              <button type="button" class="btn text-primary" @click="closest()">
                 가까운 순 <i class="bi bi-chevron-down"></i>
               </button>
-              <button type="button" class="btn text-primary">
+              <button type="button" class="btn text-primary" @click="high()">
                 해발 고도 순 <i class="bi bi-chevron-down"></i>
               </button>
             </div>
-            <p class="fs-5 fw-bold">
+            <p class="fs-5 mt-3 fw-bold">
               <i class="bi bi-geo-alt-fill me-2 text-danger"></i>이런 산은 어때요?
             </p>
             <div class="d-flex flex-wrap d-flex flex-column">
@@ -93,7 +93,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import RecommendCard from '../components/Plan/RecommendCard.vue';
 import MyWishList from '../components/wishlist/MyWishList.vue';
 
@@ -173,6 +173,15 @@ onMounted(() => {
     });
   };
 });
+
+const folderimg = ref('src/assets/recommend_img1.png');
+
+const closest = () => {
+  folderimg.value = 'src/assets/recommend_img1.png';
+};
+const high = () => {
+  folderimg.value = 'src/assets/recommend_img2.png';
+};
 </script>
 
 <style scoped>

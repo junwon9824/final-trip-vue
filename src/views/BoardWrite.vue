@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import BoardCard from '../components/board/item/BoardCard.vue';
-import RecordWrite from '../components/Plan/RecordWrite.vue'
+import BoardWrite from '../components/boardwrite/BoardWrite.vue';
 const saveId = ref(false);
 const handleIdSaveClick = () => {
   console.log('아이디 저장 clicked');
@@ -21,8 +21,6 @@ const items = [
     registerTime: '2023-11-10 12:34:56',
   },
 
-
-
   // Add more items as needed
 ];
 
@@ -31,17 +29,13 @@ const getboardlist = async () => {
     const response = await axios.get('http://localhost:80/mountain/', {
       params: {
         word: editedMountainName.value,
-      }
-
+      },
     });
-  } 
-  catch (error) {
+  } catch (error) {
     console.log(error);
     throw new Error(error);
   }
-
 };
-
 </script>
 
 <template>
@@ -51,8 +45,7 @@ const getboardlist = async () => {
         <div class="col-md-12 mb-3 d-flex align-items-end justify-content-center">
           <h1 class="mb-2 me-3 col-md-6 text-center">나의 등반기</h1>
         </div>
-        <RecordWrite></RecordWrite>
-
+        <BoardWrite></BoardWrite>
       </div>
     </div>
   </div>

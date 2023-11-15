@@ -31,35 +31,23 @@ const insertData = () => {
   <div class="container">
     <div class="card bg-info">
       <div class="card-body">
-        <input
-          v-model="editedMountainName"
-          class="form-control py-3 my-3"
-          placeholder="이름 Name"
-        />
+        <input v-model="editedMountainName" class="form-control my-3" placeholder="제목" />
 
-        <input
-          v-model="editedRegDate"
-          class="form-control py-3 my-3"
-          placeholder="등록일자 Date"
-        />
+        <input v-model="editedRegDate" class="form-control my-3" placeholder=" 내용" />
 
         <div>
-          <input
-            type="file"
-            @change="handleImageChange"
-            class="form-control form-control-lg my-3"
-            accept="image/*"
-          />
+          <input type="file" @change="handleImageChange" class="form-control" accept="image/*" />
           <img :src="editedFileInfo" class="img-fluid rounded d-block" />
         </div>
-        <div class="d-flex justify-content-end">
-          <button @click="insertData" class="btn btn-secondary btn-lg rounded-pill">
-            등록<i class="bi bi-arrow-right"></i>
-          </button>
-        </div>
+
+        <button @click="insertData" class="btn btn-primary">등록</button>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.btn btn-primary {
+  margin-left: 90%;
+}
+</style>

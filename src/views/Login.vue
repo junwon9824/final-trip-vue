@@ -12,12 +12,12 @@ const handlePasswordRecoveryClick = () => {
 </script>
 
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
+  <div class="container d-flex flex-row rounded-3 bg-light px-0">
+    <div class="col-6 ">
+      <div>
         <h1>로그인</h1>
         <p>가입하신 이메일 주소로 로그인하세요.</p>
-        <div class="mb-3">
+        <div class="m-0">
           <label for="userId" class="form-label">아이디</label>
           <input type="text" class="form-control" id="userId" placeholder="아이디를 입력하세요" />
         </div>
@@ -42,16 +42,16 @@ const handlePasswordRecoveryClick = () => {
             >비밀번호 찾기</a
           >
         </div>
-
-        <div class="d-flex">
-          <button type="button" class="btn btn-success flex-grow-1">로그인</button>
-          <button type="button" class="btn btn-success flex-grow-1">회원가입</button>
-        </div>
       </div>
 
-      <div class="col-lg-6">
-        <img src="@/assets/mountain_car.png" class="img-fluid rounded mx-auto d-block" alt="..." />
+      <div class="d-flex">
+        <button type="button" class="btn btn-success flex-grow-1">로그인</button>
+        <button type="button" class="btn btn-success flex-grow-1">회원가입</button>
       </div>
+    </div>
+
+    <div class="col-6">
+      <img src="@/assets/mountain_car.png" class="img-fluid rounded-end mx-0" alt="..." />
     </div>
   </div>
 </template>
