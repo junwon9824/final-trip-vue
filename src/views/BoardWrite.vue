@@ -21,8 +21,12 @@ const items = [
     registerTime: '2023-11-10 12:34:56',
   },
 
+
+
   // Add more items as needed
 ];
+
+
 </script>
 
 <template>
@@ -60,6 +64,7 @@ button {
 }
 
 .container {
-  margin-top: 20px; /* Adjust the value as needed */
+  margin-top: 20px;
+  /* Adjust the value as needed */
 }
 </style>
