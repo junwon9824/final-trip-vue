@@ -47,8 +47,10 @@ try {
   console.log(response.data);
 
   // 결과를 searchResult에 할당
+
   items.value = response.data;
 
+  
   console.log(items.value);
 
 } catch (error) {
