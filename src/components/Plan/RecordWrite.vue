@@ -44,6 +44,12 @@ const insertData = () => {
                             <input v-model="editedRegDate" class="form-control" placeholder=" 내용" />
                         </p>
 
+
+                        <div class="card-body">
+                            <input type="file" @change="handleImageChange" class="form-control" accept="image/*" />
+                            <img :src="editedFileInfo" class="img-fluid rounded mx-auto d-block"   />
+                        </div>
+
                         <button @click="insertData" class="btn btn-primary">등록</button>
                        
 

@@ -21,8 +21,27 @@ const items = [
     registerTime: '2023-11-10 12:34:56',
   },
 
+
+
   // Add more items as needed
 ];
+
+const getboardlist = async () => {
+  try {
+    const response = await axios.get('http://localhost:80/mountain/', {
+      params: {
+        word: editedMountainName.value,
+      }
+
+    });
+  } 
+  catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
+
+};
+
 </script>
 
 <template>
@@ -60,6 +79,7 @@ button {
 }
 
 .container {
-  margin-top: 20px; /* Adjust the value as needed */
+  margin-top: 20px;
+  /* Adjust the value as needed */
 }
 </style>

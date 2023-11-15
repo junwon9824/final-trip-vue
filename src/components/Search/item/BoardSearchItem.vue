@@ -1,4 +1,3 @@
-<!-- BoardSearchItem.vue -->
 
 <template>
     <div>

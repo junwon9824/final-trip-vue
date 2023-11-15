@@ -10,6 +10,23 @@ const handlePasswordRecoveryClick = () => {
   console.log('비밀번호 찾기 clicked');
 };
 
+const getboardlist = async () => {
+
+try {
+  const response = await axios.get('http://localhost:80/mountain/search', {
+    params: {
+      word: editedMountainName.value,
+    }
+  });
+
+  
+} catch (error) {
+  console.log(error);
+  throw new Error(error);
+}
+
+};
+
 const items = [
   {
     board_id: 1,
@@ -31,6 +48,7 @@ const items = [
   // Add more items as needed
 ];
 </script>
+
 
 <template>
   <div class="container col-12 mt-5 d-flex flex-column align-items-center justify-content-center">
@@ -57,4 +75,7 @@ const items = [
   </div>
 </template>
 
+
+
 <style scoped></style>
+
