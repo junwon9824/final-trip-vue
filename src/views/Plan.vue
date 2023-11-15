@@ -64,23 +64,28 @@
       </div>
 
       <div class="col-md-4">
-        <div class="d-flex justify-content-evenly me-5">
-          <button type="button" class="btn text-primary">
-            가까운 순 <i class="bi bi-chevron-down"></i>
-          </button>
-          <button type="button" class="btn text-primary">
-            해발 고도 순 <i class="bi bi-chevron-down"></i>
-          </button>
-        </div>
-        <p class="fs-5 fw-bold">
-          <i class="bi bi-geo-alt-fill me-2 text-danger"></i>이런 산은 어때요?
-        </p>
-        <div class="d-flex flex-wrap">
-          <RecommendCard
-            v-for="item in items"
-            :key="item.mntilistno"
-            :RecommendCard="item"
-          ></RecommendCard>
+        <img src="../assets/recomand_img1.png" class="card-img" alt="..." style="height: 100%" />
+        <div class="card-img-overlay d-flex flex-column align-items-end">
+          <div class="mt-4 me-5">
+            <div class="d-flex justify-content-around ms-4">
+              <button type="button" class="btn text-primary">
+                가까운 순 <i class="bi bi-chevron-down"></i>
+              </button>
+              <button type="button" class="btn text-primary">
+                해발 고도 순 <i class="bi bi-chevron-down"></i>
+              </button>
+            </div>
+            <p class="fs-5 fw-bold">
+              <i class="bi bi-geo-alt-fill me-2 text-danger"></i>이런 산은 어때요?
+            </p>
+            <div class="d-flex flex-wrap d-flex flex-column">
+              <RecommendCard
+                v-for="item in items"
+                :key="item.mntilistno"
+                :RecommendCard="item"
+              ></RecommendCard>
+            </div>
+          </div>
         </div>
       </div>
     </div>

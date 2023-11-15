@@ -54,5 +54,6 @@ const searchMountain = async () => {
 }
 .container {
   margin-top: 12%;
+  min-height: 60vh;
 }
 </style>
