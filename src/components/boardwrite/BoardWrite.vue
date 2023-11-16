@@ -3,8 +3,8 @@ import axios from 'axios';
 import { ref } from 'vue';
 
 const mountains = ref([]);
-const editedMountainName = ref('');
-const editedRegDate = ref('');
+const subject = ref('');
+const content = ref('');
 const editedFileInfo = ref('');
 
 const handleImageChange = (event) => {
@@ -26,16 +26,19 @@ const handleImageChange = (event) => {
 const insertData = async () => {
     // Implement the logic to insert data or perform an action
     console.log('Insert button clicked!');
-    console.log('Mountain Name:', editedMountainName.value);
-    console.log('Registration Date:', editedRegDate.value);
+    console.log('  subject:', subject.value);
+    console.log('  content:', content.value);
     console.log('File Info:', editedFileInfo.value);
 
     const formData = new FormData();
     formData.append('upfile', editedFileInfo.value);
 
     try {
+        
         const payload = {
-            userId: sessionStorage.getItem('userId')
+            userId: sessionStorage.getItem('userId'),
+            subject: subject.value,
+            content: content.value
         };
 
         const response = await axios.post('http://localhost:80/article/write', formData, {
@@ -65,9 +68,9 @@ const insertData = async () => {
     <div class="container">
         <div class="card bg-info d-flex align-items-center rounded-4">
             <div class="card-body col-11">
-                <input v-model="editedMountainName" class="form-control py-3 my-5" placeholder="제목" />
+                <input v-model="subject" class="form-control py-3 my-5" placeholder="제목" />
 
-                <input v-model="editedRegDate" class="form-control py-3 my-5" placeholder=" 내용" style="height: 600px" />
+                <input v-model="content" class="form-control py-3 my-5" placeholder=" 내용" style="height: 600px" />
 
                 <div>
                     <input type="file" @change="handleImageChange" class="form-control form-control-lg my-5"
