@@ -32,8 +32,13 @@ const login = async () => {
 
     // 여기서 반환된 데이터를 사용하여 필요한 작업 수행
 
-    router.push('/'); // 메인 페이지로 이동
-
+    if (response.data) {
+      // 세션 스토리지에 저장
+      sessionStorage.setItem('userId',id.value );
+      sessionStorage.setItem('userPwd',password.value );
+      // 성공적으로 로그인되었으므로 메인 페이지로 이동
+      router.push('/');
+    }
   } catch (error) {
     console.log(error);
     throw new Error(error);
@@ -42,8 +47,7 @@ const login = async () => {
 </script>
 
 
-<template> 
-
+<template>
   <div class="container d-flex flex-row rounded-3 bg-light px-0">
     <div class="col-6 ">
       <div>
@@ -51,33 +55,30 @@ const login = async () => {
         <p>가입하신 이메일 주소로 로그인하세요.</p>
         <div class="m-0">
           <label for="userId" class="form-label">아이디</label>
-          <input type="text" class="form-control" id="userId" placeholder="아이디를 입력하세요" />
+          <input type="text" class="form-control" id="userId" placeholder="아이디를 입력하세요" v-model="id" />
         </div>
 
         <div class="mb-3">
           <label for="userPassword" class="form-label">비밀번호</label>
-          <input
-            type="password"
-            class="form-control"
-            id="userPassword"
-            placeholder="비밀번호를 입력하세요"
-          />
+          <input type="password" class="form-control" id="userPassword" placeholder="비밀번호를 입력하세요" v-model="password" />
         </div>
 
         <div class="mb-3">
           <div class="form-check">
             <input type="checkbox" id="saveIdCheckbox" v-model="saveId" />
             <label for="saveIdCheckbox">아이디 저장</label>
-           </div>
+          </div>
 
         </div>
- 
+
       </div>
 
       <div class="d-flex">
-        <button type="button" class="btn btn-success flex-grow-1">로그인</button>
-        <button type="button" class="btn btn-success flex-grow-1">회원가입</button>
-       </div>
+        <button type="button" class="btn btn-success flex-grow-1" @click="login">로그인</button>
+
+        <button type="button" class="btn btn-outline-success col-6 mx-1 fw-bold"><router-link
+            style="text-decoration: none;" to="/register">회원가입</router-link></button>
+      </div>
     </div>
 
     <div class="col-6">

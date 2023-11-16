@@ -1,9 +1,26 @@
-<script setup></script>
+
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const isLoggedIn = ref(sessionStorage.getItem('userId') != null);
+console.log("iiii"+isLoggedIn.value)
+console.log("iiii"+sessionStorage.getItem('userId') )
+
+
+const logout = () => {
+  sessionStorage.clear(); // 세션 스토리지의 데이터 모두 제거
+  router.push('/login');
+};
+
+</script>
 
 <template>
   <nav class="navbar navbar-expand-sm navbar-dark bg-light mt-1 mb-1 py-0">
-    <div class="container-lg my-0 py-0">
-      <div class="d-flex flex-row">
+  <div class="container-lg my-0 py-0">
+    <div class="d-flex flex-row">
         <router-link to="/" class="d-flex flex-row align-items-center nav-link">
           <a class="navbar-brand nav-link" href="javascript:void(0)">
             <img src="@/assets/mtnlogo.png" class="rounded mx-auto d-block" alt="..." />
@@ -14,12 +31,13 @@
       <div class="col-7 d-flex flex-row justify-content-between">
         <div>
           <ul class="navbar-nav me-auto">
+
             <!-- <li class="nav-item">
-              <router-link to="/conqueredmountain" class="nav-link">
-                <h5 class="text-primary">정복한 산</h5>
-              </router-link>
+                    <router-link to="/conqueredmountain" class="nav-link">
+                      <h5 class="text-primary">정복한 산</h5>
+                    </router-link>
               
-            </li> -->
+                  </li> -->
             <li class="nav-item">
               <router-link to="/search" class="nav-link">
                 <p class="text-primary fs-4 fw-bold">검색</p>
@@ -42,19 +60,28 @@
             </li>
           </ul>
         </div>
-        <div class="d-flex flex-row align-items-center">
+
+        <div v-if="!isLoggedIn" class="d-flex flex-row align-items-center">
+
           <router-link to="/login" class="px-1">
             <button type="button" class="btn btn-primary rounded-pill text-white fw-bold fs-5">
               로그인
             </button>
           </router-link>
 
-          <router-link to="/regist" class="px-1">
+          <router-link to="/register" class="px-1">
             <button type="button" class="btn btn-primary rounded-pill text-white fw-bold fs-5">
               회원가입
             </button>
           </router-link>
         </div>
+
+        <div v-else>
+          <button type="button" class="btn btn-primary rounded-pill text-white fw-bold fs-5 " @click="logout">
+            로그아웃
+          </button>
+        </div>
+
       </div>
     </div>
   </nav>

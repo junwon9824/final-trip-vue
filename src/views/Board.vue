@@ -1,52 +1,35 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import BoardCard from '../components/board/item/BoardCard.vue';
-const saveId = ref(false);
-const handleIdSaveClick = () => {
-  console.log('아이디 저장 clicked');
-};
+import axios from 'axios'
 
-const handlePasswordRecoveryClick = () => {
-  console.log('비밀번호 찾기 clicked');
-};
+const saveId = ref(false);
+
+
+const items = ref([
+]);
 
 const getboardlist = async () => {
 
-try {
-  const response = await axios.get('http://localhost:80/mountain/search', {
-    params: {
-      word: editedMountainName.value,
-    }
-  });
+  try {
+    const response = await axios.get('http://localhost:80/article/alllist', {
+      // params: {
+      //   word: editedMountainName.value,
+      // }
 
-  
-} catch (error) {
-  console.log(error);
-  throw new Error(error);
-}
+    });
+
+    items.value = response.data;
+    console.log(items.value);
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
 
 };
 
-const items = [
-  {
-    board_id: 1,
-    articleNo: 20,
-    subject: 'Your Subject',
-    content: 'Your Content',
-    userId: 'Your UserID',
-    registerTime: '2023-11-10 12:34:56',
-  },
-  {
-    board_id: 2,
-    articleNo: 22,
-    subject: 'Your Subject',
-    content: 'Your Content',
-    userId: 'Your UserID',
-    registerTime: '2023-11-10 12:34:56',
-  },
+onMounted(getboardlist);
 
-  // Add more items as needed
-];
 </script>
 
 
@@ -55,14 +38,12 @@ const items = [
     <div class="d-flex col-12 flex-row justify-content-start align-items-center bg-warning">
       <p class="text-center fw-bold fs-2 col-11">우리들의 등산 이야기</p>
 
-      <router-link
-        to="/boardwrite"
-        class="d-flex flex-row align-items-center nav-link justify-content-end"
-      >
+      <router-link to="/boardwrite" class="d-flex flex-row align-items-center nav-link justify-content-end">
         <button type="button" class="btn btn-secondary rounded-pill">
           글쓰기 <i class="bi bi-arrow-right"></i>
         </button>
       </router-link>
+      
     </div>
     <table class="table table-hover border-primary">
       <tbody>

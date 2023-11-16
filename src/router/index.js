@@ -81,12 +81,7 @@ const router = createRouter({
             component: () => import('@/views/MountainView.vue'),
         },
 
-        {
-            path: '/regist',
-            name: 'regist',
-
-            component: () => import('../views/Regist.vue'),
-        },
+         
     ],
 });
 

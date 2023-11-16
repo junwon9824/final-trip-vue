@@ -3,7 +3,7 @@ import MainCard from "../components/Main/MainCard.vue";
 import { ref, onMounted } from "vue";
 import axios from "axios";
 
-const prefix = "www.forest.go.kr/images/data/down/mountain";
+const prefix = "https://www.forest.go.kr/images/data/down/mountain";
 
 const items = ref([
   //   {
