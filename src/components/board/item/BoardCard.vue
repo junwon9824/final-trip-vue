@@ -29,7 +29,7 @@ onMounted(() => {
   <tr>
     <td class="pt-3 pb-3 d-flex flex-row">
       <div>
-        
+         
         <img src="@/assets/mountain_car.png" class="img-fluid rounded mx-4 d-block" alt="..."
           style="width: 350px; height: 190px; object-fit: fill" />
 
