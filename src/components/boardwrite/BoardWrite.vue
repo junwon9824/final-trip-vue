@@ -1,4 +1,5 @@
 <script setup>
+import axios from 'axios';
 import { ref } from 'vue';
 
 const mountains = ref([]);
@@ -16,15 +17,48 @@ const handleImageChange = (event) => {
         };
         reader.readAsDataURL(file);
     }
+
+
 };
 
-const insertData = () => {
+ // const getuserinfo = 
+
+const insertData = async () => {
     // Implement the logic to insert data or perform an action
     console.log('Insert button clicked!');
     console.log('Mountain Name:', editedMountainName.value);
     console.log('Registration Date:', editedRegDate.value);
     console.log('File Info:', editedFileInfo.value);
+
+    const formData = new FormData();
+    formData.append('upfile', editedFileInfo.value);
+
+    try {
+        const payload = {
+            userId: sessionStorage.getItem('userId')
+        };
+
+        const response = await axios.post('http://localhost:80/article/write', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            params: payload // 문자열 데이터는 params에 넣어 전달합니다.
+        });
+
+        console.log("Response:", response.data);
+ 
+        if (response.data) {
+            // 처리 로직 추가
+            console.log(response.data)
+        }
+
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }
 };
+
+
 </script>
 
 <template>
@@ -33,20 +67,11 @@ const insertData = () => {
             <div class="card-body col-11">
                 <input v-model="editedMountainName" class="form-control py-3 my-5" placeholder="제목" />
 
-                <input
-                    v-model="editedRegDate"
-                    class="form-control py-3 my-5"
-                    placeholder=" 내용"
-                    style="height: 600px"
-                />
+                <input v-model="editedRegDate" class="form-control py-3 my-5" placeholder=" 내용" style="height: 600px" />
 
                 <div>
-                    <input
-                        type="file"
-                        @change="handleImageChange"
-                        class="form-control form-control-lg my-5"
-                        accept="image/*"
-                    />
+                    <input type="file" @change="handleImageChange" class="form-control form-control-lg my-5"
+                        accept="image/*" />
                     <img :src="editedFileInfo" class="img-fluid rounded d-block" />
                 </div>
                 <div class="d-flex justify-content-end mb-3">
