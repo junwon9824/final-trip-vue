@@ -34,10 +34,11 @@ const login = async () => {
 
     if (response.data) {
       // 세션 스토리지에 저장
-      sessionStorage.setItem('userId',id.value );
-      sessionStorage.setItem('userPwd',password.value );
+      sessionStorage.setItem('userId', id.value);
+      sessionStorage.setItem('userPwd', password.value);
       // 성공적으로 로그인되었으므로 메인 페이지로 이동
       router.push('/');
+      
     }
   } catch (error) {
     console.log(error);
@@ -51,25 +52,31 @@ const login = async () => {
   <div class="container d-flex flex-row rounded-3 bg-light px-0">
     <div class="col-6 ">
       <div>
-        <h1>로그인</h1>
-        <p>가입하신 이메일 주소로 로그인하세요.</p>
-        <div class="m-0">
-          <label for="userId" class="form-label">아이디</label>
-          <input type="text" class="form-control" id="userId" placeholder="아이디를 입력하세요" v-model="id" />
+        <p class="fs-4 fw-bold">로그인</p>
+        <p class="">가입하신 이메일 주소로 로그인하세요.</p>
+
+        <div class="m-0  col-6 bg-primary">
+          <label for="userId" class="form-label fw-bold">아이디</label>
+          <input type="text" class="form-control py-2 " id="userId" placeholder="아이디를 입력하세요" v-model="id" />
         </div>
 
-        <div class="mb-3">
-          <label for="userPassword" class="form-label">비밀번호</label>
-          <input type="password" class="form-control" id="userPassword" placeholder="비밀번호를 입력하세요" v-model="password" />
+        <div class="mb-3 mt-4">
+          <label for="userPassword" class="form-label fw-bold ">비밀번호</label>
+          <input type="password" class="form-control py-2    " id="userPassword" placeholder="비밀번호를 입력하세요"
+            v-model="password" />
         </div>
 
-        <div class="mb-3">
-          <div class="form-check">
+
+        <div class="mb-3 d-flex">
+
+          <div class="form-check me-2">
             <input type="checkbox" id="saveIdCheckbox" v-model="saveId" />
             <label for="saveIdCheckbox">아이디 저장</label>
           </div>
 
+          <a href="#" @click="handlePasswordRecoveryClick" class="form-label d-inline">비밀번호 찾기</a>
         </div>
+
 
       </div>
 
@@ -77,7 +84,7 @@ const login = async () => {
         <button type="button" class="btn btn-success flex-grow-1" @click="login">로그인</button>
 
         <button type="button" class="btn btn-outline-success col-6 mx-1 fw-bold"><router-link
-            style="text-decoration: none;" to="/register">회원가입</router-link></button>
+            to="/register">회원가입</router-link></button>
       </div>
     </div>
 

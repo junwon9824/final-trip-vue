@@ -18,20 +18,31 @@ const deleteUser = () => {
 </script>
 
 <template>
-  <div class="card bg-info text-dark rounded-4 d-flex justify-content-center align-items-center py-5 mt-5">
+  <div
+    class="card bg-info text-dark rounded-4 d-flex justify-content-center align-items-center py-5 mt-5"
+  >
     <div class="d-flex justify-content-center align-items-center">
-      <img src="@/assets/mountain_car.png" class="img-fluid rounded-circle mx-auto d-block" alt="..." style="width: 200px" />
+      <img
+        src="@/assets/mountain_car.png"
+        class="img-fluid rounded-circle mx-auto d-block"
+        alt="..."
+        style="width: 200px"
+      />
       <div class="flex-grow-1 ms-5">
         <p class="fs-4">ID: {{ props.userId }}</p>
         <p class="fs-4">이름: {{ props.userName }}</p>
         <p class="fs-4">주소: {{ props.address }}</p>
-        <p class="fs-4">내가 정복한 산: {{ props.conqueredMountains }}</p>
+        <p class="fs-4">정복 수: {{ props.conqueredMountains }}</p>
       </div>
     </div>
 
     <div class="d-flex justify-content-around pt-4" style="width: 100%">
-      <button class="btn btn-success rounded-3 text-white px-4" @click="deleteUser">회원탈퇴</button>
-      <router-link to="/modify" class="btn btn-success rounded-3 text-white px-4"> 수정 </router-link>
+      <button class="btn btn-success rounded-3 text-white px-4" @click="deleteUser">
+        회원탈퇴
+      </button>
+      <router-link to="/modify" class="btn btn-success rounded-3 text-white px-4">
+        수정
+      </router-link>
     </div>
   </div>
 </template>
