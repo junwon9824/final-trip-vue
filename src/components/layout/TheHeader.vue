@@ -1,48 +1,120 @@
+
 <script setup>
+import { ref ,watchEffect,watch,computed } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const isLoggedIn = computed(() => {
+  console.log("session changed")
+  return sessionStorage.getItem('userId') !== null;
+});
+
+
+// const checkSession = () => {
+//   console.log("check")
+//   const currentValue = sessionStorage.getItem('userId') !== null;
+//   if (currentValue !== isLoggedIn.value) {
+//     isLoggedIn.value = currentValue; // 상태 업데이트
+//   }
+// };
+
+// // 1초마다 checkSession 함수 실행
+// setInterval(checkSession, 1000); // 1초마다 실행됨 (1000ms = 1초)
+  
+
+watch(isLoggedIn, (newValue, oldValue) => {
+   isLoggedIn.value=newValue.value;
+   console.log("islogggggggggggggggg,new"+isLoggedIn.value+" "|newValue.value)
+  // 여기서 원하는 동작 수행
+});
+
+console.log("iiii"+isLoggedIn.value)
+console.log("iiii"+sessionStorage.getItem('userId') )
+
+
+const logout = () => {
+  sessionStorage.clear(); // 세션 스토리지의 데이터 모두 제거
+  router.push('/login');
+};
+
+ 
 
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <div class="container-fluid">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-light mt-1 mb-1 py-0">
+  <div class="container-lg my-0 py-0">
+    <div class="d-flex flex-row">
+        <router-link to="/" class="d-flex flex-row align-items-center nav-link">
+          <a class="navbar-brand nav-link" href="javascript:void(0)">
+            <img src="@/assets/mtnlogo.png" class="rounded mx-auto d-block" alt="..." />
+          </a>
+          <p class="text-muted fs-2 mt-4 fw-bold">산들바람</p>
+        </router-link>
+      </div>
+      <div class="col-7 d-flex flex-row justify-content-between">
+        <div>
+          <ul class="navbar-nav me-auto">
 
-    <router-link to="/">
-    <a class="navbar-brand" href="javascript:void(0)">Logo</a>
-  </router-link>
+            <!-- <li class="nav-item">
+                    <router-link to="/conqueredmountain" class="nav-link">
+                      <h5 class="text-primary">정복한 산</h5>
+                    </router-link>
+              
+                  </li> -->
+            <li class="nav-item">
+              <router-link to="/search" class="nav-link">
+                <p class="text-primary fs-4 fw-bold">검색</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/board" class="nav-link">
+                <p class="text-primary fs-4 fw-bold">게시판</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/plan" class="nav-link">
+                <p class="text-primary fs-4 fw-bold">계획</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/mypage" class="nav-link">
+                <p class="text-primary fs-4 fw-bold">마이페이지</p>
+              </router-link>
+            </li>
+          </ul>
+        </div>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <div v-if="!isLoggedIn" class="d-flex flex-row align-items-center">
 
-    <div class="collapse navbar-collapse" id="mynavbar">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <router-link to="/conqueredmountain">
-          <a class="nav-link" href="javascript:void(0)">정복한 산</a>
+          <router-link to="/login" class="px-1">
+            <button type="button" class="btn btn-primary rounded-pill text-white fw-bold fs-5">
+              로그인
+            </button>
           </router-link>
 
-        </li>
-        <li class="nav-item">
-          <router-link to="/search">
-            <a class="nav-link" href="javascript:void(0)">검색</a>
+          <router-link to="/register" class="px-1">
+            <button type="button" class="btn btn-primary rounded-pill text-white fw-bold fs-5">
+              회원가입
+            </button>
           </router-link>
+        </div>
 
-        </li>
-        <li class="nav-item">
-          <router-link to="/board">
-          <a class="nav-link" href="javascript:void(0)">게시판</a>
-          </router-link>
+        <div v-else>
+          <button type="button" class="btn btn-primary rounded-pill text-white fw-bold fs-5 " @click="logout">
+            로그아웃
+          </button>
+        </div>
 
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="text" placeholder="Search">
-        <button class="btn btn-primary" type="button">Search</button>
-      </form>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 </template>
 
 <style scoped>
+img {
+  height: 111px;
+  text-align: left;
+}
 </style>

@@ -1,0 +1,40 @@
+<script setup>
+defineProps(['ranker']);
+</script>
+
+<template>
+  <div class="card mt-5 bg-info py-4 rounded-pill d-flex flex-row justify-content-around">
+    <div class="d-flex flex-row align-items-center">
+      <img src="../../assets/prfile_temp_1.png" alt="..." class="rounded-circle" />
+
+      <div class="ms-3">
+        <p class="fs-6 mb-0 pb-0">
+          <i class="bi bi-trophy-fill" style="color: gold"></i> 이 산의 지배자
+        </p>
+        <p class="fs-4 fw-bold">{{ ranker[0].name }}</p>
+      </div>
+    </div>
+    <div class="d-flex flex-row align-items-center">
+      <img src="../../assets/prfile_temp_2.png" alt="..." class="rounded-circle" />
+
+      <div class="ms-3">
+        <p class="fs-6 mb-0 pb-0">
+          <i class="bi bi-trophy-fill" style="color: silver"></i> 차기 재배자?
+        </p>
+        <p class="fs-4 fw-bold">{{ ranker[1].name }}</p>
+      </div>
+    </div>
+    <div class="d-flex flex-row align-items-center">
+      <img src="../../assets/prfile_temp_3.png" alt="..." class="rounded-circle" />
+
+      <div class="ms-3">
+        <p class="fs-6 mb-0 pb-0">
+          <i class="bi bi-trophy-fill" style="color: brown"></i> 여기서 만족인가요?
+        </p>
+        <p class="fs-4 fw-bold">{{ ranker[2].name }}</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped></style>

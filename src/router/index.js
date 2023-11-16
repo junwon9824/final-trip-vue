@@ -1,68 +1,88 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 // import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: () => import('../views/Main.vue')
-    },
+    history: createWebHistory(import.meta.env.BASE_URL),
+    routes: [
+        {
+            path: '/',
+            name: 'home',
+            component: () => import('../views/Main.vue'),
+        },
 
+        {
+            path: '/modify',
+            name: 'modify',
 
-    {
-      path: '/rank',
-      name: 'rank',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/Rank.vue')
-    }, 
+            component: () => import('@/views/ModifyView.vue'),
+        },
 
-    {
-      path: '/conqueredmountain',
-      name: 'conqueredmountain',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/ConqueredMountain.vue')
-    }, 
+        {
+            path: '/conqueredmountain',
+            name: 'conqueredmountain',
 
-    {
-      path: '/board',
-      name: 'board',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/Board.vue')
-    }, 
+            component: () => import('@/views/ConqueredMountain.vue'),
+        },
 
-    {
-      path: '/login',
-      name: 'login',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/Login.vue')
-    }, 
-    {
-      path: '/register',
-      name: 'register',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/Regist.vue')
-    }, 
-    {
-      path: '/search',
-      name: 'search',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/SearchResult.vue')
-    }, 
-  ]
-})
+        {
+            path: '/board',
+            name: 'board',
 
-export default router
+            component: () => import('../views/Board.vue'),
+        },
+        {
+            path: '/plan',
+            name: 'plan',
+
+            component: () => import('../views/Plan.vue'),
+        },
+        {
+            path: '/mypage',
+            name: 'mypage',
+
+            component: () => import('../views/MyPage.vue'),
+        },
+        {
+            path: '/boardwrite',
+            name: 'boardwrite',
+
+            component: () => import('@/views/BoardWrite.vue'),
+        },
+        {
+            path: '/login',
+            name: 'login',
+
+            component: () => import('../views/Login.vue'),
+        },
+        {
+            path: '/register',
+            name: 'register',
+
+            component: () => import('../views/Regist.vue'),
+        },
+        {
+            path: '/search',
+            name: 'search',
+
+            component: () => import('../views/Search.vue'),
+        },
+
+        {
+            path: '/login',
+            name: 'login',
+
+            component: () => import('../views/Login.vue'),
+        },
+
+        {
+            path: '/mountainview',
+            name: 'mountainview',
+
+            component: () => import('@/views/MountainView.vue'),
+        },
+
+         
+    ],
+});
+
+export default router;
