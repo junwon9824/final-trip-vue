@@ -16,7 +16,6 @@ const route = useRoute();
   <TheHeader></TheHeader>
 
   <router-view></router-view>
-
   <TheFooter></TheFooter>
 </template>
 
