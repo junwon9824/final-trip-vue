@@ -11,7 +11,7 @@ const addToWishlist = () => {
 </script>
 
 <template>
-  <div class="card mb-3" style="max-width: 350px; height: 170">
+  <div class="card mb-3 shadow-sm" style="max-width: 350px; height: 170">
     <div class="d-flex flex-row g-0">
       <div class="col-5 m-2">
         <img src="@/assets/mountain_car.png" class="img-fluid rounded-start" alt="..." />

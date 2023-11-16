@@ -31,12 +31,12 @@ const insertData = () => {
     <div class="container">
         <div class="card bg-info d-flex align-items-center rounded-4">
             <div class="card-body col-11">
-                <input v-model="editedMountainName" class="form-control py-3 my-5" placeholder="이름 Name" />
+                <input v-model="editedMountainName" class="form-control py-3 my-5" placeholder="제목" />
 
                 <input
                     v-model="editedRegDate"
                     class="form-control py-3 my-5"
-                    placeholder="등록일자 Date"
+                    placeholder=" 내용"
                     style="height: 600px"
                 />
 

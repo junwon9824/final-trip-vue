@@ -42,49 +42,46 @@ const login = async () => {
 </script>
 
 
-<template>
-  <div class="container bg-light rounded-3 p-0 ">
-    <div class="row">
-      <div class="col-5 d-flex justify-content-center align-items-center">
-        <div class="col-8 d-flex flex-column justify-content-around" style="height: 80%;">
-          <p class="fs-4 fw-bold">로그인</p>
-          <p>가입하신 이메일 주소로 로그인하세요.</p>
-          <div class="mb-3">
-            <label for="userId" class="form-label fw-bold">아이디</label>
-            <input type="text" class="form-control py-2" id="userId" placeholder="아이디를 입력하세요" v-model="id" />
-          </div>
+<template> 
 
-          <div class="mb-3">
-            <label for="userPassword" class="form-label fw-bold ">비밀번호</label>
-            <input type="password" class="form-control py-2" id="userPassword" placeholder="비밀번호를 입력하세요" v-model="password" />
-          </div>
-
-          <div class="mb-3 d-flex">
-
-            <div class="form-check me-2">
-              <input type="checkbox" id="saveIdCheckbox" v-model="saveId" />
-              <label for="saveIdCheckbox">아이디 저장</label>
-            </div>
-
-            <a href="#" @click="handlePasswordRecoveryClick" class="form-label d-inline">비밀번호 찾기</a>
-          </div>
-
-
-          <div class="d-flex justify-content-center">
-
-            <button type="button" class="btn btn-success col-6 mx-1 text-white fw-bold" @click="login()">로그인</button>
-
-            <button type="button" class="btn btn-outline-success col-6 mx-1 fw-bold"><router-link
-                style="text-decoration: none;" to="/register">회원가입</router-link></button>
-          </div>
-
+  <div class="container d-flex flex-row rounded-3 bg-light px-0">
+    <div class="col-6 ">
+      <div>
+        <h1>로그인</h1>
+        <p>가입하신 이메일 주소로 로그인하세요.</p>
+        <div class="m-0">
+          <label for="userId" class="form-label">아이디</label>
+          <input type="text" class="form-control" id="userId" placeholder="아이디를 입력하세요" />
         </div>
 
+        <div class="mb-3">
+          <label for="userPassword" class="form-label">비밀번호</label>
+          <input
+            type="password"
+            class="form-control"
+            id="userPassword"
+            placeholder="비밀번호를 입력하세요"
+          />
+        </div>
+
+        <div class="mb-3">
+          <div class="form-check">
+            <input type="checkbox" id="saveIdCheckbox" v-model="saveId" />
+            <label for="saveIdCheckbox">아이디 저장</label>
+           </div>
+
+        </div>
+ 
       </div>
 
-      <div class="col-7">
-        <img src="@/assets/mountain_car.png" class="img-fluid rounded-end d-block" alt="..." />
-      </div>
+      <div class="d-flex">
+        <button type="button" class="btn btn-success flex-grow-1">로그인</button>
+        <button type="button" class="btn btn-success flex-grow-1">회원가입</button>
+       </div>
+    </div>
+
+    <div class="col-6">
+      <img src="@/assets/mountain_car.png" class="img-fluid rounded-end mx-0" alt="..." />
     </div>
   </div>
 </template>

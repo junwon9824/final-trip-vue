@@ -1,31 +1,26 @@
 <script setup>
 import { defineProps } from 'vue';
 
-defineProps({
-  MainCard: Object,
+const props=defineProps({
+    MainCard: Object,
 });
-
-
 
 
 </script>
 
-<template>
+<template> 
+    <div class="card shadow-lg m-4" style="width: 600px">
+        <img class="card-img-top" src="../../assets/mountain_car.png" alt="Card image" />
+        <div class="card-img-overlay d-flex justify-content-between align-items-center flex-column">
+            <p class="card-title text-light fs-2 fw-bold">{{ MainCard.mntiname }}</p>
+            <RouterLink to="/">
 
-  <div class="card shadow-lg m-4" style="width: 600px">
+            <button class="btn btn-light btn-lg rounded-pill px-4 py-2">
+                둘러보기<i class="bi bi-arrow-right"></i>
+            </button>
+          </RouterLink>
 
-    <img class="card-img-top" src="../../assets/mountain_car.png" alt="Card image" />
-    <div class="card-img-overlay d-flex justify-content-between align-items-center flex-column">
-      <p class="card-title text-light fs-2 fw-bold">{{ MainCard.mntiname }}</p>
-
-      <RouterLink to="/">
-
-        <a href="#" class="btn btn-light btn-lg rounded-pill px-4 py-2">둘러보기<i class="bi bi-arrow-right"></i></a>
-      </RouterLink>
-
+        </div>
     </div>
-
-  </div>
-
-</template>
+ </template>
 <style scoped></style>
