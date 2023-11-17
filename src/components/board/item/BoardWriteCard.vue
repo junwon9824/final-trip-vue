@@ -2,12 +2,12 @@
 import axios from 'axios';
 import { ref } from 'vue';
 
-const mountains = ref([]);
 const subject = ref('');
 const content = ref('');
 const editedFileInfo = ref('');
 
 const handleImageChange = (event) => {
+
     const file = event.target.files[0];
 
     if (file) {
@@ -18,41 +18,40 @@ const handleImageChange = (event) => {
         reader.readAsDataURL(file);
     }
 
-
 };
 
- // const getuserinfo = 
-
+// const getuserinfo = 
 const insertData = async () => {
     // Implement the logic to insert data or perform an action
     console.log('Insert button clicked!');
     console.log('  subject:', subject.value);
     console.log('  content:', content.value);
     console.log('File Info:', editedFileInfo.value);
-
+    
     const formData = new FormData();
     formData.append('upfile', editedFileInfo.value);
 
     try {
-        
-        const payload = {
+        const boardDto = {
             userId: sessionStorage.getItem('userId'),
             subject: subject.value,
             content: content.value
         };
 
-        const response = await axios.post('http://localhost:80/article/write', formData, {
+        // FormData에 BoardDto를 추가
+        formData.append('boardDto', JSON.stringify(boardDto));
+
+        const config = {
             headers: {
                 'Content-Type': 'multipart/form-data'
-            },
-            params: payload // 문자열 데이터는 params에 넣어 전달합니다.
-        });
+            }
+        };
 
-        console.log("Response:", response.data);
- 
+        const response = await axios.post('http://localhost:80/article/write', formData, config);
+
         if (response.data) {
             // 처리 로직 추가
-            console.log(response.data)
+            console.log(response.data);
         }
 
     } catch (error) {
@@ -84,7 +83,6 @@ const insertData = async () => {
                     </button>
                 </div>
             </div>
-            
         </div>
     </div>
 </template>

@@ -15,6 +15,7 @@ import ConqueredBoard from '../components/Mypage/ConqueredBoard.vue';
                 <ConqueredBoard></ConqueredBoard>
             </div>
         </div>
+        
     </div>
 </template>
 

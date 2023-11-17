@@ -43,10 +43,10 @@ const router = createRouter({
             component: () => import('../views/MyPage.vue'),
         },
         {
-            path: '/boardwrite',
-            name: 'boardwrite',
+            path: '/boardwriteCard',
+            name: 'boardwriteCard',
 
-            component: () => import('@/views/BoardWrite.vue'),
+            component: () => import('../components/board/item/BoardwriteCard.vue'),
         },
         {
             path: '/login',

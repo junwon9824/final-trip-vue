@@ -38,9 +38,6 @@ const handlePasswordRecoveryClick = () => {
               type="password"
               class="form-control py-2"
               id="userPassword"
-
-
-              
               placeholder="비밀번호를 입력하세요"
             />
           </div>
@@ -86,7 +83,11 @@ const handlePasswordRecoveryClick = () => {
       </div>
 
       <div class="col-lg-7">
-        <img src="@/assets/mountain_car.png" class="img-fluid rounded mx-auto d-block" alt="..." />
+        <img
+          src="@/assets/mountain_car.png"
+          class="img-fluid rounded-end mx-auto d-block"
+          alt="..."
+        />
       </div>
     </div>
   </div>

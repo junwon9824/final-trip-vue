@@ -1,7 +1,8 @@
-<script setup>
+<script setup>   //게시판등록
 import { ref } from 'vue';
 import BoardCard from '../components/board/item/BoardCard.vue';
-import BoardWrite from '../components/boardwrite/BoardWrite.vue';
+import BoardWriteCard from '../components/board/item/BoardWriteCard.vue';
+// import BoardWrite from '../components/boardwrite/BoardWrite.vue';
 const saveId = ref(false);
 const handleIdSaveClick = () => {
     console.log('아이디 저장 clicked');
@@ -25,18 +26,19 @@ const items = [
 ];
 
  
-const getboardlist = async () => {
-    try {
-        const response = await axios.get('http://localhost:80/mountain/', {
-            params: {
-                word: editedMountainName.value,
-            },
-        });
-    } catch (error) {
-        console.log(error);
-        throw new Error(error);
-    }
-};
+// const getboardlist = async () => {
+//     try {
+//         const response = await axios.get('http://localhost:80/mountain/', {
+//             params: {
+//                 word: editedMountainName.value,
+//             },
+//         });
+//     } catch (error) {
+//         console.log(error);
+//         throw new Error(error);
+//     }
+// };
+
  </script>
 
 <template>
@@ -46,7 +48,7 @@ const getboardlist = async () => {
                 <div class="col-md-12 mb-3 d-flex align-items-end justify-content-center">
                     <p class="text-center fw-bold fs-2 col-11">나의 등반기</p>
                 </div>
-                <BoardWrite></BoardWrite>
+                <BoardWriteCard></BoardWriteCard>
             </div>
         </div>
     </div>
