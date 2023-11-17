@@ -10,6 +10,7 @@ const userIdvalue = sessionStorage.getItem('userId');
 const userName = ref('');
 const address = ref('');
 const conquerednum = ref('');
+const num =ref('');
 
 const getmydata = async () => {
 
@@ -35,6 +36,27 @@ const getmydata = async () => {
 };
 
 onMounted(getmydata);
+
+
+const gettotalconquerednum = async () => {
+
+try {
+
+  const response = await axios.get('http://localhost:80/user/gettotalconquered', {
+    params: {
+      userId: userIdvalue,
+    },
+  });
+ 
+  console.log("getttt" + response.data.userId); 
+  num = response.data
+} catch (error) {
+  console.log(error);
+  throw new Error(error);
+}
+};
+
+onMounted(gettotalconquerednum);
 
 
 const deleteUser = async () => {
@@ -73,7 +95,7 @@ const deleteUser = async () => {
         <p class="fs-4">ID: {{ userIdvalue }}</p>
         <p class="fs-4">이름: {{ userName }}</p>
         <p class="fs-4">주소: {{ address }}</p>
-        <p class="fs-4">정복 수: {{ conquerednum }}</p>
+        <p class="fs-4">정복 수: {{   }}</p>
       </div>
     </div>
 

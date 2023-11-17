@@ -35,6 +35,7 @@
                             <td>{{ item.memberconquerednum }}</td>
                             <td>{{ item.conquereddate }}</td>
 
+                            
                         </tr>
                     </tbody>
                 </table>
