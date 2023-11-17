@@ -2,8 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router';
 // import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
-    routes: [
+    history:createWebHistory(import.meta.env.BASE_URL),
+    routes:[ 
+    
         {
             path: '/',
             name: 'home',
@@ -66,23 +67,18 @@ const router = createRouter({
 
             component: () => import('../views/Search.vue'),
         },
-
-        {
-            path: '/login',
-            name: 'login',
-
-            component: () => import('../views/Login.vue'),
-        },
-
         {
             path: '/mountainview',
             name: 'mountainview',
 
             component: () => import('@/views/MountainView.vue'),
         },
-
-         
-    ],
-});
+        {
+            path: '/mountain/:id',
+            name: 'MountainDetail',
+            component: () => import('../views/MountainView.vue')
+          }
+        ]
+    });
 
 export default router;

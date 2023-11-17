@@ -1,31 +1,53 @@
 <template>
-    <div>
-      <div class="card text-dark align-items-center">
-        <img
-          src="../assets/DALL·E 2023-11-15 10.51.50 - Create an illustration of a Korean mountain landscape for a website's main banner, featuring a diverse group of people hiking. The design should be si.png"
-          class="col-lg-12"
-          alt="..."
-          style="height: 400px"
-        />
-        <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center">
-          <p class="fw-bold fs-3 text-secondary">Card title</p>
-          <p class="text-seconadary col-6">
-            This is a wider card with supporting text below as a natural lead-in to additional
-            content. This content is a little bit longer.
-          </p>
-        </div>
-      </div>
-      <div class="container">
-        <MountainConqueror :ranker="items"></MountainConqueror>
-        <RecordCard class="mt-5" :records="items"></RecordCard>
+  <div v-if="mountainDetail" class="content-container">
+    <div class="mountain-container">
+      <!-- API에서 가져온 산의 이미지를 표시 -->
+      <img :src="completeImageUrl" class="mountain-image" alt="" height="400"/>
+
+      <!-- 산의 이름과 상세 정보를 표시 -->
+      <div class="mountain-info">
+        <h1 class="mountain-name">{{ mountainDetail.mntiname }}</h1>
+        <p class="mountain-details">{{ mountainDetail.mntidetails }}</p>
       </div>
     </div>
-  </template>
+
+    <div class="additional-info">
+      <MountainConqueror :ranker="items"></MountainConqueror>
+      <RecordCard class="mt-5" :records="items"></RecordCard>
+    </div>
+  </div>
+</template>
   
   <script setup>
   import MountainConqueror from '../components/mountain/MountainConqueror.vue';
   import RecordCard from '../components/mountain/RecordCard.vue';
+  import { ref, onMounted, computed } from 'vue';
+  import { useRoute } from 'vue-router';
+  import axios from 'axios';
   
+  const route = useRoute();
+const mountainDetail = ref(null);
+
+
+
+onMounted(async () => {
+  console.log(route.params.id);
+  const mountainId = route.params.id;
+  try {
+    const response = await axios.get(`http://localhost:80/mountain/getdetail/${mountainId}`);
+    console.log("response.data"+response.data.mntiimg);
+    mountainDetail.value = response.data;
+    completeImageUrl;
+  } catch (error) {
+    console.error(error);
+  }
+})
+
+const completeImageUrl = computed(() => {
+  return `https://www.forest.go.kr/images/data/down/mountain/${mountainDetail.value.mntiimg}`;
+});
+
+
   const items = [
     {
       mntilistno: 1,
@@ -77,6 +99,56 @@
   </script>
   
   <style scoped>
-  /* Your existing styles */
-  </style>
-  
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white; /* 밝은 배경색 */
+  padding: 20px;
+}
+
+.mountain-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 80%;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: #f4f4f4; /* 전체 배경색 변경 */
+
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1); 
+}
+
+.mountain-image {
+  max-width: 400px;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 15px; /* 이미지 테두리 반경 */
+  margin-right: 20px;
+}
+
+.mountain-info {
+  max-width: 50%;
+  text-align: left;
+  color: #333; /* 텍스트 색상 */
+}
+
+.mountain-name {
+  font-size: 2em; /* 제목 크기 */
+  font-weight: bold; /* 글씨 굵기 */
+  margin-bottom: 15px;
+}
+
+.mountain-details {
+  font-size: 1.2em; /* 본문 크기 */
+  line-height: 1.6; /* 줄 간격 */
+}
+
+.additional-info {
+  width: 80%;
+  margin-top: 20px;
+}
+</style>
+
