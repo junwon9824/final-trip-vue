@@ -59,6 +59,7 @@ const insertData = async () => {
         console.log(error);
         throw new Error(error);
     }
+
 };
 
 
@@ -83,6 +84,7 @@ const insertData = async () => {
                     </button>
                 </div>
             </div>
+            
         </div>
     </div>
 </template>
