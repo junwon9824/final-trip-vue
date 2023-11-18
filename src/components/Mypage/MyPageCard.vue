@@ -10,7 +10,7 @@ const userIdvalue = sessionStorage.getItem('userId');
 const userName = ref('');
 const address = ref('');
 const conquerednum = ref('');
-const num =ref('');
+const num =ref(0);
 
 const getmydata = async () => {
 
@@ -63,7 +63,6 @@ onMounted(gettotalconquerednum);
 const deleteUser = async () => {
 
   try {
-    console.log(editedMountainName.value);
     const response = await axios.delete('http://localhost:80/user/delete', {
       params: {
         userId: userIdvalue,
@@ -93,7 +92,7 @@ const deleteUser = async () => {
       <img src="@/assets/mountain_car.png" class="img-fluid rounded-circle mx-auto d-block" alt="..."
         style="width: 200px" />
 
-        
+
       <div class="flex-grow-1 ms-5">
         <p class="fs-4">ID: {{ userIdvalue }}</p>
         <p class="fs-4">이름: {{ userName }}</p>
