@@ -41,15 +41,16 @@ onMounted(getmydata);
 const gettotalconquerednum = async () => {
 
 try {
+  console.log("idddddddddddddd"+userIdvalue)
 
-  const response = await axios.get('http://localhost:80/user/gettotalconquered', {
+  const response = await axios.get('http://localhost:80/mountain/gettotalconquered', {
     params: {
       userId: userIdvalue,
     },
   });
  
   console.log("getttt" + response.data.userId); 
-  num = response.data
+  num.value = response.data
 } catch (error) {
   console.log(error);
   throw new Error(error);
@@ -91,11 +92,13 @@ const deleteUser = async () => {
     <div class="d-flex justify-content-center align-items-center">
       <img src="@/assets/mountain_car.png" class="img-fluid rounded-circle mx-auto d-block" alt="..."
         style="width: 200px" />
+
+        
       <div class="flex-grow-1 ms-5">
         <p class="fs-4">ID: {{ userIdvalue }}</p>
         <p class="fs-4">이름: {{ userName }}</p>
         <p class="fs-4">주소: {{ address }}</p>
-        <p class="fs-4">정복 수: {{   }}</p>
+        <p class="fs-4">정복 수: {{  num }}</p>
       </div>
     </div>
 
