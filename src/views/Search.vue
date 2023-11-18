@@ -53,11 +53,14 @@ const searchMountain = async () => {
             <tr>
               <td class="p-0 m-0"></td>
             </tr>
+
             <MountainSearchItem
               v-for="result in searchResult"
               :key="result.mntilistno"
               :searchResult="result"
             ></MountainSearchItem>
+
+            
           </tbody>
         </table>
       </div>
