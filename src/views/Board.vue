@@ -32,7 +32,7 @@ onMounted(getboardlist);
       <p class="text-center fw-bold fs-2 col-11">우리들의 등산 이야기</p>
 
       <router-link
-        to="/boardwrite"
+        to="/boardwriteCard"
         class="d-flex flex-row align-items-center nav-link justify-content-end"
       >
         <button type="button" class="btn btn-secondary rounded-pill">

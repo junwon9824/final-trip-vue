@@ -11,6 +11,7 @@
                             추가하기<i class="bi bi-arrow-right"></i>
                         </button>
                     </router-link>
+
                 </div>
 
                 <table class="table border-primary table-hover">
@@ -31,8 +32,10 @@
                             </td>
 
                             <td>{{ item.mntihigh }}</td>
-                            <td>{{ item.mnticonquerednum }}</td>
-                            <td>{{ item.lastConqueredDate }}</td>
+                            <td>{{ item.memberconquerednum }}</td>
+                            <td>{{ item.conquereddate }}</td>
+
+                            
                         </tr>
                     </tbody>
                 </table>
@@ -44,34 +47,46 @@
 <script setup>
 import MyPageCard from '@/components/Mypage/MyPageCard.vue';
 // Add your ref imports if needed
+import { ref,onMounted } from 'vue'
+import axios from 'axios';
 
-const items = [
-    {
-        mntilistno: 1,
-        mntiname: 'Mountain A',
-        mntidetails: 'Details about Mountain A',
-        mntiadd: 'Address of Mountain A',
-        mntihigh: 1500,
-        sido_code: 1,
-        gugun_code: 101,
-        mntiimg: 'url_to_image_A',
-        mnticonquerednum: 3,
-        lastConqueredDate: '2023-11-10 12:34:56',
-    },
-    {
-        mntilistno: 2,
-        mntiname: 'Mountain B',
-        mntidetails: 'Details about Mountain B',
-        mntiadd: 'Address of Mountain B',
-        mntihigh: 2000,
-        sido_code: 2,
-        gugun_code: 202,
-        mntiimg: 'url_to_image_B',
-        mnticonquerednum: 5,
-        lastConqueredDate: '2023-11-11 10:45:30',
-    },
-    // Add more items as needed
-];
+const items = ref([
+    // {
+    //     mntilistno: 1,
+    //     mntiname: 'Mountain A',
+    //     mntidetails: 'Details about Mountain A',
+    //     mntiadd: 'Address of Mountain A',
+    //     mntihigh: 1500,
+    //     sido_code: 1,
+    //     gugun_code: 101,
+    //     mntiimg: 'url_to_image_A',
+    //     mnticonquerednum: 3,
+    //     lastConqueredDate: '2023-11-10 12:34:56',
+    // },
+
+]);
+
+
+const conqueredmountain = async () => {
+    try {
+        const response = await axios.get('http://localhost:80/mountain/getConqueredMountains', {
+            params: {
+                userId: sessionStorage.getItem('userId'),
+            }
+
+        });
+
+        items.value = response.data;
+        console.log(items.value);
+
+    } catch (error) {
+        console.log(error);
+        throw new Error(error);
+    }
+};
+
+onMounted(conqueredmountain);
+
 </script>
 
 <style scoped>

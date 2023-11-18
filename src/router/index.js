@@ -2,10 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router';
 // import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
-    history:createWebHistory(import.meta.env.BASE_URL),
-    routes:[ 
-    
-        {
+ 
+     history: createWebHistory(import.meta.env.BASE_URL),
+    routes: [
+         {
             path: '/',
             name: 'home',
             component: () => import('../views/Main.vue'),
@@ -44,10 +44,10 @@ const router = createRouter({
             component: () => import('../views/MyPage.vue'),
         },
         {
-            path: '/boardwrite',
-            name: 'boardwrite',
+            path: '/boardwriteCard',
+            name: 'boardwriteCard',
 
-            component: () => import('@/views/BoardWrite.vue'),
+            component: () => import('../components/board/item/BoardwriteCard.vue'),
         },
         {
             path: '/login',
@@ -73,12 +73,22 @@ const router = createRouter({
 
             component: () => import('@/views/MountainView.vue'),
         },
-        {
+         {
             path: '/mountain/:id',
             name: 'MountainDetail',
             component: () => import('../views/MountainView.vue')
-          }
+          },
+           {
+      path: '/boardview',
+      name: 'boardview',
+
+      component: () => import('@/views/BoardView.vue'),
+    }
         ]
     });
 
+ 
+    
+
 export default router;
+ 

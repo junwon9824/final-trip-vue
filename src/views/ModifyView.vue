@@ -11,14 +11,16 @@
                         class="form-control form-control-lg mt-5"
                         accept="image/*"
                     />
+
                     <img :src="editedFileInfo" class="img-fluid rounded d-block" />
                 </div>
-                <input type="text" class="form-control py-3 my-5" placeholder="이름 Name" />
-                <input type="text" class="form-control py-3 my-5" placeholder="비밀번호" />
-                <input type="text" class="form-control py-3 my-5" placeholder="비밀번호확인" />
-                <input type="text" class="form-control py-3 my-5" placeholder="주소" />
+
+                <input type="text" class="form-control py-3 my-5" placeholder="이름 Name" v-model="userNamev"/>
+                <input type="text" class="form-control py-3 my-5" placeholder="비밀번호" v-model="userPwdv"/>
+                <input type="text" class="form-control py-3 my-5" placeholder="비밀번호확인"  />
+                <input type="text" class="form-control py-3 my-5" placeholder="주소" v-model="addressv"/>
                 <div class="d-flex justify-content-end mb-3">
-                    <button @click="insertData" class="btn btn-secondary btn-lg rounded-pill">
+                    <button @click="modify" class="btn btn-secondary btn-lg rounded-pill">
                         수정<i class="bi bi-arrow-right"></i>
                     </button>
                 </div>
@@ -29,6 +31,10 @@
 
 <script setup>
 import MyPageCard from '../components/Mypage/MyPageCard.vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
+import {ref} from 'vue'
+const router = useRouter();
 
 const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -41,6 +47,45 @@ const handleImageChange = (event) => {
         reader.readAsDataURL(file);
     }
 };
+
+
+const userIdv=sessionStorage.getItem('userId');
+const userPwdv=ref('');
+const userNamev=ref('');
+const addressv=ref('');
+
+const modify = async () => {
+
+try {
+    console.log("useridddd"+userIdv)
+    console.log("useridddd"+userPwdv)
+    console.log("useridddd"+userNamev)
+
+    const response = await axios.put('http://localhost:80/user/modify', {
+      userPwd: userPwdv.value,
+      userName: userNamev.value,
+      address: addressv.value,
+      userId: userIdv,
+
+    });
+
+//   userName.value = response.data.userName;
+//   address.value = response.data.address;
+//   userPwd.value = response.data.userPwd;
+//   userId.value = response.data.userId;
+
+//   console.log("getttt" + response.data.userId);
+//   console.log("getttt" + response.data.userName);
+//   console.log("getttt" + response.data.address);
+  router.push('/mypage')
+
+} 
+catch (error) {
+  console.log(error);
+  throw new Error(error);
+}
+};
+
 
 const items = [
     {

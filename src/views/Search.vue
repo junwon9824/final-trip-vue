@@ -57,11 +57,14 @@ const searchMountain = async () => {
         <div class="p-3"></div>
         <table class="table table-hover border-primary">
           <tbody>
-            <MountainSearchItem 
+             <MountainSearchItem 
+ 
               v-for="result in searchResult"
               :key="result.mntilistno"
               :searchResult="result"
             ></MountainSearchItem>
+
+            
           </tbody>
         </table>
       </div>

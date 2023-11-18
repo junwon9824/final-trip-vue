@@ -5,6 +5,7 @@ const props = defineProps({
   MainCard: Object,
 });
 
+
 const tmpImgSrc = ref('');
 
 onBeforeMount(() => {
