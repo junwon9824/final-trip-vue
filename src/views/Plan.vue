@@ -30,6 +30,7 @@ const onChangeSido = (val) => {
       console.log(err);
     }
   );
+  
 };
 
 const getSidoList = () => {
@@ -118,7 +119,7 @@ const high = () => {
 
         <div id="map" style="height: 500px; width: 97%"></div>
         <div class="mt-3 p-3">
-          
+
           <div class="d-flex align-items-start">
             <div
               class="rounded-circle bg-warning d-flex justify-content-center align-items-center me-2"

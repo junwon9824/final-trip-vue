@@ -1,23 +1,24 @@
 <script setup>
-import { ref } from "vue";
-
-const mountains = ref([]);
+import { ref, onMounted } from "vue";
+import { listSido, listGugun, AddconqueredMountain } from "@/api/mountain";
+import axios from "axios";
 const editedMountainName = ref("");
 const editedRegDate = ref("");
 const editedFileInfo = ref("");
-
-const sidoList = ref([]);
-const gugunList = ref([]);
-
-const selectedSido = ref("시/도");
-const selectedGugun = ref("구/군");
-
 
 const param = ref({
   sidoCode: 0,
   gugunCode: 0,
 });
 
+const sidoList = ref([]);
+const gugunList = ref([]);
+
+const selectedSido = ref("시/도");
+const selectedGugun = ref("구/군");
+const userIdv=sessionStorage.getItem("userId");
+
+console.log(userIdv);
 
 const onChangeSido = (val) => {
   listGugun(
@@ -27,6 +28,7 @@ const onChangeSido = (val) => {
       data.forEach((gugun) => {
         options.push({ text: gugun.gugun_name, value: gugun.gugun_code });
       });
+
       gugunList.value = options;
       console.log(gugunList.value);
     },
@@ -34,6 +36,12 @@ const onChangeSido = (val) => {
       console.log(err);
     }
   );
+};
+
+const onChangeGugun = () => {
+  param.value.sidoCode = selectedSido.value;
+  param.value.gugunCode = selectedGugun.value;
+  param.value.mntiname = editedMountainName.value;
 };
 
 const getSidoList = () => {
@@ -52,10 +60,9 @@ const getSidoList = () => {
   );
 };
 
-const onChangeGugun = () => {
-  param.value.sidoCode = selectedSido.value;
-  param.value.gugunCode = selectedGugun.value;
-};
+onMounted(() => {
+  getSidoList();
+});
 
 const handleImageChange = (event) => {
   const file = event.target.files[0];
@@ -68,31 +75,55 @@ const handleImageChange = (event) => {
     reader.readAsDataURL(file);
   }
 };
-
+ 
 const insertData = async () => {
   // Implement the logic to insert data or perform an action
   console.log("Insert button clicked!");
   console.log("Mountain Name:", editedMountainName.value);
   console.log("Registration Date:", editedRegDate.value);
   console.log("File Info:", editedFileInfo.value);
+  console.log("dsddddddd "+userIdv);
+
+  //   AddconqueredMountain(param, success, fail);
+ 
+  //   AddconqueredMountain(
+  //     param.value,
+
+  //     (response) => {
+  //       // 성공적으로 처리된 경우 수행할 작업
+  //       console.log("Success:", response);
+  //       console.log(" param.value,:",  param.value);
+  //     },
+  //     (error) => {
+  //       // 실패한 경우 수행할 작업
+  //       console.error("Error:", error);
+  //     }
+  //   );
 
   try {
+    console.log('in');
     const payload = {
-      word: editedMountainName.value,
-      //   articleNo: ,
-      content: editedRegDate.value,
-      userId: sessionStorage.getItem("userId"),
+      userId: userIdv,
+      //   userId: "a",
+      sido_code: selectedSido.value,
+      gugun_code: selectedGugun.value,
+      mntiname: editedMountainName.value,
     };
 
     const response = await axios.post(
-      "http://localhost:80/mountain/write",
+      "http://localhost:80/mountain/add/conqueredMountain",
       payload
     );
+    
+    console.log(userIdv)
+    console.log[(response.data)]
+
     // Handle the response if needed
   } catch (error) {
     console.log(error);
     throw new Error(error);
   }
+
 };
 </script>
 

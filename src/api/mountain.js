@@ -37,6 +37,12 @@ function listGugun(param, success, fail) {
   local.get(`mountain/gugun`, { params: param }).then(success).catch(fail);
 }
 
+function AddconqueredMountain(param, success, fail) {
+  local.post(`mountain/add/conqueredMountain`,   { params: param } ).then(success).catch(fail);
+}
+
+
+
 export {
   getAllMountains,
   addMountain,
@@ -46,4 +52,5 @@ export {
   getSearchResult,
   listSido,
   listGugun,
+  AddconqueredMountain,
 };
