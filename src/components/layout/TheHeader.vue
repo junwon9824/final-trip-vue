@@ -9,24 +9,16 @@ const isLoggedIn = computed(() => {
   return sessionStorage.getItem("userId") !== null;
 });
 
-// const checkSession = () => {
-//   console.log("check")
-//   const currentValue = sessionStorage.getItem('userId') !== null;
-//   if (currentValue !== isLoggedIn.value) {
-//     isLoggedIn.value = currentValue; // 상태 업데이트
-//   }
-// };
+ 
+const props= ['isLoggedIn']
 
-// // 1초마다 checkSession 함수 실행
-// setInterval(checkSession, 1000); // 1초마다 실행됨 (1000ms = 1초)
-
-watch(isLoggedIn, (newValue, oldValue) => {
-  isLoggedIn.value = newValue.value;
-  console.log(
-    ("islogggggggggggggggg,new" + isLoggedIn.value + " ") | newValue.value
-  );
-  // 여기서 원하는 동작 수행
-});
+// watch(isLoggedIn, (newValue, oldValue) => {
+//   isLoggedIn.value = newValue.value;
+//   console.log(
+//     ("islogggggggggggggggg,new" + isLoggedIn.value + " ") | newValue.value
+//   );
+//   // 여기서 원하는 동작 수행
+// });
 
 console.log("iiii" + isLoggedIn.value);
 console.log("iiii" + sessionStorage.getItem("userId"));
@@ -74,6 +66,8 @@ const goToBoard= () => {
     router.push("/board");
   }
 };
+
+
 </script>
 
 <template>
