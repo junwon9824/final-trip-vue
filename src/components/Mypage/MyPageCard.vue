@@ -2,7 +2,7 @@
 import { defineProps, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
-const props = defineProps(['userId', 'userName', 'address', 'conqueredMountains']);
+// const props = defineProps(['userId', 'userName', 'address', 'conqueredMountains']);
 
 const router = useRouter();
 
@@ -11,6 +11,10 @@ const userName = ref('');
 const address = ref('');
 const conquerednum = ref('');
 const num =ref(0);
+
+const props = defineProps({
+  MainCard: Object,
+});
 
 const getmydata = async () => {
 
@@ -89,6 +93,7 @@ const deleteUser = async () => {
 <template>
   <div class="card bg-info text-dark rounded-4 d-flex justify-content-center align-items-center py-5 mt-5">
     <div class="d-flex justify-content-center align-items-center">
+      
       <img src="@/assets/mountain_car.png" class="img-fluid rounded-circle mx-auto d-block" alt="..."
         style="width: 200px" />
 

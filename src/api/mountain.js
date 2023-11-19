@@ -42,6 +42,9 @@ function AddconqueredMountain(param, success, fail) {
 }
 
 
+function getSearchResultdetail(param, success, fail) {
+  local.post(`mountain/add/conqueredMountain`,   { params: param } ).then(success).catch(fail);
+}
 
 export {
   getAllMountains,
