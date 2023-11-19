@@ -31,7 +31,7 @@ const mountainDetail = ref(null);
 
 
 onMounted(async () => {
-  console.log(route.params.id);
+  console.log('rr'+route.params.id);
   const mountainId = route.params.id;
   try {
     const response = await axios.get(`http://localhost:80/mountain/getdetail/${mountainId}`);
