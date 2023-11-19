@@ -3,7 +3,6 @@ import { ref, onMounted } from "vue";
 import { listSido, listGugun, AddconqueredMountain } from "@/api/mountain";
 import axios from "axios";
 const editedMountainName = ref("");
-const editedRegDate = ref("");
 const editedFileInfo = ref("");
 
 const param = ref({
@@ -16,17 +15,19 @@ const gugunList = ref([]);
 
 const selectedSido = ref("시/도");
 const selectedGugun = ref("구/군");
-const userIdv=sessionStorage.getItem("userId");
+const userIdv = sessionStorage.getItem("userId");
 
 console.log(userIdv);
 
 const onChangeSido = (val) => {
+  console.log(val);
   listGugun(
     { sido: val },
     ({ data }) => {
       let options = [];
       data.forEach((gugun) => {
         options.push({ text: gugun.gugun_name, value: gugun.gugun_code });
+        console.log(gugun.gugun_code)
       });
 
       gugunList.value = options;
@@ -38,11 +39,41 @@ const onChangeSido = (val) => {
   );
 };
 
-const onChangeGugun = () => {
+const onChangeGugun = (val) => {
+  console.log("ssss", val);
+
+  selectedGugun.value = val;
+
   param.value.sidoCode = selectedSido.value;
   param.value.gugunCode = selectedGugun.value;
-  param.value.mntiname = editedMountainName.value;
+  console.log("codeeee", selectedSido.value);
+  console.log("codeeee", selectedGugun.value);
 };
+
+// const onChangeGugun = (event) => {
+//   const val = event;
+//   console.log("ssss", val);
+
+//   selectedGugun.value = val;
+
+//   param.value.sidoCode = selectedSido.value;
+//   param.value.gugunCode = val;
+//   console.log("codeeee", selectedSido.value);
+//   console.log("codeeee", val);
+
+// };
+
+
+
+// const onChangeGugun = () => {
+//   const val = selectedGugun.value;
+//   console.log("ssss", val);
+
+//   param.value.sidoCode = selectedSido.value;
+//   param.value.gugunCode = val;
+//   console.log("siiiii", selectedSido.value);
+//   console.log("guuuuu", val);
+// };
 
 const getSidoList = () => {
   listSido(
@@ -75,36 +106,13 @@ const handleImageChange = (event) => {
     reader.readAsDataURL(file);
   }
 };
- 
+
 const insertData = async () => {
-  // Implement the logic to insert data or perform an action
-  console.log("Insert button clicked!");
-  console.log("Mountain Name:", editedMountainName.value);
-  console.log("Registration Date:", editedRegDate.value);
-  console.log("File Info:", editedFileInfo.value);
-  console.log("dsddddddd "+userIdv);
-
-  //   AddconqueredMountain(param, success, fail);
- 
-  //   AddconqueredMountain(
-  //     param.value,
-
-  //     (response) => {
-  //       // 성공적으로 처리된 경우 수행할 작업
-  //       console.log("Success:", response);
-  //       console.log(" param.value,:",  param.value);
-  //     },
-  //     (error) => {
-  //       // 실패한 경우 수행할 작업
-  //       console.error("Error:", error);
-  //     }
-  //   );
-
   try {
-    console.log('in');
+    console.log("in");
+
     const payload = {
       userId: userIdv,
-      //   userId: "a",
       sido_code: selectedSido.value,
       gugun_code: selectedGugun.value,
       mntiname: editedMountainName.value,
@@ -114,16 +122,19 @@ const insertData = async () => {
       "http://localhost:80/mountain/add/conqueredMountain",
       payload
     );
-    
-    console.log(userIdv)
-    console.log[(response.data)]
+
+    console.log(userIdv);
+    console.log("codeeee", selectedSido.value);
+
+    console.log("codeeee" + selectedGugun.value);
+
+    console.log(response.data);
 
     // Handle the response if needed
   } catch (error) {
     console.log(error);
     throw new Error(error);
   }
-
 };
 </script>
 
@@ -153,11 +164,18 @@ const insertData = async () => {
                 {{ sido.text }}
               </option>
             </select>
+
+            <!-- <select
+              class="form-select bg-secondary fw-bold text-white"
+              v-model="selectedGugun"
+              @change="onChangeGugun(selectedGugun)"
+            > -->
             <select
               class="form-select bg-secondary fw-bold text-white"
               v-model="selectedGugun"
-              @change="onChangeGugun"
+              @change="onChangeGugun(selectedGugun)"
             >
+
               <option selected disabled>구/군</option>
               <option
                 v-for="gugun in gugunList"

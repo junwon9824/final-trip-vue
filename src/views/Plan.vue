@@ -52,6 +52,8 @@ const getSidoList = () => {
 const onChangeGugun = () => {
   param.value.sidoCode = selectedSido.value;
   param.value.gugunCode = selectedGugun.value;
+  console.log(selectedGugun.value)
+  console.log(param.value.gugunCode )
 };
 
 onMounted(() => {
