@@ -60,10 +60,6 @@ const insertData = async () => {
     throw new Error(error);
   }
 };
-
-onMounted(() => {
-  console.log("here?");
-});
 </script>
 
 <template>
