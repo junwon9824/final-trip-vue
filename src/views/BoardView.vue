@@ -3,6 +3,7 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 
 const article = ref({});
+const liked = ref(false);
 
 const getdetaillist = async () => {
   try {
@@ -11,10 +12,32 @@ const getdetaillist = async () => {
     );
 
     article.value = response.data;
-    console.log(response.data);
+    liked.value = response.data.likedByUser;
   } catch (error) {
     console.log(error);
     throw new Error(error);
+  }
+};
+const toggleLike = async () => {
+  const newLikeStatus = !liked.value; // 미리 상태를 변경하지 않고, 요청을 보낸 후 성공적인 응답을 받았을 때 상태를 변경
+
+  try {
+    const response = await axios.post(
+      "http://localhost:80/article/likes?articleNo=" + article.value.articleNo
+      // ,{
+      //   articleNo: article.value.articleNo,
+      // }
+    );
+
+    // 응답으로 받은 좋아요 수와 상태를 업데이트합니다.
+    if (response.data.success) {
+      article.value.likes = response.data.likes;
+      liked.value = newLikeStatus; // 서버의 응답을 바탕으로 상태를 업데이트
+      console.log(article.value.likes);
+    }
+  } catch (error) {
+    console.error(error);
+    // 여기서 사용자에게 에러가 발생했다는 것을 알리는 UI 피드백을 제공할 수 있음
   }
 };
 
@@ -41,9 +64,13 @@ onMounted(getdetaillist);
         </div>
       </div>
       <div class="d-flex flex-row align-items-center">
-        <!-- 좋아요 수 -->
-        <button class="btn btn-light" type="submit">
-          <i class="bi bi-hand-thumbs-up"></i> number
+        <button
+          :class="{ 'btn-like-active': liked }"
+          class="btn btn-light"
+          type="button"
+          @click="toggleLike"
+        >
+          <i class="bi bi-hand-thumbs-up"></i>{{ article.likes }}
         </button>
       </div>
     </div>
@@ -58,4 +85,8 @@ onMounted(getdetaillist);
   </div>
 </template>
 
-<style scoped></style>
+<style scoped >
+.btn-like-active {
+  color: green; /* 좋아요가 활성화된 상태일 때의 색깔 */
+}
+</style>

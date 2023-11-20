@@ -28,9 +28,6 @@ const getboardlist = async () => {
 };
 
 onMounted(getboardlist);
-// onMounted(() => {
-//   console.log("here");
-// });
 
 function getBoardDetail() {
   // console.log ("hi");
@@ -72,5 +69,4 @@ function getBoardDetail() {
     </table>
   </div>
 </template>
-
-<style scoped></style>
+<style scope></style>
