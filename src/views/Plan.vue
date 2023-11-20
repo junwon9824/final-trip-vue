@@ -170,12 +170,10 @@ const getWishLists = () => {
   getWishList(
     { userId: sessionStorage.userId },
     ({ data }) => {
-      wishlists.value = [];
       data.forEach((mountain) => {
         wishlists.value.push(mountain);
       });
-      console.log(wishlists.value);
-    },
+      console.log(wishlists.value);ZAAAA01    },
     (err) => {
       console.log(err);
     }
