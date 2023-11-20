@@ -22,6 +22,7 @@ onBeforeMount(() => {
   tmpImgSrc.value = props.MainCard.mntiimg;
   console.log("Image source after mounted:", tmpImgSrc.value);
 });
+
 </script>
 
 <template>
