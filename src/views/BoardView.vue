@@ -6,7 +6,7 @@
       <div class="d-flex flex-row align-items-center">
         <!-- 이미지props로 받기 -->
         <img
-          src="../assets/prfile_temp_1.png"
+          src="../assets/prfile_temp_2.png"
           class="img-fluid rounded-circle d-block"
           alt="..."
           style="width: 100px; height: 100px; object-fit: fill"

@@ -1,16 +1,87 @@
 <script setup>
-import { ref, watchEffect, watch, computed } from "vue";
+import { ref, watch, computed } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
+const userId = ref(sessionStorage.getItem("userId"));
 
-const isLoggedIn = computed(() => {
-  console.log("session changed");
-  return sessionStorage.getItem("userId") !== null;
+const isLoggedIn = ref("");
+
+computed(() => {
+  isLoggedIn = userId.value !== null;
+
+  if (isLoggedIn) {
+    console.log("true");
+
+    headerhtml.value = `<div class="d-flex flex-row align-items-center " style="margin-top: 8px">
+<router-link to="/login" class="px-1">    
+  <button
+    type="button"
+    class="btn btn-primary rounded-pill text-white fw-bold fs-5"
+  >
+
+    로그인
+  </button>
+</router-link>
+
+<router-link to="/register" class="px-1">
+  <button
+    type="button"
+    class="btn btn-primary rounded-pill text-white fw-bold fs-5"
+  >
+    회원가입
+  </button>
+</router-link>
+</div>`;
+  } else {
+    console.log("false");
+
+    headerhtml.value = ` <div>
+        <button type="button" class="btn btn-primary rounded-pill text-white fw-bold fs-5  mb-3 " @click="logout">
+          로그아웃
+        </button>
+      </div> `;
+  }
 });
 
- 
-const props= ['isLoggedIn']
+console.log("logggg " + isLoggedIn.value);
+
+const headerhtml = ref("");
+
+watch(isLoggedIn.value, (newValue, oldValue) => {
+  console.log("isLoggedIn changed:", newValue);
+  // Perform actions based on the change in isLoggedIn
+  if (newValue) {
+    headerhtml.value = `<div class="d-flex flex-row align-items-center " style="margin-top: 8px">
+    <router-link to="/login" class="px-1">
+      <button
+        type="button"
+        class="btn btn-primary rounded-pill text-white fw-bold fs-5"
+      >
+
+        로그인
+      </button>
+    </router-link>
+
+    <router-link to="/register" class="px-1">
+      <button
+        type="button"
+        class="btn btn-primary rounded-pill text-white fw-bold fs-5"
+      >
+        회원가입
+      </button>
+    </router-link>
+  </div>`;
+  } else {
+    headerhtml.value = ` <div>
+            <button type="button" class="btn btn-primary rounded-pill text-white fw-bold fs-5  mb-3 " @click="logout">
+              로그아웃
+            </button>
+          </div> `;
+  }
+});
+
+// const props = ['isLoggedIn']
 
 // watch(isLoggedIn, (newValue, oldValue) => {
 //   isLoggedIn.value = newValue.value;
@@ -22,6 +93,7 @@ const props= ['isLoggedIn']
 
 console.log("iiii" + isLoggedIn.value);
 console.log("iiii" + sessionStorage.getItem("userId"));
+console.log("headerhtml" + headerhtml.value);
 
 const logout = () => {
   sessionStorage.clear(); // 세션 스토리지의 데이터 모두 제거
@@ -41,7 +113,7 @@ const goToMyPage = () => {
   }
 };
 
-const goToPlan= () => {
+const goToPlan = () => {
   const isLoggedIn = sessionStorage.getItem("userId") !== null;
 
   if (!isLoggedIn) {
@@ -54,7 +126,7 @@ const goToPlan= () => {
   }
 };
 
-const goToBoard= () => {
+const goToBoard = () => {
   const isLoggedIn = sessionStorage.getItem("userId") !== null;
 
   if (!isLoggedIn) {
@@ -66,8 +138,6 @@ const goToBoard= () => {
     router.push("/board");
   }
 };
-
-
 </script>
 
 <template>
@@ -85,66 +155,71 @@ const goToBoard= () => {
           <p class="text-muted fs-2 mt-4 fw-bold">산들바람</p>
         </router-link>
       </div>
-      <div class="col-7 d-flex flex-row justify-content-between">
-        <div>
-          <ul class="navbar-nav me-auto">
-            <!-- <li class="nav-item">
-                    <router-link to="/conqueredmountain" class="nav-link">
-                      <h5 class="text-primary">정복한 산</h5>
-                    </router-link>
+
+      <div class="col-7 d-flex flex-row align-items-center justify-content-end">
+        <div
+          class="mt-3 ms-1 d-flex flex-row align-items-center"
+          tyle="height: 100%;"
+        >
+          <!-- <li class="nav-item">
+                                                        <router-link to="/conqueredmountain" class="nav-link">
+                                                          <h5 class="text-primary">정복한 산</h5>
+                                                        </router-link>
               
-                  </li> -->
+                                                      </li> -->
 
-            <li class="nav-item">
-              <router-link to="/search" class="nav-link">
-                <p class="text-primary fs-4 fw-bold me-3">검색</p>
-              </router-link>
-            </li>
-
-            <!-- <router-link to="/board" class="nav-link"> -->
-              <p id="board" @click="goToBoard" class="text-primary fs-4 fw-bold mt-2 me-3">게시판</p>
-            <!-- </router-link> -->
-
-            <!-- <router-link to="/plan" class="nav-link"> -->
-              <p @click="goToPlan" class="text-primary fs-4 fw-bold mt-2 me-3">계획</p>
-            <!-- </router-link> -->
-
-            <p @click="goToMyPage" class="text-primary fs-4 fw-bold mt-2 me-3">
-              마이페이지
-            </p>
-            
-          </ul>
-        </div>
-
-        <div v-if="!isLoggedIn" class="d-flex flex-row align-items-center">
-          <router-link to="/login" class="px-1">
-            <button
-              type="button"
-              class="btn btn-primary rounded-pill text-white fw-bold fs-5"
+          <p class="text-primary fs-4 fw-bold me-3">
+            <router-link to="/search" class="nav-link text-primary"
+              >검색</router-link
             >
-              로그인
-            </button>
-          </router-link>
+          </p>
 
-          <router-link to="/register" class="px-1">
-            <button
-              type="button"
-              class="btn btn-primary rounded-pill text-white fw-bold fs-5"
-            >
-              회원가입
-            </button>
-          </router-link>
-        </div>
-
-        <div v-else>
-          <button
-            type="button"
-            class="btn btn-primary rounded-pill text-white fw-bold fs-5"
-            @click="logout"
+          <!-- <router-link to="/board" class="nav-link"> -->
+          <p
+            id="board"
+            @click="goToBoard"
+            class="text-primary fs-4 fw-bold me-3"
           >
-            로그아웃
-          </button>
+            게시판
+          </p>
+          <!-- </router-link> -->
+
+          <!-- <router-link to="/plan" class="nav-link"> -->
+          <p @click="goToPlan" class="text-primary fs-4 fw-bold me-3">계획</p>
+          <!-- </router-link> -->
+
+          <p @click="goToMyPage" class="text-primary fs-4 fw-bold me-3">
+            마이페이지
+          </p>
+
+          <div v-html="headerhtml"></div>
+
+          <!-- <div>
+                                    <button type="button" class="btn btn-primary rounded-pill text-white fw-bold fs-5  mb-3 " @click="logout">
+                                      로그아웃
+                                    </button>
+                                  </div> -->
         </div>
+        <!-- 
+                                            <div v-if="!isLoggedIn" class="d-flex flex-row align-items-center " style="margin-top: 8px">
+                                              <router-link to="/login" class="px-1">
+                                                <button
+                                                  type="button"
+                                                  class="btn btn-primary rounded-pill text-white fw-bold fs-5"
+                                                >
+                                                  로그인
+                                                </button>
+                                              </router-link>
+
+                                              <router-link to="/register" class="px-1">
+                                                <button
+                                                  type="button"
+                                                  class="btn btn-primary rounded-pill text-white fw-bold fs-5"
+                                                >
+                                                  회원가입
+                                                </button>
+                                              </router-link>
+                                            </div> -->
       </div>
     </div>
   </nav>
@@ -155,6 +230,4 @@ img {
   height: 111px;
   text-align: left;
 }
-
- 
 </style>

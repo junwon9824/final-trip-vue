@@ -9,6 +9,7 @@ const files = ref([]);
 
  const getfiles = async () => {
   console.log("pppppppppppp"+props.board.articleNo)
+  console.log("subjectssssssssssssss"+props.board.subject)
   const response = await axios.get('http://localhost:80/article/getboardfiles', {
     params: {
       articleNo: props.board.articleNo
@@ -26,8 +27,9 @@ onMounted(() => {
   
  
 </script>
+
 <template>
-  <tr>
+  <tr>  
     <td class="pt-3 pb-3 d-flex flex-row">
       <div>
  
@@ -40,8 +42,8 @@ onMounted(() => {
        </div>
 
       <div class="card-body d-flex flex-column">
-        <p class="card-title fw-bold fs-3">{{ board.subject }}</p>
-        <p class="card-text pb-3 fs-5">{{ board.content }}</p>
+        <h1 class="card-title fw-bold fs-3">{{ board.subject }}</h1>
+    <h1 class="card-text pb-3 fs-5">{{ board.content }}</h1>
         <p class="mt-5">{{ board.registerTime }}</p>
       </div>
     </td>
