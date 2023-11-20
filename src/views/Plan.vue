@@ -43,7 +43,6 @@ const onChangeSido = (val) => {
       console.log(err);
     }
   );
-  
 };
 
 const getSidoList = () => {
@@ -173,7 +172,8 @@ const getWishLists = () => {
       data.forEach((mountain) => {
         wishlists.value.push(mountain);
       });
-      console.log(wishlists.value);ZAAAA01    },
+      console.log(wishlists.value);
+    },
     (err) => {
       console.log(err);
     }
@@ -195,7 +195,6 @@ const getHighItems = () => {
   getUnconqueredMountainsAscendingByHeight(
     { memberId: sessionStorage.userId },
     ({ data }) => {
-      items.value = [];
       data.forEach((mountain) => {
         items.value.push(mountain);
       });
@@ -208,7 +207,7 @@ const getHighItems = () => {
 };
 const getNearItems = () => {
   items.value = [];
-  getUnconqueredMountainsAscendingByHeight(
+  getNearestUnconqueredMountains(
     { memberId: sessionStorage.userId },
     ({ data }) => {
       items.value = [];
@@ -238,7 +237,6 @@ const getNearItems = () => {
             <option v-for="sido in sidoList" :key="sido.value" :value="sido.value">
               {{ sido.text }}
             </option>
-
           </select>
 
           <select
@@ -251,12 +249,10 @@ const getNearItems = () => {
               {{ gugun.text }}
             </option>
           </select>
-
         </div>
 
         <div id="map" style="height: 500px; width: 97%"></div>
         <div class="mt-3 p-3">
-
           <div class="d-flex align-items-start">
             <div
               class="rounded-circle bg-warning d-flex justify-content-center align-items-center me-2"
@@ -274,7 +270,6 @@ const getNearItems = () => {
               :wishlist="wishlist"
             ></MyWishList>
           </div>
-
         </div>
       </div>
     </div>
