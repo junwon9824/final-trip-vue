@@ -2,10 +2,13 @@
 import { ref, onMounted } from "vue";
 import BoardCard from "../components/board/item/BoardCard.vue";
 import axios from "axios";
-
+ 
+import { useRouter } from "vue-router";
+ 
 const saveId = ref(false);
 
 const items = ref([]);
+const router = useRouter();
 
 const getboardlist = async () => {
   try {
@@ -25,6 +28,14 @@ const getboardlist = async () => {
 };
 
 onMounted(getboardlist);
+// onMounted(() => {
+//   console.log("here");
+// });
+
+function getBoardDetail() {
+  // console.log ("hi");
+  router.push({ name: "boardview" });
+}
 </script>
 
 <template>
@@ -51,7 +62,9 @@ onMounted(getboardlist);
           <td></td>
         </tr>
         <BoardCard
-          v-for="item in items"
+ 
+          @click="getBoardDetail"
+           v-for="item in items"
           :key="item.articleNo"
           :board="item"
         ></BoardCard>
