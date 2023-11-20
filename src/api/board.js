@@ -1,5 +1,5 @@
 // board.js
-import { localAxios } from "@/util/http-commons";
+import { localAxios } from '@/util/http-commons';
 
 const local = localAxios();
 
@@ -12,11 +12,12 @@ function detailArticle(articleno, success, fail) {
 }
 
 function registArticle(article, success, fail) {
-  console.log("boardjs article", article);
+  console.log('boardjs article', article);
   local.post(`/board`, JSON.stringify(article)).then(success).catch(fail);
 }
 
-function getModifyArticle(articleno, success, fail) {x
+function getModifyArticle(articleno, success, fail) {
+  x;
   local.get(`/board/modify/${articleno}`).then(success).catch(fail);
 }
 
@@ -28,6 +29,16 @@ function deleteArticle(articleno, success, fail) {
   local.delete(`/board/${articleno}`).then(success).catch(fail);
 }
 
+function toggleLike(articleno, likeStatus, success, fail) {
+  local
+    .post(`/article/likes`, {
+      articleno: articleno,
+      likes: likeStatus,
+    })
+    .then(success)
+    .catch(fail);
+}
+
 export {
   listArticle,
   detailArticle,
@@ -35,4 +46,5 @@ export {
   getModifyArticle,
   modifyArticle,
   deleteArticle,
+  toggleLike,
 };

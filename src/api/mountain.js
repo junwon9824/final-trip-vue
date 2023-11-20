@@ -17,12 +17,12 @@ function getUnconqueredMountains(param, success, fail) {
   local.get(`/mountain/unconquered`, { params: param }).then(success).catch(fail);
 }
 
-function getUnconqueredMountainsAscendingByHeight(param, success, fail) {
-  local.get(`/mountain/unconquered/ascending`, { params: param }).then(success).catch(fail);
+function getUnconqueredMountainsAscendingByHeight(memberId, success, fail) {
+  local.get(`/mountain/unconquered/ascending`, { params: memberId }).then(success).catch(fail);
 }
 
-function getNearestUnconqueredMountains(param, success, fail) {
-  local.get(`/mountain/unconquered/nearest`, { params: param }).then(success).catch(fail);
+function getNearestUnconqueredMountains(memberId, success, fail) {
+  local.get(`/mountain/unconquered/nearest`, { params: memberId }).then(success).catch(fail);
 }
 
 function getSearchResult(word, success, fail) {
@@ -35,6 +35,9 @@ function listSido(success, fail) {
 
 function listGugun(param, success, fail) {
   local.get(`mountain/gugun`, { params: param }).then(success).catch(fail);
+}
+async function getMountainList(sidogugun, success, fail) {
+  await local.get(`/mountain/getmountainlist`, { params: sidogugun }).then(success).catch(fail);
 }
 
 function AddconqueredMountain(param, success, fail) {
@@ -55,5 +58,9 @@ export {
   getSearchResult,
   listSido,
   listGugun,
+
+  getMountainList,
+
   AddconqueredMountain,
+
 };

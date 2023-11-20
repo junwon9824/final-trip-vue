@@ -168,11 +168,10 @@ const goToBoard = () => {
           tyle="height: 100%;"
         >
           <!-- <li class="nav-item">
-                                                        <router-link to="/conqueredmountain" class="nav-link">
-                                                          <h5 class="text-primary">정복한 산</h5>
-                                                        </router-link>
-              
-                                                      </li> -->
+            <router-link to="/conqueredmountain" class="nav-link">
+              <h5 class="text-primary">정복한 산</h5>
+            </router-link>
+          </li> -->
 
           <p class="text-primary fs-4 fw-bold me-3">
             <router-link to="/search" class="nav-link text-primary"
