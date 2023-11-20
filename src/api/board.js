@@ -29,6 +29,16 @@ function deleteArticle(articleno, success, fail) {
   local.delete(`/board/${articleno}`).then(success).catch(fail);
 }
 
+function toggleLike(articleno, likeStatus, success, fail) {
+  local
+    .post(`/article/likes`, {
+      articleno: articleno,
+      likes: likeStatus,
+    })
+    .then(success)
+    .catch(fail);
+}
+
 export {
   listArticle,
   detailArticle,
@@ -36,4 +46,5 @@ export {
   getModifyArticle,
   modifyArticle,
   deleteArticle,
+  toggleLike,
 };
