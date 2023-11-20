@@ -83,11 +83,7 @@ const router = createRouter({
 
       component: () => import("@/views/BoardView.vue"),
     },
-
-    // {
-    //   path: "/login",
-    //   redirect: "/login",
-    // },
+ 
   ],
 });
 
