@@ -8,12 +8,15 @@ defineProps({ wishlist: Object });
     <img
       class="card-img-top p-2 rounded-5"
       style="height: 150px"
-      src="@/assets/mountain_car.png"
+      :src="wishlist.mntiimg"
       alt="Card image"
     />
     <div class="card-body m-0 p-2">
       <p class="fs-5 fw-bold">{{ wishlist.mntiname }}</p>
-      <p class="fs-6"><i class="bi bi-geo-alt-fill me-2 text-danger"></i>{{ wishlist.mntiadd }}</p>
+      <p class="fs-6">
+        <i class="bi bi-geo-alt-fill me-2 text-danger"></i
+        >{{ wishlist.mntiadd.substring(0, wishlist.mntiadd.length - 3) }}
+      </p>
     </div>
   </div>
 </template>
