@@ -1,5 +1,5 @@
 // board.js
-import { localAxios } from "@/util/http-commons";
+import { localAxios } from '@/util/http-commons';
 
 const local = localAxios();
 
@@ -12,7 +12,7 @@ function detailArticle(articleno, success, fail) {
 }
 
 function registArticle(article, success, fail) {
-  console.log("boardjs article", article);
+  console.log('boardjs article', article);
   local.post(`/board`, JSON.stringify(article)).then(success).catch(fail);
 }
 
