@@ -1,85 +1,91 @@
 <script setup>
-import { ref, watch, computed } from "vue";
+import { ref, watch, computed, onMounted, defineProps } from "vue";
 import { useRouter } from "vue-router";
+const props = defineProps({ showHeader: Object });
 
 const router = useRouter();
 const userId = ref(sessionStorage.getItem("userId"));
 
-const isLoggedIn = ref("");
+const isLoggedIn = userId.value !== null;
 
-computed(() => {
-  isLoggedIn = userId.value !== null;
-
-  if (isLoggedIn) {
-    console.log("true");
-
-    headerhtml.value = `<div class="d-flex flex-row align-items-center " style="margin-top: 8px">
-<router-link to="/login" class="px-1">    
-  <button
-    type="button"
-    class="btn btn-primary rounded-pill text-white fw-bold fs-5"
-  >
-
-    로그인
-  </button>
-</router-link>
-
-<router-link to="/register" class="px-1">
-  <button
-    type="button"
-    class="btn btn-primary rounded-pill text-white fw-bold fs-5"
-  >
-    회원가입
-  </button>
-</router-link>
-</div>`;
-  } else {
-    console.log("false");
-
-    headerhtml.value = ` <div>
-        <button type="button" class="btn btn-primary rounded-pill text-white fw-bold fs-5  mb-3 " @click="logout">
-          로그아웃
-        </button>
-      </div> `;
-  }
+onMounted(() => {
+  //   if (isLoggedIn) {
+  //     console.log("true");
+  //     headerhtml.value = `<div class="d-flex flex-row align-items-center " style="margin-top: 8px">
+  // <router-link to="/login" class="px-1">
+  //   <button
+  //     type="button"
+  //     class="btn btn-primary rounded-pill text-white fw-bold fs-5"
+  //   >
+  //     로그인
+  //   </button>
+  // </router-link>
+  // <router-link to="/register" class="px-1">
+  //   <button
+  //     type="button"
+  //     class="btn btn-primary rounded-pill text-white fw-bold fs-5"
+  //   >
+  //     회원가입
+  //   </button>
+  // </router-link>
+  // </div>`;
+  //   } else {
+  //     console.log("false");
+  //     headerhtml.value = ` <div>
+  //         <button type="button" class="btn btn-primary rounded-pill text-white fw-bold fs-5  mb-3 " @click="logout">
+  //           로그아웃
+  //         </button>
+  //       </div> `;
+  //   }
+  console.log("showheader" + props.showHeader);
 });
 
-console.log("logggg " + isLoggedIn.value);
+console.log("logggg " + isLoggedIn);
 
 const headerhtml = ref("");
 
-watch(isLoggedIn.value, (newValue, oldValue) => {
-  console.log("isLoggedIn changed:", newValue);
-  // Perform actions based on the change in isLoggedIn
-  if (newValue) {
-    headerhtml.value = `<div class="d-flex flex-row align-items-center " style="margin-top: 8px">
-    <router-link to="/login" class="px-1">
-      <button
-        type="button"
-        class="btn btn-primary rounded-pill text-white fw-bold fs-5"
-      >
-
-        로그인
-      </button>
-    </router-link>
-
-    <router-link to="/register" class="px-1">
-      <button
-        type="button"
-        class="btn btn-primary rounded-pill text-white fw-bold fs-5"
-      >
-        회원가입
-      </button>
-    </router-link>
-  </div>`;
-  } else {
-    headerhtml.value = ` <div>
-            <button type="button" class="btn btn-primary rounded-pill text-white fw-bold fs-5  mb-3 " @click="logout">
-              로그아웃
-            </button>
-          </div> `;
+watch(
+  () => sessionStorage.getItem("userId"),
+  (newValue, oldValue) => {
+    if (newValue !== oldValue) {
+      // 새로운 값이 이전 값과 다를 때 실행할 로직 작성
+      console.log("세션 스토리지 값이 변경되었습니다:", newValue);
+      // 추가 작업 수행
+    }
   }
-});
+);
+
+// watch(isLoggedIn, (newValue, oldValue) => {
+// Perform actions based on the change in isLoggedIn
+// if (newValue) {
+//   headerhtml.value = `<div class="d-flex flex-row align-items-center " style="margin-top: 8px">
+//   <router-link to="/login" class="px-1">
+//     <button
+//       type="button"
+//       class="btn btn-primary rounded-pill text-white fw-bold fs-5"
+//     >
+
+//       로그인
+//     </button>
+//   </router-link>
+
+//   <router-link to="/register" class="px-1">
+//     <button
+//       type="button"
+//       class="btn btn-primary rounded-pill text-white fw-bold fs-5"
+//     >
+//       회원가입
+//     </button>
+//   </router-link>
+// </div>`;
+// } else {
+//   headerhtml.value = ` <div>
+//           <button type="button" class="btn btn-primary rounded-pill text-white fw-bold fs-5  mb-3 " @click="logout">
+//             로그아웃
+//           </button>
+//         </div> `;
+// }
+// });
 
 // const props = ['isLoggedIn']
 
@@ -91,7 +97,7 @@ watch(isLoggedIn.value, (newValue, oldValue) => {
 //   // 여기서 원하는 동작 수행
 // });
 
-console.log("iiii" + isLoggedIn.value);
+console.log("iiii" + isLoggedIn);
 console.log("iiii" + sessionStorage.getItem("userId"));
 console.log("headerhtml" + headerhtml.value);
 
@@ -194,32 +200,40 @@ const goToBoard = () => {
 
           <div v-html="headerhtml"></div>
 
-          <!-- <div>
-                                    <button type="button" class="btn btn-primary rounded-pill text-white fw-bold fs-5  mb-3 " @click="logout">
-                                      로그아웃
-                                    </button>
-                                  </div> -->
-        </div>
-        <!-- 
-                                            <div v-if="!isLoggedIn" class="d-flex flex-row align-items-center " style="margin-top: 8px">
-                                              <router-link to="/login" class="px-1">
-                                                <button
-                                                  type="button"
-                                                  class="btn btn-primary rounded-pill text-white fw-bold fs-5"
-                                                >
-                                                  로그인
-                                                </button>
-                                              </router-link>
+          <div
+            v-if="!showHeader"
+            class="d-flex flex-row align-items-center"
+            style="margin-top: 8px"
+          >
+            <router-link to="/login" class="px-1">
+              <button
+                type="button"
+                class="btn btn-primary rounded-pill text-white fw-bold fs-5 mb-3"
+              >
+                로그인
+              </button>
+            </router-link>
 
-                                              <router-link to="/register" class="px-1">
-                                                <button
-                                                  type="button"
-                                                  class="btn btn-primary rounded-pill text-white fw-bold fs-5"
-                                                >
-                                                  회원가입
-                                                </button>
-                                              </router-link>
-                                            </div> -->
+            <router-link to="/register" class="px-1">
+              <button
+                type="button"
+                class="btn btn-primary rounded-pill text-white fw-bold fs-5 mb-3"
+              >
+                회원가입
+              </button>
+            </router-link>
+          </div>
+
+          <div v-else>
+            <button
+              type="button"
+              class="btn btn-primary rounded-pill text-white fw-bold fs-5 mb-3"
+              @click="logout"
+            >
+              로그아웃
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </nav>

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 // import HomeView from '../views/HomeView.vue'
+import { ref } from "vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -83,12 +84,15 @@ const router = createRouter({
 
       component: () => import("@/views/BoardView.vue"),
     },
-
-    // {
-    //   path: "/login",
-    //   redirect: "/login",
-    // },
   ],
+});
+export const showHeader = ref(true);
+
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = sessionStorage.getItem("userId") !== null;
+
+  showHeader.value = isLoggedIn;
+  next();
 });
 
 export default router;
