@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
+
 // import BoardSearchItem from "../components/Search/item/BoardSearchItem.vue";
 import MountainSearchItem from '../components/Search/item/MountainSearchItem.vue';
 
@@ -25,7 +26,13 @@ const searchMountain = async () => {
     console.log(error);
     throw new Error(error);
   }
+
 };
+
+
+
+
+
 </script>
 
 <template>
@@ -50,14 +57,14 @@ const searchMountain = async () => {
         <div class="p-3"></div>
         <table class="table table-hover border-primary">
           <tbody>
-            <tr>
-              <td class="p-0 m-0"></td>
-            </tr>
-            <MountainSearchItem
+             <MountainSearchItem 
+ 
               v-for="result in searchResult"
               :key="result.mntilistno"
               :searchResult="result"
             ></MountainSearchItem>
+
+            
           </tbody>
         </table>
       </div>

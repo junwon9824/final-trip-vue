@@ -40,6 +40,15 @@ async function getMountainList(sidogugun, success, fail) {
   await local.get(`/mountain/getmountainlist`, { params: sidogugun }).then(success).catch(fail);
 }
 
+function AddconqueredMountain(param, success, fail) {
+  local.post(`mountain/add/conqueredMountain`,   { params: param } ).then(success).catch(fail);
+}
+
+
+function getSearchResultdetail(param, success, fail) {
+  local.post(`mountain/add/conqueredMountain`,   { params: param } ).then(success).catch(fail);
+}
+
 export {
   getAllMountains,
   addMountain,
@@ -49,5 +58,9 @@ export {
   getSearchResult,
   listSido,
   listGugun,
+
   getMountainList,
+
+  AddconqueredMountain,
+
 };

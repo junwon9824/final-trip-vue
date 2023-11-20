@@ -1,92 +1,99 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from "vue-router";
 // import HomeView from '../views/HomeView.vue'
+import { ref } from "vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: () => import('../views/Main.vue'),
+      path: "/",
+      name: "home",
+      component: () => import("../views/Main.vue"),
     },
 
     {
-      path: '/modify',
-      name: 'modify',
+      path: "/modify",
+      name: "modify",
 
-      component: () => import('@/views/ModifyView.vue'),
+      component: () => import("@/views/ModifyView.vue"),
     },
 
     {
-      path: '/conqueredmountain',
-      name: 'conqueredmountain',
+      path: "/conqueredmountain",
+      name: "conqueredmountain",
 
-      component: () => import('@/views/ConqueredMountain.vue'),
+      component: () => import("@/views/ConqueredMountain.vue"),
     },
 
     {
-      path: '/board',
-      name: 'board',
+      path: "/board",
+      name: "board",
 
-      component: () => import('../views/Board.vue'),
+      component: () => import("../views/Board.vue"),
     },
     {
-      path: '/plan',
-      name: 'plan',
+      path: "/plan",
+      name: "plan",
 
-      component: () => import('../views/Plan.vue'),
+      component: () => import("../views/Plan.vue"),
     },
     {
-      path: '/mypage',
-      name: 'mypage',
+      path: "/mypage",
+      name: "mypage",
 
-      component: () => import('../views/MyPage.vue'),
+      component: () => import("../views/MyPage.vue"),
     },
     {
-      path: '/boardwrite',
-      name: 'boardwrite',
+      path: "/boardwriteCard",
+      name: "boardwriteCard",
 
-      component: () => import('@/views/BoardWrite.vue'),
+      component: () => import("../components/board/item/BoardwriteCard.vue"),
     },
     {
-      path: '/login',
-      name: 'login',
+      path: "/login",
+      name: "login",
 
-      component: () => import('../views/Login.vue'),
+      component: () => import("../views/Login.vue"),
     },
     {
-      path: '/register',
-      name: 'register',
+      path: "/register",
+      name: "register",
 
-      component: () => import('../views/Regist.vue'),
+      component: () => import("../views/Regist.vue"),
     },
     {
-      path: '/search',
-      name: 'search',
+      path: "/search",
+      name: "search",
 
-      component: () => import('../views/Search.vue'),
-    },
-
-    {
-      path: '/login',
-      name: 'login',
-
-      component: () => import('../views/Login.vue'),
-    },
-
-    {
-      path: '/mountainview',
-      name: 'mountainview',
-
-      component: () => import('@/views/MountainView.vue'),
+      component: () => import("../views/Search.vue"),
     },
     {
-      path: '/boardview',
-      name: 'boardview',
+      path: "/mountainview",
+      name: "mountainview",
 
-      component: () => import('@/views/BoardView.vue'),
+      component: () => import("@/views/MountainView.vue"),
     },
+    {
+      path: "/mountain/:id",
+      name: "MountainDetail",
+      component: () => import("../views/MountainView.vue"),
+    },
+    {
+      path: "/boardview",
+      name: "boardview",
+
+      component: () => import("@/views/BoardView.vue"),
+    },
+ 
   ],
+});
+export const showHeader = ref(true);
+
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = sessionStorage.getItem("userId") !== null;
+
+  showHeader.value = isLoggedIn;
+  next();
 });
 
 export default router;

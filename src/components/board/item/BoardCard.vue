@@ -1,24 +1,35 @@
 <script setup>
-import { defineProps, onMounted } from 'vue';
-
+import { defineProps, onMounted, ref } from "vue";
+import axios from "axios";
 const props = defineProps({ board: Object });
 
 //boardcard 에 특정 게시판의 정보를 준다.. 따라서 해당 게시판에 해당하는 많은 파일들중 하나를 추출하는 작업 필요..
+const files = ref([]);
 
-// async function getfiles() {
-//   const  response = axios.get('http://localhost:80/mountain/search', {
-//     params: {
-//       word: editedMountainName.value,
-//     },
-//   });
-// }
+ 
+const getfiles = async () => {
+  console.log("pppppppppppp" + props.board.articleNo);
+  const response = await axios.get(
+    "http://localhost:80/article/getboardfiles",
+    {
+      params: {
+        articleNo: props.board.articleNo,
+      },
+    }
+  );
+ 
+  files.value = response.data;
+  console.log("ffffff" + files.value);
+};
 
 onMounted(() => {
   console.log(props.board.articleNo);
+  getfiles();
 });
 </script>
+
 <template>
-  <tr>
+  <tr>  
     <td class="pt-3 pb-3 d-flex flex-row">
       <div>
         <img
@@ -30,8 +41,8 @@ onMounted(() => {
       </div>
 
       <div class="card-body d-flex flex-column">
-        <p class="card-title fw-bold fs-3">{{ board.subject }}</p>
-        <p class="card-text pb-3 fs-5">{{ board.content }}</p>
+        <h1 class="card-title fw-bold fs-3">{{ board.subject }}</h1>
+    <h1 class="card-text pb-3 fs-5">{{ board.content }}</h1>
         <p class="mt-5">{{ board.registerTime }}</p>
       </div>
     </td>

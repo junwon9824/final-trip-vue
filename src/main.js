@@ -17,3 +17,4 @@ import '../scss/main.scss';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 app.mount('#app')
+// createApp(App).use(router).mount('#app');

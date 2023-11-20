@@ -43,6 +43,7 @@ const onChangeSido = (val) => {
       console.log(err);
     }
   );
+  
 };
 
 const getSidoList = () => {
@@ -239,7 +240,9 @@ const getNearItems = () => {
             <option v-for="sido in sidoList" :key="sido.value" :value="sido.value">
               {{ sido.text }}
             </option>
+
           </select>
+
           <select
             class="form-select bg-secondary fw-bold text-white"
             v-model="selectedGugun"
@@ -250,10 +253,12 @@ const getNearItems = () => {
               {{ gugun.text }}
             </option>
           </select>
+
         </div>
 
         <div id="map" style="height: 500px; width: 97%"></div>
         <div class="mt-3 p-3">
+
           <div class="d-flex align-items-start">
             <div
               class="rounded-circle bg-warning d-flex justify-content-center align-items-center me-2"
@@ -263,6 +268,7 @@ const getNearItems = () => {
             </div>
             <p class="fw-bold fs-5">내 위시리스트</p>
           </div>
+
           <div class="d-flex">
             <MyWishList
               v-for="wishlist in wishlists"
@@ -270,6 +276,7 @@ const getNearItems = () => {
               :wishlist="wishlist"
             ></MyWishList>
           </div>
+
         </div>
       </div>
     </div>
