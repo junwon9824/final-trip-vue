@@ -165,6 +165,7 @@ onMounted(() => {
 });
 
 const getWishLists = () => {
+  console.log('getWishLists');
   wishlists.value = [];
   getWishList(
     { userId: sessionStorage.userId },
@@ -178,6 +179,7 @@ const getWishLists = () => {
       console.log(err);
     }
   );
+  console.log(wishlists.value);
 };
 
 const folderimg = ref('src/assets/recommend_img1.png');
@@ -251,7 +253,7 @@ const getNearItems = () => {
           </select>
         </div>
 
-        <div id="map" style="height: 500px; width: 97%"></div>
+        <div id="map" style="height: 600px; width: 97%"></div>
         <div class="mt-3 p-3">
           <div class="d-flex align-items-start">
             <div
@@ -268,6 +270,7 @@ const getNearItems = () => {
               v-for="wishlist in wishlists"
               :key="wishlist"
               :wishlist="wishlist"
+              @getWishLists="getWishLists()"
             ></MyWishList>
           </div>
         </div>
@@ -276,11 +279,11 @@ const getNearItems = () => {
     <div
       class="col-3 d-flex flex-column"
       :style="{ 'background-image': 'url(' + folderimg + ')' }"
-      style="background-repeat: no-repeat; background-size: cover; height: 100%"
+      style="background-repeat: no-repeat; background-size: contain"
     >
-      <div class="mt-4 ms-5">
+      <div class="mt-4 ms-5 ps-3">
         <div class="d-flex flex-row">
-          <button type="button" class="btn text-primary ms-3 me-4" @click="closest()">
+          <button type="button" class="btn text-primary ms-3 me-5" @click="closest()">
             가까운 순 <i class="bi bi-chevron-down"></i>
           </button>
           <button type="button" class="btn text-primary ms-5" @click="high()">
@@ -290,11 +293,12 @@ const getNearItems = () => {
         <p class="fs-5 mt-3 fw-bold">
           <i class="bi bi-geo-alt-fill me-2 text-danger"></i>이런 산은 어때요?
         </p>
-        <div class="d-flex flex-wrap d-flex flex-column align-items-center">
+        <div class="d-flex flex-wrap d-flex flex-column">
           <RecommendCard
             v-for="item in items"
             :key="item.mntilistno"
             :RecommendCard="item"
+            @getWishLists="getWishLists()"
           ></RecommendCard>
         </div>
       </div>
