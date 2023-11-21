@@ -39,8 +39,8 @@ const uploadFilefunction = function () {
     region: VITE_BUCKET_REGION,
     credentials: new AWS.CognitoIdentityCredentials({
       IdentityPoolId: VITE_IDENTITY_POOL_ID,
-      accesskeyId: VITE_ACCESS_KEY_ID,
-      secretAccessKey: VITE_SECRET_ACCESS_KEY,
+      // accesskeyId: VITE_ACCESS_KEY_ID,
+      // secretAccessKey: VITE_SECRET_ACCESS_KEY,
     }),
   });
 
