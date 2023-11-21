@@ -79,12 +79,11 @@ const router = createRouter({
       component: () => import("../views/MountainView.vue"),
     },
     {
-      path: "/boardview",
+      path: "/boardview/:boardId",
       name: "boardview",
 
       component: () => import("@/views/BoardView.vue"),
     },
- 
   ],
 });
 export const showHeader = ref(true);

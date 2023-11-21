@@ -17,7 +17,7 @@ const items = [
   {
     board_id: 1,
     articleNo: 20,
-    subject: "Your Subject",
+    subjects: "Your Subject",
     content: "Your Content",
     userId: "Your UserID",
     registerTime: "2023-11-10 12:34:56",

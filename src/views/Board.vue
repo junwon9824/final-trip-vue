@@ -2,9 +2,9 @@
 import { ref, onMounted } from "vue";
 import BoardCard from "../components/board/item/BoardCard.vue";
 import axios from "axios";
- 
+
 import { useRouter } from "vue-router";
- 
+
 const saveId = ref(false);
 
 const items = ref([]);
@@ -29,9 +29,10 @@ const getboardlist = async () => {
 
 onMounted(getboardlist);
 
-function getBoardDetail() {
+function getBoardDetail(boardId) {
   // console.log ("hi");
-  router.push({ name: "boardview" });
+  console.log("boardId" + boardId);
+  router.push({ name: "boardview", params: { boardId: boardId } });
 }
 </script>
 
@@ -59,9 +60,8 @@ function getBoardDetail() {
           <td></td>
         </tr>
         <BoardCard
- 
-          @click="getBoardDetail"
-           v-for="item in items"
+          @click="getBoardDetail(item.articleNo)"
+          v-for="item in items"
           :key="item.articleNo"
           :board="item"
         ></BoardCard>
