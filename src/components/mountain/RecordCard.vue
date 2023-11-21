@@ -1,6 +1,7 @@
 <script setup>
-import RecordCardItem from './item/RecordCardItem.vue';
-defineProps(['records']);
+import RecordCardItem from "./item/RecordCardItem.vue";
+const props = defineProps(["records"]);
+console.log("ppppppppp" + props.records[0].userName);
 </script>
 
 <template>

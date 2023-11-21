@@ -16,7 +16,11 @@
         v-if="showMountainConqueror"
         :ranker="items"
       ></MountainConqueror>
-      <RecordCard class="mt-5" :records="items"></RecordCard>
+      <RecordCard
+        v-if="showMountainConqueror"
+        class="mt-5"
+        :records="items"
+      ></RecordCard>
     </div>
   </div>
 </template>
@@ -30,55 +34,6 @@ import axios from "axios";
 
 const route = useRoute();
 const mountainDetail = ref(null);
-
-// const items = [
-//   {
-//     mntilistno: 1,
-//     mntiname: "Mountain A",
-//     mntidetails: "Details about Mountain A",
-//     mntiadd: "Address of Mountain A",
-//     mntihigh: 1500,
-//     sido_code: 1,
-//     gugun_code: 101,
-//     mntiimg: "url_to_image_A",
-//     mnticonquerednum: 3,
-//     date: "2023-11-10 12:34:56",
-//     rank: 2,
-//     name: "zahi",
-//     count: 5,
-//   },
-
-//   {
-//     mntilistno: 2,
-//     mntiname: "Mountain B",
-//     mntidetails: "Details about Mountain B",
-//     mntiadd: "Address of Mountain B",
-//     mntihigh: 2000,
-//     sido_code: 2,
-//     gugun_code: 202,
-//     mntiimg: "url_to_image_B",
-//     mnticonquerednum: 5,
-//     date: "2023-11-11 10:45:30",
-//     rank: 4,
-//     name: "Milad",
-//     count: 3,
-//   },
-//   {
-//     mntilistno: 2,
-//     mntiname: "Mountain B",
-//     mntidetails: "Details about Mountain B",
-//     mntiadd: "Address of Mountain B",
-//     mntihigh: 2000,
-//     sido_code: 2,
-//     gugun_code: 202,
-//     mntiimg: "url_to_image_B",
-//     mnticonquerednum: 5,
-//     date: "2023-11-11 10:45:30",
-//     rank: 4,
-//     name: "Arash",
-//     count: 1,
-//   },
-// ];
 
 const items = ref([]);
 const showMountainConqueror = ref(false);
@@ -101,8 +56,8 @@ onMounted(async () => {
         `http://localhost:80/mountain/getrank3`,
         {
           params: {
-            // mntilistno: mountainDetail.value.mntilistno,
-            mntilistno: 111100101,
+            mntilistno: mountainDetail.value.mntilistno,
+            // mntilistno: 111100101,
           },
         }
       );
