@@ -51,33 +51,6 @@ const uploadFilefunction = function () {
   //   }),
 };
 
-//   const s3 = new AWS.S3({
-//     apiVersion: "2006-03-01",
-//     params: {
-//       Bucket: VITE_BUCKET_NAME,
-//     },
-//   });
-
-//   s3.upload(
-//     {
-//       Key: place.value.uuid,
-//       Body: uploadedFile.value,
-//       ACL: "public-read",
-//     },
-//     function (err, data) {
-//       console.log(uploadedFile.value);
-//       // console.log(uploadedFile.value.uuid);
-
-//       if (err) {
-//         console.log(err);
-//         return alert("There was an error uploading your photo: ", err.message);
-//       }
-//       alert("Successfully uploaded photo");
-//       console.log(data);
-//     }
-//   );
-// };
-
 const getFileExtension = function (fileName) {
   const len = fileName.length;
   const lastDot = fileName.lastIndexOf(".");
@@ -93,17 +66,6 @@ const insertData = async () => {
   console.log("  content:", content.value);
   console.log("File Info:", editedFileInfo.value);
 
-  // uploadedFile.value = editedFileInfo;
-
-  // const file = document.getElementById("place-image").files[0];
-  // const uuid = UUID(file.name);
-  // console.log(uuid);
-  // place.value.placeImgUrl = VITE_IMAGE_URL + uuid + getFileExtension(file.name);
-  // console.log(place.value.placeImgUrl);
-  // place.value.uuid = uuid + getFileExtension(file.name);
-  // console.log(file);
-  // uploadedFile.value = file;
-  // console.log(uploadedFile);
   let formData = new FormData();
   formData.append("userId", sessionStorage.getItem("userId"));
   formData.append("subjects", subjects.value);
