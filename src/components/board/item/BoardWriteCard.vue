@@ -7,70 +7,76 @@ import { v4 as UUID } from "uuid";
 const subjects = ref("");
 const content = ref("");
 const editedFileInfo = ref("");
+const yourFileVariableHere = ref(null); // 파일 변수를 추가해야 합니다.
 
-const {
-  VITE_BUCKET_NAME,
-  VITE_BUCKET_REGION,
-  VITE_IDENTITY_POOL_ID,
-  VITE_IMAGE_URL,
-  VITE_SECRET_ACCESS_KEY,
-  VITE_ACCESS_KEY_ID,
-} = import.meta.env;
+// 파일이 변경되었을 때 실행되는 메소드입니다.
+const handleImageChange = (event) => {
+  const selectedFile = event.target.files[0];
+  editedFileInfo.value = URL.createObjectURL(selectedFile);
+  yourFileVariableHere.value = selectedFile; // 파일 변수에 선택한 파일을 할당합니다.
+};
+// const {
+//   VITE_BUCKET_NAME,
+//   VITE_BUCKET_REGION,
+//   VITE_IDENTITY_POOL_ID,
+//   VITE_IMAGE_URL,
+//   VITE_SECRET_ACCESS_KEY,
+//   VITE_ACCESS_KEY_ID,
+// } = import.meta.env;
 
-console.log(VITE_BUCKET_NAME);
+// console.log(VITE_BUCKET_NAME);
 const uploadedFile = ref({});
 
-const place = ref({
-  placeName: "",
-  placeAddr: "",
-  placeType: "",
-  placeContent: "",
-  placeDate: "",
-  placeImgUrl: "",
-  placeLat: "",
-  placeLng: "",
-});
+// const place = ref({
+//   placeName: "",
+//   placeAddr: "",
+//   placeType: "",
+//   placeContent: "",
+//   placeDate: "",
+//   placeImgUrl: "",
+//   placeLat: "",
+//   placeLng: "",
+// });
 
 const uploadFilefunction = function () {
   // Set the Region
   console.log("uploadfile");
-  console.log("upload file" + VITE_BUCKET_REGION);
-  AWS.config.update({
-    region: VITE_BUCKET_REGION,
-    credentials: new AWS.CognitoIdentityCredentials({
-      IdentityPoolId: VITE_IDENTITY_POOL_ID,
-      // accesskeyId: VITE_ACCESS_KEY_ID,
-      // secretAccessKey: VITE_SECRET_ACCESS_KEY,
-    }),
-  });
-
-  // Create S3 service object
-  const s3 = new AWS.S3({
-    apiVersion: "2006-03-01",
-    params: {
-      Bucket: VITE_BUCKET_NAME,
-    },
-  });
-
-  s3.upload(
-    {
-      Key: place.value.uuid,
-      Body: uploadedFile.value,
-      ACL: "public-read",
-    },
-    function (err, data) {
-      console.log(uploadedFile.value);
-      // console.log(uploadedFile.value.uuid);
-
-      if (err) {
-        console.log(err);
-        return alert("There was an error uploading your photo: ", err.message);
-      }
-      alert("Successfully uploaded photo");
-      console.log(data);
-    }
-  );
+  // console.log("upload file" + VITE_BUCKET_REGION);
+  // AWS.config.update({
+  //   region: VITE_BUCKET_REGION,
+  //   credentials: new AWS.CognitoIdentityCredentials({
+  //     IdentityPoolId: VITE_IDENTITY_POOL_ID,
+  //     // accesskeyId: VITE_ACCESS_KEY_ID,
+  //     // secretAccessKey: VITE_SECRET_ACCESS_KEY,
+  //   }),
 };
+
+//   const s3 = new AWS.S3({
+//     apiVersion: "2006-03-01",
+//     params: {
+//       Bucket: VITE_BUCKET_NAME,
+//     },
+//   });
+
+//   s3.upload(
+//     {
+//       Key: place.value.uuid,
+//       Body: uploadedFile.value,
+//       ACL: "public-read",
+//     },
+//     function (err, data) {
+//       console.log(uploadedFile.value);
+//       // console.log(uploadedFile.value.uuid);
+
+//       if (err) {
+//         console.log(err);
+//         return alert("There was an error uploading your photo: ", err.message);
+//       }
+//       alert("Successfully uploaded photo");
+//       console.log(data);
+//     }
+//   );
+// };
 
 const getFileExtension = function (fileName) {
   const len = fileName.length;
@@ -89,22 +95,32 @@ const insertData = async () => {
 
   // uploadedFile.value = editedFileInfo;
 
-  const file = document.getElementById("place-image").files[0];
-  const uuid = UUID(file.name);
-  console.log(uuid);
-  place.value.placeImgUrl = VITE_IMAGE_URL + uuid + getFileExtension(file.name);
-  console.log(place.value.placeImgUrl);
-  place.value.uuid = uuid + getFileExtension(file.name);
-  console.log(file);
-  uploadedFile.value = file;
-  console.log(uploadedFile);
+  // const file = document.getElementById("place-image").files[0];
+  // const uuid = UUID(file.name);
+  // console.log(uuid);
+  // place.value.placeImgUrl = VITE_IMAGE_URL + uuid + getFileExtension(file.name);
+  // console.log(place.value.placeImgUrl);
+  // place.value.uuid = uuid + getFileExtension(file.name);
+  // console.log(file);
+  // uploadedFile.value = file;
+  // console.log(uploadedFile);
+  let formData = new FormData();
+  formData.append("userId", sessionStorage.getItem("userId"));
+  formData.append("subjects", subjects.value);
+  formData.append("content", content.value);
+  console.log(yourFileVariableHere.value);
+  formData.append("fileInfos", yourFileVariableHere.value); // 파일을 formData에 추가해야 합니다.
 
   try {
-    const response = await axios.post("http://localhost:80/article/write", {
-      userId: sessionStorage.getItem("userId"),
-      subjects: subjects.value,
-      content: content.value,
-    });
+    const response = await axios.post(
+      "http://localhost:80/article/write",
+      formData, // FormData를 전송합니다.
+      {
+        headers: {
+          "Content-Type": "multipart/form-data", // 헤더의 오타 수정
+        },
+      }
+    );
 
     if (response.data) {
       console.log(response.data);
