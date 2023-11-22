@@ -1,11 +1,12 @@
 <script setup>
-import { defineProps, ref } from 'vue';
+import { defineProps, ref, defineEmits } from 'vue';
 import { addWishList } from '@/api/wishlist';
 
 defineProps({
   RecommendCard: Object,
 });
-
+const emit = defineEmits(['getWishLists']);
+const prefix = 'https://www.forest.go.kr/images/data/down/mountain';
 const wish = ref({
   userId: '',
   mntilistno: '',
@@ -31,6 +32,7 @@ const addToWishlist = (mntilistno) => {
     wish.value,
     ({ data }) => {
       console.log(data);
+      emit('getWishLists');
     },
     (err) => {
       console.log(err);
@@ -43,7 +45,11 @@ const addToWishlist = (mntilistno) => {
   <div class="card mb-4 shadow-sm" style="max-width: 380px; height: 190">
     <div class="d-flex flex-row g-0 me-4">
       <div class="col-5 m-2">
-        <img src="@/assets/mountain_car.png" class="img-fluid rounded-start" alt="..." />
+        <img
+          :src="`${prefix}/${RecommendCard.mntiimg}`"
+          class="img-fluid rounded-start"
+          alt="..."
+        />
       </div>
       <div class="col-7 my-2 d-flex flex-column align-items-start">
         <button type="button" class="btn btn-dark rounded-pill btn-sm mb-2 fs-8">
