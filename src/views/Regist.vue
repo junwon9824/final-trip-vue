@@ -1,19 +1,19 @@
 <script setup>
-import { ref } from 'vue';
-import { checkid, join } from '../api/members';
+import { ref } from "vue";
+import { checkid, join } from "../api/members";
 
-const userId = ref('');
-const userName = ref('');
-const address = ref('');
-const password = ref('');
-const checkpassword = ref('');
+const userId = ref("");
+const userName = ref("");
+const address = ref("");
+const password = ref("");
+const checkpassword = ref("");
 const passId = ref(false);
 
 const userinfo = ref({
-  userId: '',
-  userPwd: '',
-  userName: '',
-  address: '',
+  userId: "",
+  userPwd: "",
+  userName: "",
+  address: "",
   lat: 0,
   lng: 0,
 });
@@ -22,7 +22,7 @@ const lngLat = ref({
   lat: 0,
   lng: 0,
 });
-const KAKAO_REST_API_KEY = 'c57b01f7e32c7befe7fdb4c37d0d4071';
+const KAKAO_REST_API_KEY = "c57b01f7e32c7befe7fdb4c37d0d4071";
 
 async function convertAddressToCoordinates(address) {
   try {
@@ -44,11 +44,17 @@ async function convertAddressToCoordinates(address) {
       console.log(userinfo.value);
       final();
     } else {
-      console.error('Failed to fetch data:', response.status, response.statusText);
+      console.error(
+        "Failed to fetch data:",
+        response.status,
+        response.statusText
+      );
+      alert("주소를 가져오지 못했습니다.");
       return null;
     }
   } catch (error) {
-    console.error('Error during fetch:', error.message);
+    console.error("Error during fetch:", error.message);
+    alert("주소를 가져오지 못했습니다.");
     return null;
   }
 }
@@ -57,12 +63,12 @@ const checkId = () => {
   checkid(
     userId.value,
     ({ data }) => {
-      if (data == '1') {
-        alert('중복된 아이디입니다.');
-        userId.value = '';
+      if (data == "1") {
+        alert("중복된 아이디입니다.");
+        userId.value = "";
         return;
       } else {
-        alert('사용 가능한 아이디입니다.');
+        alert("사용 가능한 아이디입니다.");
         passId.value = true;
         return;
       }
@@ -74,24 +80,24 @@ const checkId = () => {
 };
 
 const regist = () => {
-  if (userId.value == '') {
-    alert('아이디를 입력해주세요.');
+  if (userId.value == "") {
+    alert("아이디를 입력해주세요.");
     return;
   }
   if (passId.value == false) {
-    alert('아이디 중복확인을 해주세요.');
+    alert("아이디 중복확인을 해주세요.");
     return;
   }
-  if (password.value == '' || checkpassword.value == '') {
-    alert('비밀번호를 입력해주세요.');
+  if (password.value == "" || checkpassword.value == "") {
+    alert("비밀번호를 입력해주세요.");
     return;
   }
   if (password.value != checkpassword.value) {
-    alert('비밀번호가 일치하지 않습니다.');
+    alert("비밀번호가 일치하지 않습니다.");
     return;
   }
-  if (userName.value == '') {
-    alert('이름을 입력해주세요.');
+  if (userName.value == "") {
+    alert("이름을 입력해주세요.");
     return;
   }
   userinfo.value.userId = userId.value;
@@ -100,7 +106,7 @@ const regist = () => {
   userinfo.value.address = address.value;
   convertAddressToCoordinates(address.value).catch((err) => {
     console.log(err);
-    alert('주소를 다시 입력해주세요.');
+    alert("주소를 다시 입력해주세요.");
     return;
   });
 };
@@ -109,11 +115,11 @@ const final = () => {
   join(
     userinfo.value,
     ({ data }) => {
-      if (data == 'Member registered successfully') {
-        alert('회원가입이 완료되었습니다.');
-        location.href = '/login';
+      if (data == "Member registered successfully") {
+        alert("회원가입이 완료되었습니다.");
+        location.href = "/login";
       } else {
-        alert('회원가입에 실패하였습니다.');
+        alert("회원가입에 실패하였습니다.");
         return;
       }
     },
@@ -128,10 +134,15 @@ const final = () => {
   <div class="container bg-light rounded-3 p-0 mt-5">
     <div class="row">
       <div class="col-5 d-flex justify-content-center align-items-center">
-        <div class="col-9 d-flex flex-column justify-content-around" style="height: 80%">
+        <div
+          class="col-9 d-flex flex-column justify-content-around"
+          style="height: 80%"
+        >
           <p class="fs-4 fw-bold">회원가입</p>
           <div class="">
-            <label for="userId" class="form-label mb-0 pb-0 fw-bold">아이디</label>
+            <label for="userId" class="form-label mb-0 pb-0 fw-bold"
+              >아이디</label
+            >
             <div class="d-flex col-9 py-0">
               <input
                 type="text"
@@ -151,7 +162,9 @@ const final = () => {
           </div>
 
           <div class="mb-3 mt-3">
-            <label for="userPassword" class="form-label fw-bold">비밀번호</label>
+            <label for="userPassword" class="form-label fw-bold"
+              >비밀번호</label
+            >
             <input
               type="password"
               class="form-control py-2"
@@ -161,7 +174,9 @@ const final = () => {
             />
           </div>
           <div class="mb-3">
-            <label for="userPassword" class="form-label fw-bold">비밀번호 확인</label>
+            <label for="userPassword" class="form-label fw-bold"
+              >비밀번호 확인</label
+            >
             <input
               type="password"
               class="form-control py-2"
@@ -194,7 +209,10 @@ const final = () => {
           </div>
 
           <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-outline-success col-6 py-2 mx-1 fw-bold">
+            <button
+              type="button"
+              class="btn btn-outline-success col-6 py-2 mx-1 fw-bold"
+            >
               취소
             </button>
             <button
