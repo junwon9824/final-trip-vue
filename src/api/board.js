@@ -17,7 +17,6 @@ function registArticle(article, success, fail) {
 }
 
 function getModifyArticle(articleno, success, fail) {
-  x;
   local.get(`/board/modify/${articleno}`).then(success).catch(fail);
 }
 

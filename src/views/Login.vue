@@ -2,19 +2,22 @@
 import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { onMounted } from 'vue';
+import { useCookies } from 'vue3-cookies';
+
+const { cookies } = useCookies();
 
 const saveId = ref(false);
 const id = ref('');
 const password = ref('');
 const router = useRouter(); // 라우터 객체 한 번만 선언
 
-const handleIdSaveClick = () => {
-  console.log('아이디 저장 clicked');
-};
-
-const handlePasswordRecoveryClick = () => {
-  console.log('비밀번호 찾기 clicked');
-};
+onMounted(() => {
+  id.value = cookies.get('userId');
+  if (id.value) {
+    saveId.value = true;
+  }
+});
 
 const login = async () => {
   console.log('로그인 clicked' + ' ' + id.value);
@@ -31,12 +34,17 @@ const login = async () => {
     console.log('login response:', response.data); // 반환된 데이터 확인
 
     // 여기서 반환된 데이터를 사용하여 필요한 작업 수행
-
     if (response.data) {
       // 세션 스토리지에 저장
       sessionStorage.setItem('userId', id.value);
       sessionStorage.setItem('userPwd', password.value);
       // 성공적으로 로그인되었으므로 메인 페이지로 이동
+      if (saveId.value) {
+        cookies.set('userId', id.value);
+      } else {
+        cookies.remove('userId');
+      }
+
       router.push('/');
     }
   } catch (error) {
