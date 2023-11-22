@@ -12,4 +12,8 @@ async function addWishList(wish, success, fail) {
   await local.post(`/wishlist/add`, wish).then(success).catch(fail);
 }
 
-export { getWishList, addWishList };
+async function deleteWishList(wish, success, fail) {
+  await local.post(`/wishlist/delete`, wish).then(success).catch(fail);
+}
+
+export { getWishList, addWishList, deleteWishList };
