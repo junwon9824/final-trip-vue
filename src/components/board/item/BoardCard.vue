@@ -1,11 +1,11 @@
 <script setup>
-import { defineProps, onMounted, ref } from "vue";
-import axios from "axios";
+import { defineProps, onMounted, ref } from 'vue';
+import axios from 'axios';
 const props = defineProps({ board: Object });
 
 //boardcard 에 특정 게시판의 정보를 준다.. 따라서 해당 게시판에 해당하는 많은 파일들중 하나를 추출하는 작업 필요..
 const files = ref([]);
-console.log("board" + props.board.save_file);
+console.log('board' + props.board.save_file);
 
 // const getfiles = async () => {
 //   console.log("pppppppppppp" + props.board.articleNo);
