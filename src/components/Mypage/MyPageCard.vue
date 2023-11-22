@@ -10,7 +10,7 @@ const userIdvalue = sessionStorage.getItem("userId");
 const userName = ref("");
 const address = ref("");
 const num = ref(0);
-
+const imgurl = ref("");
 const props = defineProps({
   MainCard: Object,
 });
@@ -25,10 +25,11 @@ const getmydata = async () => {
 
     userName.value = response.data.userName;
     address.value = response.data.address;
-
+    imgurl.value = response.data.imgurl;
     console.log("getttt" + response.data.userId);
     console.log("getttt" + response.data.userName);
     console.log("getttt" + response.data.address);
+    console.log("getttt" + response.data.imgurl);
   } catch (error) {
     console.log(error);
     throw new Error(error);
@@ -87,7 +88,7 @@ const deleteUser = async () => {
   >
     <div class="d-flex justify-content-center align-items-center">
       <img
-        src="@/assets/mountain_car.png"
+        :src="imgurl"
         class="img-fluid rounded-circle mx-auto d-block"
         alt="..."
         style="width: 200px"
