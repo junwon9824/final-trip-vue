@@ -1,26 +1,23 @@
 <script setup>
-import { defineProps, ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import axios from 'axios';
+import { defineProps, ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
 // const props = defineProps(['userId', 'userName', 'address', 'conqueredMountains']);
 
 const router = useRouter();
 
-const userIdvalue = sessionStorage.getItem('userId');
-const userName = ref('');
-const address = ref('');
-const conquerednum = ref('');
-const num =ref(0);
+const userIdvalue = sessionStorage.getItem("userId");
+const userName = ref("");
+const address = ref("");
+const num = ref(0);
 
 const props = defineProps({
   MainCard: Object,
 });
 
 const getmydata = async () => {
-
   try {
-
-    const response = await axios.get('http://localhost:80/user/getinfo', {
+    const response = await axios.get("http://localhost:80/user/getinfo", {
       params: {
         userId: userIdvalue,
       },
@@ -32,7 +29,6 @@ const getmydata = async () => {
     console.log("getttt" + response.data.userId);
     console.log("getttt" + response.data.userName);
     console.log("getttt" + response.data.address);
-
   } catch (error) {
     console.log(error);
     throw new Error(error);
@@ -41,77 +37,82 @@ const getmydata = async () => {
 
 onMounted(getmydata);
 
-
 const gettotalconquerednum = async () => {
+  try {
+    console.log("idddddddddddddd" + userIdvalue);
 
-try {
-  console.log("idddddddddddddd"+userIdvalue)
+    const response = await axios.get(
+      "http://localhost:80/mountain/gettotalconquered",
+      {
+        params: {
+          userId: userIdvalue,
+        },
+      }
+    );
 
-  const response = await axios.get('http://localhost:80/mountain/gettotalconquered', {
-    params: {
-      userId: userIdvalue,
-    },
-  });
- 
-  console.log("getttt" + response.data.userId); 
-  num.value = response.data
-} catch (error) {
-  console.log(error);
-  throw new Error(error);
-}
+    console.log("getttt" + response.data.userId);
+    num.value = response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
 };
 
 onMounted(gettotalconquerednum);
 
-
 const deleteUser = async () => {
-
   try {
-    const response = await axios.delete('http://localhost:80/user/delete', {
+    const response = await axios.delete("http://localhost:80/user/delete", {
       params: {
         userId: userIdvalue,
-
       },
     });
 
     console.log(response.data);
-
   } catch (error) {
     console.log(error);
     throw new Error(error);
   }
 
   // 탈퇴 후 로그인 페이지로 이동
-  router.push('/login');
-
+  router.push("/login");
 };
-
 
 // 기타 필요한 로직 추가
 </script>
 
 <template>
-  <div class="card bg-info text-dark rounded-4 d-flex justify-content-center align-items-center py-5 mt-5">
+  <div
+    class="card bg-info text-dark rounded-4 d-flex justify-content-center align-items-center py-5 mt-5"
+  >
     <div class="d-flex justify-content-center align-items-center">
-      
-      <img src="@/assets/mountain_car.png" class="img-fluid rounded-circle mx-auto d-block" alt="..."
-        style="width: 200px" />
-
+      <img
+        src="@/assets/mountain_car.png"
+        class="img-fluid rounded-circle mx-auto d-block"
+        alt="..."
+        style="width: 200px"
+      />
 
       <div class="flex-grow-1 ms-5">
         <p class="fs-4">ID: {{ userIdvalue }}</p>
         <p class="fs-4">이름: {{ userName }}</p>
         <p class="fs-4">주소: {{ address }}</p>
-        <p class="fs-4">정복 수: {{  num }}</p>
+        <p class="fs-4">정복 수: {{ num }}</p>
       </div>
     </div>
 
     <div class="d-flex justify-content-around pt-4" style="width: 100%">
-      <button class="btn btn-success rounded-3 text-white px-4" @click="deleteUser">
+      <button
+        class="btn btn-success rounded-3 text-white px-4"
+        @click="deleteUser"
+      >
         회원탈퇴
       </button>
 
-      <router-link to="/modify" class="btn btn-success rounded-3 text-white px-4">
+      <router-link
+        to="/modify"
+        class="btn btn-success rounded-3 text-white px-4"
+      >
         수정
       </router-link>
     </div>

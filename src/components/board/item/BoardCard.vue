@@ -5,35 +5,32 @@ const props = defineProps({ board: Object });
 
 //boardcard 에 특정 게시판의 정보를 준다.. 따라서 해당 게시판에 해당하는 많은 파일들중 하나를 추출하는 작업 필요..
 const files = ref([]);
+console.log("board" + props.board.save_file);
 
-const getfiles = async () => {
-  console.log("pppppppppppp" + props.board.articleNo);
-  const response = await axios.get(
-    "http://localhost:80/article/getboardfiles",
-    {
-      params: {
-        articleNo: props.board.articleNo,
-      },
-    }
-  );
+// const getfiles = async () => {
+//   console.log("pppppppppppp" + props.board.articleNo);
+//   const response = await axios.get(
+//     "http://localhost:80/article/getboardfiles",
+//     {
+//       params: {
+//         articleNo: props.board.articleNo,
+//       },
+//     }
+//   );
 
-  files.value = response.data;
-  console.log("ffffff" + files.value);
-};
+//   files.value = response.data;
+//   console.log("ffffff" + files.value);
+// };
 
 onMounted(() => {
   console.log(props.board.content);
-  getfiles();
+  // getfiles();
 });
 </script>
 
 <template>
   <div class="board-card">
-    <img
-      src="@/assets/mountain_car.png"
-      class="board-image"
-      alt="Board image"
-    />
+    <img :src="board.save_file" class="board-image" alt="Board image" />
     <div class="board-text">
       <h2 class="board-title">{{ board.subjects }}</h2>
       <p class="board-content">{{ board.content }}</p>

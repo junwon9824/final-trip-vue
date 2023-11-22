@@ -12,7 +12,7 @@
             accept="image/*"
           />
 
-          <img :src="editedFileInfo" class="img-fluid rounded d-block" />
+          <!-- <img :src="editedFileInfo" class="img-fluid rounded d-block" /> -->
         </div>
 
         <input
@@ -54,17 +54,14 @@ import { useRouter } from "vue-router";
 import axios from "axios";
 import { ref } from "vue";
 const router = useRouter();
+const yourFileVariableHere = ref(null); // 파일 변수를 추가해야 합니다.
+const editedFileInfo = ref("");
 
 const handleImageChange = (event) => {
-  const file = event.target.files[0];
-
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      editedFileInfo.value = reader.result;
-    };
-    reader.readAsDataURL(file);
-  }
+  const selectedFile = event.target.files[0];
+  editedFileInfo.value = URL.createObjectURL(selectedFile);
+  yourFileVariableHere.value = selectedFile; // 파일 변수에 선택한 파일을 할당합니다.
+  console.log("chaaaaaaaaaaaaaa" + yourFileVariableHere.value);
 };
 
 const userIdv = sessionStorage.getItem("userId");
@@ -78,17 +75,26 @@ const modify = async () => {
     console.log("useridddd" + userPwdv);
     console.log("useridddd" + userNamev);
 
-    const response = await axios.put("http://localhost:80/user/modify", {
-      userPwd: userPwdv.value,
-      userName: userNamev.value,
-      address: addressv.value,
-      userId: userIdv,
-    });
-
-    //   userName.value = response.data.userName;
-    //   address.value = response.data.address;
-    //   userPwd.value = response.data.userPwd;
-    //   userId.value = response.data.userId;
+    let formData = new FormData();
+    formData.append("userPwd", userPwdv.value);
+    formData.append("userName", userNamev.value);
+    formData.append("address", addressv.value);
+    formData.append("userId", userIdv);
+    formData.append("imgfile", yourFileVariableHere.value);
+    console.log("iiiiiiiiiiii" + yourFileVariableHere.value);
+    const response = await axios.put(
+      "http://localhost:80/user/modify",
+      formData,
+      {
+        // userPwd: userPwdv.value,
+        // userName: userNamev.value,
+        // address: addressv.value,
+        // userId: userIdv,
+        headers: {
+          "Content-Type": "multipart/form-data", // 헤더의 오타 수정
+        },
+      }
+    );
 
     //   console.log("getttt" + response.data.userId);
     //   console.log("getttt" + response.data.userName);
@@ -98,36 +104,7 @@ const modify = async () => {
     console.log(error);
     throw new Error(error);
   }
-  
 };
-
-const items = [
-  {
-    mntilistno: 1,
-    mntiname: "Mountain A",
-    mntidetails: "Details about Mountain A",
-    mntiadd: "Address of Mountain A",
-    mntihigh: 1500,
-    sido_code: 1,
-    gugun_code: 101,
-    mntiimg: "url_to_image_A",
-    mnticonquerednum: 3,
-    lastConqueredDate: "2023-11-10 12:34:56",
-  },
-  {
-    mntilistno: 2,
-    mntiname: "Mountain B",
-    mntidetails: "Details about Mountain B",
-    mntiadd: "Address of Mountain B",
-    mntihigh: 2000,
-    sido_code: 2,
-    gugun_code: 202,
-    mntiimg: "url_to_image_B",
-    mnticonquerednum: 5,
-    lastConqueredDate: "2023-11-11 10:45:30",
-  },
-  // Add more items as needed
-];
 </script>
 
 <style scoped>

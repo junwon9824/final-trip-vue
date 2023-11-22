@@ -19,7 +19,9 @@ const getboardlist = async () => {
     });
 
     items.value = response.data;
-    console.log("item" + items.value.content);
+    console.log("item" + items);
+    console.log("item " + items.value[6].subjects);
+    console.log("item " + items.value[6].save_file);
     // console.log(it)
   } catch (error) {
     console.log(error);
