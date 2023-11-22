@@ -27,7 +27,7 @@ const onChangeSido = (val) => {
       let options = [];
       data.forEach((gugun) => {
         options.push({ text: gugun.gugun_name, value: gugun.gugun_code });
-        console.log(gugun.gugun_code)
+        console.log(gugun.gugun_code);
       });
 
       gugunList.value = options;
@@ -62,8 +62,6 @@ const onChangeGugun = (val) => {
 //   console.log("codeeee", val);
 
 // };
-
-
 
 // const onChangeGugun = () => {
 //   const val = selectedGugun.value;
@@ -133,6 +131,8 @@ const insertData = async () => {
     // Handle the response if needed
   } catch (error) {
     console.log(error);
+    alert("해당하는 산이 없습니다.");
+
     throw new Error(error);
   }
 };
@@ -175,7 +175,6 @@ const insertData = async () => {
               v-model="selectedGugun"
               @change="onChangeGugun(selectedGugun)"
             >
-
               <option selected disabled>구/군</option>
               <option
                 v-for="gugun in gugunList"
