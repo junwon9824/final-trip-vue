@@ -90,7 +90,7 @@ const deleteUser = async () => {
       <img
         :src="imgurl"
         class="img-fluid rounded-circle mx-auto d-block"
-        alt="..."
+        alt="이미지를 등록해주세요."
         style="width: 200px"
       />
 
