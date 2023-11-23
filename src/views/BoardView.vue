@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useRoute, useRouter } from 'vue-router';
-import { deleteArticle } from '../api/board.js';
+import { deleteArticle, writeComments } from '../api/board.js';
 import { storeToRefs } from 'pinia';
 import { useMemberStore } from '@/stores/member';
 
