@@ -1,10 +1,11 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import { useRoute, useRouter } from "vue-router";
-import { deleteArticle, writeComments } from "../api/board.js";
-import { storeToRefs } from "pinia";
-import { useMemberStore } from "@/stores/member";
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import { useRoute, useRouter } from 'vue-router';
+import { deleteArticle, writeComments } from '../api/board.js';
+import { storeToRefs } from 'pinia';
+import { useMemberStore } from '@/stores/member';
+
 
 const { userInfo } = storeToRefs(useMemberStore());
 const route = useRoute();
