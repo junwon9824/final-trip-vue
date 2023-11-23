@@ -26,10 +26,17 @@ onBeforeMount(() => {
 
 <template>
     <div class="card shadow-lg m-4" style="width: 450px">
-        <img class="card-img-top" :src="tmpImgSrc" alt="Card image" style="height: 300px; width: 450px" />
+        <img
+            class="card-img-top"
+            :src="tmpImgSrc"
+            alt="src/assets/artmountain.jpg"
+            style="height: 300px; width: 450px"
+        />
 
         <div class="card-img-overlay d-flex justify-content-between align-items-center flex-column">
-            <p class="card-title text-light fs-2 fw-bold">{{ MainCard.mntiname }}</p>
+            <p class="card-title text-light fs-2 fw-bold px-2 rounded-pill" style="backdrop-filter: blur(10px)">
+                {{ MainCard.mntiname }}
+            </p>
 
             <!-- <RouterLink to="/mountainview"> -->
             <button @click="navigateToMountainView" class="btn btn-light btn-lg rounded-pill px-4 py-2">

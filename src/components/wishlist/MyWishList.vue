@@ -37,7 +37,8 @@ const deleteWishListItem = (mntilistno) => {
             class="card-img-top px-2 pt-2 rounded-5"
             style="height: 150px"
             :src="`${prefix}/${wishlist.mntiimg}`"
-            alt="Card image"
+            onerror="this.src
+            ='src/assets/altmountain.jpg'"
         />
         <div class="card-body m-0 px-2">
             <p class="fs-5 fw-bold m-0 p-0">{{ wishlist.mntiname }}</p>
