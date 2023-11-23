@@ -2,6 +2,59 @@
 import MainCard from '../components/Main/MainCard.vue';
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import { defineComponent } from 'vue';
+import 'vue3-carousel/dist/carousel.css';
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
+
+const banneritems = [
+    {
+        title: 'Carousel Slider',
+        description: 'Carousel를 이용한 이미지 슬라이드 효과',
+        menus: [
+            {
+                image: 'src/assets/bannergood.jpg',
+                alt: 'image1',
+            },
+            {
+                image: 'src/assets/river.jpg',
+                alt: 'image1',
+            },
+            {
+                image: 'src/assets/snowmountain.jpg',
+                alt: 'image1',
+            },
+            {
+                image: 'src/assets/lake.jpg',
+                alt: 'image1',
+            },
+            {
+                image: 'src/assets/truebsee.jpg',
+                alt: 'image1',
+            },
+        ],
+    },
+];
+
+const imgitems = [
+    {
+        title: 'Carousel Slider',
+        description: 'Carousel를 이용한 이미지 슬라이드 효과',
+        menus: [
+            {
+                image: 'src/assets/001.png',
+                alt: 'image1',
+            },
+            {
+                image: 'src/assets/002.png',
+                alt: 'image1',
+            },
+            {
+                image: 'src/assets/003.png',
+                alt: 'image1',
+            },
+        ],
+    },
+];
 
 const items = ref([
     {
@@ -32,17 +85,30 @@ const items2 = ref([
         mntiimg: 'src/assets/gyaemountain.jpeg',
     },
     {
-        mntiname: '봉화산',
-        mntilistno: '415901101',
-        mntiimg: 'src/assets/bongmountain.jpeg',
+        mntiname: '감악산',
+        mntilistno: '414800101',
+        mntiimg: 'src/assets/gammountain.png',
     },
 ]);
 </script>
 
 <template>
-    <div>
-        <div class="col-lg-12 d-flex justify-content-between align-items-center flex-column">
-            <img src="@/assets/bannergood.jpg" class="img-fluid rounded mx-auto d-block" alt="..." />
+    <div class="wrapper">
+        <div class="image_slider col-lg-12" slideWidth="100%">
+            <carousel :items-to-show="1" :wrapAround="true" :autoplay="5000">
+                <slide v-for="slide in banneritems[0].menus" :key="slide">
+                    <div class="carousel__item">
+                        <figure>
+                            <img :src="slide.image" :alt="slide.alt" />
+                        </figure>
+                    </div>
+                </slide>
+
+                <template #addons>
+                    <navigation />
+                    <pagination />
+                </template>
+            </carousel>
         </div>
 
         <div class="d-flex flex-column mt-5 align-items-center">
@@ -62,19 +128,19 @@ const items2 = ref([
             <div class="d-flex align-items-center col-10">
                 <MainCard v-for="item in items2" :key="item.mntilistno" :MainCard="item"></MainCard>
             </div>
-            <div class="d-flex" id="image">
-                <img
-                    id="first_snow"
-                    src="src/assets/첫눈맞이등산.png"
-                    class="img-fluid rounded mx-auto d-block"
-                    alt="..."
-                />
-                <img
-                    id="first_snow"
-                    src="src/assets/겨울산행전대비.png"
-                    class="img-fluid rounded mx-auto d-block"
-                    alt="..."
-                />
+            <div class="col-10 image_slider" slideWidth="100%">
+                <carousel :items-to-show="1" :wrapAround="true" :autoplay="5000">
+                    <slide v-for="slide in imgitems[0].menus" :key="slide">
+                        <div class="m-0 p-0">
+                            <figure><img :src="slide.image" :alt="slide.alt" style="object-fit: contain" /></figure>
+                        </div>
+                    </slide>
+
+                    <template #addons>
+                        <navigation />
+                        <pagination />
+                    </template>
+                </carousel>
             </div>
         </div>
     </div>
