@@ -166,6 +166,7 @@ const AddComment = () => {
   console.log("bbbb" + boardId);
   console.log("add comment" + commentbox.value.content);
   console.log("add comment" + commentbox.value.articleNo);
+  getdetaillist();
 };
 
 // const final = () => {
