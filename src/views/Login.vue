@@ -1,11 +1,19 @@
 <script setup>
-import axios from 'axios';
+import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { onMounted } from 'vue';
+import { useMemberStore } from '@/stores/member';
 import { useCookies } from 'vue3-cookies';
+import { useMenuStore } from '@/stores/menu';
 
 const { cookies } = useCookies();
+
+const memberStore = useMemberStore();
+
+const { isLogin } = storeToRefs(memberStore);
+const { userLogin, getUserInfo } = memberStore;
+const { changeMenuState } = useMenuStore();
 
 const saveId = ref(false);
 const id = ref('');
@@ -19,38 +27,19 @@ onMounted(() => {
   }
 });
 
-const login = async () => {
-  console.log('로그인 clicked' + ' ' + id.value);
-
-  try {
-    console.log('in try' + ' ' + password.value);
-
-    const payload = {
-      userId: id.value,
-      userPwd: password.value,
-    };
-
-    const response = await axios.post('http://localhost:80/user/login', payload);
-    console.log('login response:', response.data); // 반환된 데이터 확인
-
-    // 여기서 반환된 데이터를 사용하여 필요한 작업 수행
-    if (response.data) {
-      // 세션 스토리지에 저장
-      sessionStorage.setItem('userId', id.value);
-      sessionStorage.setItem('userPwd', password.value);
-      // 성공적으로 로그인되었으므로 메인 페이지로 이동
-      if (saveId.value) {
-        cookies.set('userId', id.value);
-      } else {
-        cookies.remove('userId');
-      }
-
-      router.push('/');
+const loginUser = async () => {
+  await userLogin({ userId: id.value, userPwd: password.value });
+  let token = sessionStorage.getItem('accessToken');
+  if (isLogin) {
+    getUserInfo(token);
+    changeMenuState();
+    if (saveId.value) {
+      cookies.set('userId', id.value);
+    } else {
+      cookies.remove('userId');
     }
-  } catch (error) {
-    console.log(error);
-    throw new Error(error);
   }
+  router.push('/');
 };
 </script>
 
@@ -107,7 +96,7 @@ const login = async () => {
             <button
               type="button"
               class="btn btn-success col-6 py-2 mx-1 fw-bold text-white"
-              @click="login"
+              @click="loginUser"
             >
               로그인
             </button>

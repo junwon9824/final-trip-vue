@@ -1,6 +1,27 @@
-import { createRouter, createWebHistory } from "vue-router";
-// import HomeView from '../views/HomeView.vue'
-import { ref } from "vue";
+
+import { createRouter, createWebHistory } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { useMemberStore } from '@/stores/member';
+import { ref } from 'vue';
+
+
+
+const onlyAuthUser = async (to, from, next) => {
+  const memberStore = useMemberStore();
+  const { userInfo, isValidToken } = storeToRefs(memberStore);
+  const { getUserInfo } = memberStore;
+
+  let token = sessionStorage.getItem('accessToken');
+
+  if (userInfo.value != null && token) {
+    await getUserInfo(token);
+  }
+  if (!isValidToken.value || userInfo.value === null) {
+    next({ name: 'user-login' });
+  } else {
+    next();
+  }
+};
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,42 +33,43 @@ const router = createRouter({
     },
 
     {
-      path: "/modify",
-      name: "modify",
 
-      component: () => import("@/views/ModifyView.vue"),
+      path: '/modify',
+      name: 'modify',
+      beforeEnter: onlyAuthUser,
+      component: () => import('@/views/ModifyView.vue'),
     },
 
     {
-      path: "/conqueredmountain",
-      name: "conqueredmountain",
-
-      component: () => import("@/views/ConqueredMountain.vue"),
+      path: '/conqueredmountain',
+      name: 'conqueredmountain',
+      beforeEnter: onlyAuthUser,
+      component: () => import('@/views/ConqueredMountain.vue'),
     },
 
     {
-      path: "/board",
-      name: "board",
-
-      component: () => import("../views/Board.vue"),
+      path: '/board',
+      name: 'board',
+      beforeEnter: onlyAuthUser,
+      component: () => import('../views/Board.vue'),
     },
     {
-      path: "/plan",
-      name: "plan",
-
-      component: () => import("../views/Plan.vue"),
+      path: '/plan',
+      name: 'plan',
+      beforeEnter: onlyAuthUser,
+      component: () => import('../views/Plan.vue'),
     },
     {
-      path: "/mypage",
-      name: "mypage",
-
-      component: () => import("../views/MyPage.vue"),
+      path: '/mypage',
+      name: 'mypage',
+      beforeEnter: onlyAuthUser,
+      component: () => import('../views/MyPage.vue'),
     },
     {
-      path: "/boardwriteCard",
-      name: "boardwriteCard",
-
-      component: () => import("../components/board/item/BoardwriteCard.vue"),
+      path: '/boardwriteCard',
+      name: 'boardwriteCard',
+      beforeEnter: onlyAuthUser,
+      component: () => import('../components/board/item/BoardwriteCard.vue'),
     },
     {
       path: "/login",
@@ -62,40 +84,35 @@ const router = createRouter({
       component: () => import("../views/Regist.vue"),
     },
     {
-      path: "/search",
-      name: "search",
 
-      component: () => import("../views/Search.vue"),
+      path: '/search',
+      name: 'search',
+      beforeEnter: onlyAuthUser,
+      component: () => import('../views/Search.vue'),
     },
     {
-      path: "/mountainview",
-      name: "mountainview",
-
-      component: () => import("@/views/MountainView.vue"),
+      path: '/mountainview',
+      name: 'mountainview',
+      beforeEnter: onlyAuthUser,
+      component: () => import('@/views/MountainView.vue'),
     },
     {
-      path: "/mountain/:id",
-      name: "MountainDetail",
-      component: () => import("../views/MountainView.vue"),
+      path: '/mountain/:id',
+      name: 'MountainDetail',
+      beforeEnter: onlyAuthUser,
+      component: () => import('../views/MountainView.vue'),
     },
     {
-      path: "/boardview/:boardId",
-      name: "boardview",
-
-      component: () => import("@/views/BoardView.vue"),
-    },
-    {
-      path: "/myinfo",
-      name: "myinfo",
-
-      component: () => import("@/views/myinfo.vue"),
+      path: '/boardview/:boardId',
+      name: 'boardview',
+      beforeEnter: onlyAuthUser,
+      component: () => import('@/views/BoardView.vue'),
     },
   ],
 });
 export const showHeader = ref(true);
 
 router.beforeEach((to, from, next) => {
-  const isLoggedIn = sessionStorage.getItem("userId") !== null;
 
   showHeader.value = isLoggedIn;
   next();

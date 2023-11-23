@@ -1,52 +1,51 @@
 <script setup>
-import { defineProps, ref, defineEmits } from "vue";
-import { addWishList } from "@/api/wishlist";
-
+import { defineProps, ref, defineEmits } from 'vue';
+import { addWishList } from '@/api/wishlist';
+import { storeToRefs } from 'pinia';
+import { useMemberStore } from '@/stores/member';
+const { userInfo } = storeToRefs(useMemberStore());
 defineProps({
   RecommendCard: Object,
 });
-const emit = defineEmits(["getWishLists"]);
-const prefix = "https://www.forest.go.kr/images/data/down/mountain";
+const emit = defineEmits(['getWishLists']);
+const prefix = 'https://www.forest.go.kr/images/data/down/mountain';
 const wish = ref({
-  userId: "",
-  mntilistno: "",
-  memberid: "",
-  mntiname: "",
-  mntidetails: "",
-  mntiadd: "",
-  mntihigh: "",
+  userId: '',
+  mntilistno: '',
+  memberid: '',
+  mntiname: '',
+  mntidetails: '',
+  mntiadd: '',
+  mntihigh: '',
   sido_code: 0,
   gugun_code: 0,
-  mntiimg: "",
-  memberconquerednum: "",
-  conquereddate: "",
-  lat: "",
-  lng: "",
+  mntiimg: '',
+  memberconquerednum: '',
+  conquereddate: '',
+  lat: '',
+  lng: '',
 });
 
 const addToWishlist = (mntilistno) => {
-  wish.value.userId = sessionStorage.userId;
+  wish.value.userId = userInfo.value.userId;
   wish.value.mntilistno = mntilistno;
 
   addWishList(
     wish.value,
     ({ data }) => {
       console.log(data);
-      emit("getWishLists");
+      emit('getWishLists');
     },
-    (err) => {
+    (error) => {
       if (error.response) {
         // 서버가 응답하지만, 요청이 실패한 경우
-        console.log(
-          "Server responded with a non 2xx response",
-          error.response.data
-        );
+        console.log('Server responded with a non 2xx response', error.response.data);
       } else if (error.request) {
         // 서버로 요청을 보냈지만 응답을 받지 못한 경우
-        console.log("No response received", error.request);
+        console.log('No response received', error.request);
       } else {
         // 요청 전에 문제가 발생한 경우
-        console.log("Error setting up the request", error.message);
+        console.log('Error setting up the request', error.message);
       }
     }
   );
@@ -64,13 +63,8 @@ const addToWishlist = (mntilistno) => {
         />
       </div>
       <div class="col-7 my-2 d-flex flex-column align-items-start">
-        <button
-          type="button"
-          class="btn btn-dark rounded-pill btn-sm mb-2 fs-8"
-        >
-          {{
-            RecommendCard.mntiadd.substring(0, RecommendCard.mntiadd.length - 3)
-          }}
+        <button type="button" class="btn btn-dark rounded-pill btn-sm mb-2 fs-8">
+          {{ RecommendCard.mntiadd.substring(0, RecommendCard.mntiadd.length - 3) }}
         </button>
         <p class="fs-5 fw-bold mb-2">{{ RecommendCard.mntiname }}</p>
         <p
