@@ -2,8 +2,11 @@
 import { ref, onMounted } from "vue";
 import { listSido, listGugun, AddconqueredMountain } from "@/api/mountain";
 import axios from "axios";
+import { useRouter } from "vue-router";
+
 const editedMountainName = ref("");
 const editedFileInfo = ref("");
+const router = useRouter();
 
 const param = ref({
   sidoCode: 0,
@@ -127,6 +130,7 @@ const insertData = async () => {
     console.log("codeeee" + selectedGugun.value);
 
     console.log(response.data);
+    router.push("/mypage");
 
     // Handle the response if needed
   } catch (error) {

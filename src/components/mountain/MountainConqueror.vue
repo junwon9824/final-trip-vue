@@ -69,8 +69,6 @@ onMounted(() => {
       </div>
     </div>
   </div>
-
-  <div v-else>랭킹에 표시할 top3 정복자가 없습니다.</div>
 </template>
 
 <style scoped></style>
