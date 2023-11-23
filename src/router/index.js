@@ -37,6 +37,13 @@ const router = createRouter({
     },
 
     {
+      path: "/myinfo",
+      name: "myinfo",
+      beforeEnter: onlyAuthUser,
+      component: () => import("@/views/Myinfo.vue"),
+    },
+
+    {
       path: "/conqueredmountain",
       name: "conqueredmountain",
       beforeEnter: onlyAuthUser,
@@ -105,12 +112,5 @@ const router = createRouter({
     },
   ],
 });
-// export const showHeader = ref(true);
-
-// router.beforeEach((to, from, next) => {
-
-//   showHeader.value = isLoggedIn;
-//   next();
-// });
 
 export default router;

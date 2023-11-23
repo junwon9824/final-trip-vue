@@ -1,12 +1,10 @@
 <script setup>
-
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import { useRoute, useRouter } from 'vue-router';
-import { deleteArticle } from '../api/board.js';
-import { storeToRefs } from 'pinia';
-import { useMemberStore } from '@/stores/member';
-
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import { useRoute, useRouter } from "vue-router";
+import { deleteArticle, writeComments } from "../api/board.js";
+import { storeToRefs } from "pinia";
+import { useMemberStore } from "@/stores/member";
 
 const { userInfo } = storeToRefs(useMemberStore());
 const route = useRoute();
@@ -17,6 +15,7 @@ const isYou = ref(false);
 const imgurl = ref("");
 
 const article = ref({});
+const articleimg = ref({});
 const articlecomments = ref([]);
 
 const liked = ref(false);
@@ -50,6 +49,30 @@ const getmydata = async () => {
 
     console.log("getttt" + response.data.imgurl);
     imgurl.value = response.data.imgurl;
+    // console.log("getttt" + response.data.userId);
+    // console.log("getttt" + response.data.userName);
+    // console.log("getttt" + response.data.address);
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
+};
+
+const getarticleimg = async () => {
+  try {
+    const response = await axios.get(
+      "http://localhost:80/article/getfilelist",
+      {
+        params: {
+          articleNo: boardId,
+        },
+      }
+    );
+
+    console.log(" " + response.data);
+    console.log(" " + boardId);
+
+    articleimg.value = response.data;
     // console.log("getttt" + response.data.userId);
     // console.log("getttt" + response.data.userName);
     // console.log("getttt" + response.data.address);
@@ -101,9 +124,7 @@ const getcommentlist = async () => {
 };
 
 const checkIsYou = (thisid) => {
-
   if (userInfo.value.userId === thisid) {
-
     isYou.value = true;
   }
 };
@@ -120,6 +141,7 @@ const getdetaillist = async () => {
     liked.value = response.data.likedByUser;
     checkIsYou(article.value.userId);
     // writer.value = article.value.userId;
+    getarticleimg();
     getmydata();
     getcommentlist();
   } catch (error) {
@@ -154,7 +176,7 @@ const toggleLike = async () => {
 const AddComment = () => {
   // console.log("article.value.articleNo", article.value.articleNo);
 
-  commentbox.value.userId = sessionStorage.getItem("userId");
+  commentbox.value.userId = userInfo.value.userId;
   commentbox.value.articleNo = boardId;
   commentbox.value.content = comment.value;
   commentbox.value.articleNo = boardId;
@@ -249,6 +271,14 @@ const deleteThisArticle = () => {
         {{ article.content }}
       </p>
     </div>
+    <div class="col-10 mt-4 mb-4">
+      <img
+        :src="articleimg"
+        alt="."
+        style="width: 400px; height: 400px; object-fit: fill"
+      />
+    </div>
+
     <button
       v-if="isYou"
       class="btn bg-secondary fs-6 fw-bold text-white"

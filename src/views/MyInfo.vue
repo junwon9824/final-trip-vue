@@ -3,7 +3,10 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRoute, useRouter } from "vue-router";
 import { deleteArticle } from "../api/board.js";
+import { storeToRefs } from "pinia";
+import { useMemberStore } from "@/stores/member";
 
+const { userInfo } = storeToRefs(useMemberStore());
 const route = useRoute();
 const router = useRouter();
 console.log(route.params);
@@ -47,7 +50,7 @@ const getmydata = async () => {
 };
 
 const checkIsYou = (thisid) => {
-  if (sessionStorage.getItem("userId") === thisid) {
+  if (userInfo.value.userId === thisid) {
     isYou.value = true;
   }
 };
@@ -140,6 +143,24 @@ const deleteThisArticle = () => {
     <img
       id="first_snow"
       src="src/assets/겨울산행전대비.png"
+      class="img-fluid rounded mx-auto d-block"
+      alt="..."
+    />
+    <img
+      id="first_snow"
+      src="src/assets/가을기념단풍산행.png"
+      class="img-fluid rounded mx-auto d-block"
+      alt="..."
+    />
+    <img
+      id="first_snow"
+      src="src/assets/낭만산여행.png"
+      class="img-fluid rounded mx-auto d-block"
+      alt="..."
+    />
+    <img
+      id="first_snow"
+      src="src/assets/정기산행공지.png"
       class="img-fluid rounded mx-auto d-block"
       alt="..."
     />

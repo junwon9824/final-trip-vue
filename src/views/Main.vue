@@ -1,134 +1,166 @@
 <script setup>
-import MainCard from "../components/Main/MainCard.vue";
-import { ref, onMounted } from "vue";
-import axios from "axios";
+import MainCard from '../components/Main/MainCard.vue';
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import { defineComponent } from 'vue';
+import 'vue3-carousel/dist/carousel.css';
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel';
 
-const prefix = "https://www.forest.go.kr/images/data/down/mountain";
+const banneritems = [
+    {
+        title: 'Carousel Slider',
+        description: 'Carousel를 이용한 이미지 슬라이드 효과',
+        menus: [
+            {
+                image: 'src/assets/bannergood.jpg',
+                alt: 'image1',
+            },
+            {
+                image: 'src/assets/river.jpg',
+                alt: 'image1',
+            },
+            {
+                image: 'src/assets/snowmountain.jpg',
+                alt: 'image1',
+            },
+            {
+                image: 'src/assets/lake.jpg',
+                alt: 'image1',
+            },
+            {
+                image: 'src/assets/truebsee.jpg',
+                alt: 'image1',
+            },
+        ],
+    },
+];
+
+const imgitems = [
+    {
+        title: 'Carousel Slider',
+        description: 'Carousel를 이용한 이미지 슬라이드 효과',
+        menus: [
+            {
+                image: 'src/assets/001.png',
+                alt: 'image1',
+            },
+            {
+                image: 'src/assets/002.png',
+                alt: 'image1',
+            },
+            {
+                image: 'src/assets/003.png',
+                alt: 'image1',
+            },
+        ],
+    },
+];
 
 const items = ref([
-  //   {
-  //     mntilistno: 1,
-  //     memberid: 'user123',
-  //     mntiname: 'Mountain A',
-  //     mntidetails: 'Details about Mountain A',
-  //     mntiadd: 'Address of Mountain A',
-  //     mntihigh: 1500,
-  //     sido_code: 1,
-  //     gugun_code: 101,
-  //     mntiimg: 'url_to_image_A',
-  //     memberconquerednum: 3,
-  //   },
-  //   {
-  //     mntilistno: 2,
-  //     memberid: 'user456',
-  //     mntiname: 'Mountain B',
-  //     mntidetails: 'Details about Mountain B',
-  //     mntiadd: 'Address of Mountain B',
-  //     mntihigh: 2000,
-  //     sido_code: 2,
-  //     gugun_code: 202,
-  //     mntiimg: 'url_to_image_B',
-  //     memberconquerednum: 5,
-  //   },
-  // Add more items as needed
+    {
+        mntiname: '무등산',
+        mntilistno: '431502001',
+        mntiimg: 'src/assets/mumountain.png',
+    },
+    {
+        mntiname: '민둥산',
+        mntilistno: '418201701',
+        mntiimg: 'src/assets/minmountain.jpeg',
+    },
+    {
+        mntiname: '방태산',
+        mntilistno: '428102201',
+        mntiimg: 'src/assets/bangmountain.jpeg',
+    },
 ]);
-
-const getrandomMountain = async () => {
-  console.log("innn");
-
-  try {
-    const response = await axios.get(
-      "http://localhost:80/mountain/random2",
-      {}
-    );
-
-    console.log(response.data);
-
-    items.value = response.data.map((item) => ({
-      ...item,
-      mntiimg: `${prefix}/${item.mntiimg}`, // 이미지 URL에 prefix 추가
-    }));
-
-    // items.value = response.data;
-
-    console.log(items.value);
-  } catch (error) {
-    console.log(error);
-    throw new Error(error);
-  }
-};
-
-onMounted(getrandomMountain);
+const items2 = ref([
+    {
+        mntiname: '단석산',
+        mntilistno: '471301101',
+        mntiimg: 'src/assets/danmountain.jpeg',
+    },
+    {
+        mntiname: '계방산',
+        mntilistno: '427206801',
+        mntiimg: 'src/assets/gyaemountain.jpeg',
+    },
+    {
+        mntiname: '감악산',
+        mntilistno: '414800101',
+        mntiimg: 'src/assets/gammountain.png',
+    },
+]);
 </script>
 
 <template>
-  <div>
-    <div
-      class="col-lg-12 d-flex justify-content-between align-items-center flex-column"
-    >
-      <img
-        src="@/assets/bannergood.jpg"
-        class="img-fluid rounded mx-auto d-block"
-        alt="..."
-      />
+    <div class="wrapper">
+        <div class="image_slider col-lg-12" slideWidth="100%">
+            <carousel :items-to-show="1" :wrapAround="true" :autoplay="5000">
+                <slide v-for="slide in banneritems[0].menus" :key="slide">
+                    <div class="carousel__item">
+                        <figure>
+                            <img :src="slide.image" :alt="slide.alt" />
+                        </figure>
+                    </div>
+                </slide>
+
+                <template #addons>
+                    <navigation />
+                    <pagination />
+                </template>
+            </carousel>
+        </div>
+
+        <div class="d-flex flex-column mt-5 align-items-center">
+            <div class="d-flex justify-content-between align-items-center col-10">
+                <p class="text-secondary fw-bold fs-4 px-5 m-0">아래 산들도 정복 해 보세요!</p>
+
+                <router-link to="/search">
+                    <button class="btn btn-secondary rounded-pill btn-lg fs-4" id="searchmtn">
+                        산을 검색해 보세요 <i class="bi bi-search"></i>
+                    </button>
+                </router-link>
+            </div>
+
+            <div class="d-flex align-items-center col-10">
+                <MainCard v-for="item in items" :key="item.mntilistno" :MainCard="item"></MainCard>
+            </div>
+            <div class="d-flex align-items-center col-10">
+                <MainCard v-for="item in items2" :key="item.mntilistno" :MainCard="item"></MainCard>
+            </div>
+            <div class="col-10 image_slider" slideWidth="100%">
+                <carousel :items-to-show="1" :wrapAround="true" :autoplay="5000">
+                    <slide v-for="slide in imgitems[0].menus" :key="slide">
+                        <div class="m-0 p-0">
+                            <figure><img :src="slide.image" :alt="slide.alt" style="object-fit: contain" /></figure>
+                        </div>
+                    </slide>
+
+                    <template #addons>
+                        <navigation />
+                        <pagination />
+                    </template>
+                </carousel>
+            </div>
+        </div>
     </div>
-
-    <div class="d-flex flex-column mt-5 align-items-center">
-      <div class="d-flex justify-content-between align-items-center col-10">
-        <p class="text-secondary fw-bold fs-4 px-5 m-0">
-          아래 산들도 정복 해 보세요!
-        </p>
-
-        <router-link to="/search">
-          <button
-            class="btn btn-secondary rounded-pill btn-lg fs-4"
-            id="searchmtn"
-          >
-            산을 검색해 보세요 <i class="bi bi-search"></i>
-          </button>
-        </router-link>
-      </div>
-
-      <div class="d-flex align-items-center col-10">
-        <MainCard
-          v-for="item in items"
-          :key="item.mntilistno"
-          :MainCard="item"
-        ></MainCard>
-      </div>
-      <div class="d-flex" id="image">
-        <img
-          id="first_snow"
-          src="src/assets/첫눈맞이등산.png"
-          class="img-fluid rounded mx-auto d-block"
-          alt="..."
-        />
-        <img
-          id="first_snow"
-          src="src/assets/겨울산행전대비.png"
-          class="img-fluid rounded mx-auto d-block"
-          alt="..."
-        />
-      </div>
-    </div>
-  </div>
 </template>
 
 <style scoped>
 img {
-  width: 100%;
-  max-width: 100%;
-  height: 600px;
+    width: 100%;
+    max-width: 100%;
+    height: 600px;
 }
 
 p {
-  margin-left: 10%;
+    margin-left: 10%;
 }
 
 #searchmtn {
-  margin-left: 500px;
+    margin-left: 500px;
 }
 #first_snow {
-  width: 40%;
+    width: 40%;
 }
 </style>
