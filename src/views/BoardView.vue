@@ -1,27 +1,37 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import { useRoute } from "vue-router";
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import { useRoute, useRouter } from 'vue-router';
+import { deleteArticle } from '../api/board.js';
 
 const route = useRoute();
+const router = useRouter();
 console.log(route.params);
 const boardId = route.params.boardId;
+const isYou = ref(false);
 
-console.log("boardId:", boardId);
+onMounted(() => {
+  getdetaillist();
+});
+
+const checkIsYou = (thisid) => {
+  if (sessionStorage.getItem('userId') === thisid) {
+    isYou.value = true;
+  }
+};
+
+console.log('boardId:', boardId);
 
 const article = ref({});
 const liked = ref(false);
 
 const getdetaillist = async () => {
   try {
-    const response = await axios.get(
-      "http://localhost:80/article/view?articleno=" + boardId
-    );
-    // console.log("gettttttttt" + article.value.likes);
-    // console.log("gettttttttt" + article.value.content);
+    const response = await axios.get('http://localhost:80/article/view?articleno=' + boardId);
     console.log(response.data);
     article.value = response.data;
     liked.value = response.data.likedByUser;
+    checkIsYou(article.value.userId);
   } catch (error) {
     console.log(error);
     throw new Error(error);
@@ -29,11 +39,11 @@ const getdetaillist = async () => {
 };
 
 const toggleLike = async () => {
-  console.log("likkk");
+  console.log('likkk');
   const newLikeStatus = !liked.value; // 미리 상태를 변경하지 않고, 요청을 보낸 후 성공적인 응답을 받았을 때 상태를 변경
 
   try {
-    const response = await axios.post("http://localhost:80/article/likes", {
+    const response = await axios.post('http://localhost:80/article/likes', {
       articleNo: article.value.articleNo,
     });
 
@@ -42,7 +52,7 @@ const toggleLike = async () => {
     // 응답으로 받은 좋아요 수와 상태를 업데이트합니다.
     // if (response.data.success) {
     article.value.likes = response.data;
-    console.log("arrrrr" + article.value.likes);
+    console.log('arrrrr' + article.value.likes);
     liked.value = newLikeStatus; // 서버의 응답을 바탕으로 상태를 업데이트
     // }
   } catch (error) {
@@ -51,13 +61,24 @@ const toggleLike = async () => {
   }
 };
 
-onMounted(getdetaillist);
+const deleteThisArticle = () => {
+  console.log('article.value.articleNo', article.value.articleNo);
+  deleteArticle(
+    article.value.articleNo,
+    ({ data }) => {
+      console.log(data);
+      alert('삭제되었습니다.');
+      router.push('/board');
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+};
 </script>
 
 <template>
-  <div
-    class="container bg-info d-flex align-items-center flex-column py-4 rounded-4"
-  >
+  <div class="container bg-info d-flex align-items-center flex-column py-4 rounded-4 mt-5">
     <div class="col-10 d-flex flex-row justify-content-between">
       <div class="d-flex flex-row align-items-center">
         <!-- 이미지props로 받기 -->
@@ -92,6 +113,14 @@ onMounted(getdetaillist);
         {{ article.content }}
       </p>
     </div>
+    <button
+      v-if="isYou"
+      class="btn bg-secondary fs-6 fw-bold text-white"
+      type="button"
+      @click="deleteThisArticle"
+    >
+      삭제
+    </button>
   </div>
 </template>
 
