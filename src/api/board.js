@@ -28,7 +28,7 @@ function modifyArticle(article, success, fail) {
 }
 
 function deleteArticle(articleno, success, fail) {
-  local.delete(`/board/delete`, { articleno: articleno }).then(success).catch(fail);
+  local.delete(`/article/delete`, { articleno: articleno }).then(success).catch(fail);
 }
 
 function toggleLike(articleno, likeStatus, success, fail) {

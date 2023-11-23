@@ -62,14 +62,16 @@ const toggleLike = async () => {
 };
 
 const deleteThisArticle = () => {
+  console.log('article.value.articleNo', article.value.articleNo);
   deleteArticle(
     article.value.articleNo,
-    () => {
+    ({ data }) => {
+      console.log(data);
       alert('삭제되었습니다.');
       router.push('/board');
     },
-    (error) => {
-      alert(error.response.data.msg);
+    (err) => {
+      console.log(err);
     }
   );
 };
