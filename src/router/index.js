@@ -1,8 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router';
 
+import { createRouter, createWebHistory } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useMemberStore } from '@/stores/member';
 import { ref } from 'vue';
+
+
 
 const onlyAuthUser = async (to, from, next) => {
   const memberStore = useMemberStore();
@@ -25,12 +27,13 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: () => import('../views/Main.vue'),
+      path: "/",
+      name: "home",
+      component: () => import("../views/Main.vue"),
     },
 
     {
+
       path: '/modify',
       name: 'modify',
       beforeEnter: onlyAuthUser,
@@ -69,18 +72,19 @@ const router = createRouter({
       component: () => import('../components/board/item/BoardwriteCard.vue'),
     },
     {
-      path: '/login',
-      name: 'login',
+      path: "/login",
+      name: "login",
 
-      component: () => import('../views/Login.vue'),
+      component: () => import("../views/Login.vue"),
     },
     {
-      path: '/register',
-      name: 'register',
+      path: "/register",
+      name: "register",
 
-      component: () => import('../views/Regist.vue'),
+      component: () => import("../views/Regist.vue"),
     },
     {
+
       path: '/search',
       name: 'search',
       beforeEnter: onlyAuthUser,
@@ -109,6 +113,7 @@ const router = createRouter({
 export const showHeader = ref(true);
 
 router.beforeEach((to, from, next) => {
+
   showHeader.value = isLoggedIn;
   next();
 });

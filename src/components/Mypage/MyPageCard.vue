@@ -91,7 +91,6 @@ const deleteUser = async () => {
         :src="imgurl"
         class="img-fluid rounded-circle mx-auto d-block"
         alt="이미지를 등록해주세요."
-        style="width: 200px"
       />
 
       <div class="flex-grow-1 ms-5">
@@ -117,5 +116,10 @@ const deleteUser = async () => {
 <style scoped>
 .cursor-pointer {
   cursor: pointer;
+}
+
+img {
+  width: 200px;
+  height: 200px;
 }
 </style>

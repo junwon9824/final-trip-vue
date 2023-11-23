@@ -41,6 +41,11 @@ const goToMyPage = () => {
   }
 };
 
+const goToMyInfo = () => {
+  const isLoggedIn = sessionStorage.getItem("userId") !== null;
+
+  router.push("/myinfo");
+};
 const goToPlan = () => {
   if (!isLogin) {
     // 비로그인 상태일 때 로그인 창 보여주기
@@ -98,6 +103,9 @@ const goToBoard = () => {
 
           <p @click="goToMyPage" class="text-primary fs-4 fw-bold me-3">마이페이지</p>
 
+          <p @click="goToMyInfo" class="text-primary fs-4 fw-bold me-3">
+            공지사항
+          </p>
           <div v-html="headerhtml"></div>
 
           <div v-if="!isLogin" class="d-flex flex-row align-items-center" style="margin-top: 8px">
