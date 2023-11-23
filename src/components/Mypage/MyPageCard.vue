@@ -1,23 +1,26 @@
 <script setup>
-import { defineProps, ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import axios from "axios";
+import { defineProps, ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
 // const props = defineProps(['userId', 'userName', 'address', 'conqueredMountains']);
+import { storeToRefs } from 'pinia';
+import { useMemberStore } from '@/stores/member';
 
+const { userInfo } = storeToRefs(useMemberStore());
 const router = useRouter();
 
-const userIdvalue = sessionStorage.getItem("userId");
-const userName = ref("");
-const address = ref("");
+const userIdvalue = userInfo.value.userId;
+const userName = ref('');
+const address = ref('');
 const num = ref(0);
-const imgurl = ref("");
+const imgurl = ref('');
 const props = defineProps({
   MainCard: Object,
 });
 
 const getmydata = async () => {
   try {
-    const response = await axios.get("http://localhost:80/user/getinfo", {
+    const response = await axios.get('http://localhost:80/user/getinfo', {
       params: {
         userId: userIdvalue,
       },
@@ -26,10 +29,10 @@ const getmydata = async () => {
     userName.value = response.data.userName;
     address.value = response.data.address;
     imgurl.value = response.data.imgurl;
-    console.log("getttt" + response.data.userId);
-    console.log("getttt" + response.data.userName);
-    console.log("getttt" + response.data.address);
-    console.log("getttt" + response.data.imgurl);
+    console.log('getttt' + response.data.userId);
+    console.log('getttt' + response.data.userName);
+    console.log('getttt' + response.data.address);
+    console.log('getttt' + response.data.imgurl);
   } catch (error) {
     console.log(error);
     throw new Error(error);
@@ -40,18 +43,15 @@ onMounted(getmydata);
 
 const gettotalconquerednum = async () => {
   try {
-    console.log("idddddddddddddd" + userIdvalue);
+    console.log('idddddddddddddd' + userIdvalue);
 
-    const response = await axios.get(
-      "http://localhost:80/mountain/gettotalconquered",
-      {
-        params: {
-          userId: userIdvalue,
-        },
-      }
-    );
+    const response = await axios.get('http://localhost:80/mountain/gettotalconquered', {
+      params: {
+        userId: userIdvalue,
+      },
+    });
 
-    console.log("getttt" + response.data.userId);
+    console.log('getttt' + response.data.userId);
     num.value = response.data;
   } catch (error) {
     console.log(error);
@@ -63,7 +63,7 @@ onMounted(gettotalconquerednum);
 
 const deleteUser = async () => {
   try {
-    const response = await axios.delete("http://localhost:80/user/delete", {
+    const response = await axios.delete('http://localhost:80/user/delete', {
       params: {
         userId: userIdvalue,
       },
@@ -76,7 +76,7 @@ const deleteUser = async () => {
   }
 
   // 탈퇴 후 로그인 페이지로 이동
-  router.push("/login");
+  router.push('/login');
 };
 
 // 기타 필요한 로직 추가
@@ -103,17 +103,11 @@ const deleteUser = async () => {
     </div>
 
     <div class="d-flex justify-content-around pt-4" style="width: 100%">
-      <button
-        class="btn btn-success rounded-3 text-white px-4"
-        @click="deleteUser"
-      >
+      <button class="btn btn-success rounded-3 text-white px-4" @click="deleteUser">
         회원탈퇴
       </button>
 
-      <router-link
-        to="/modify"
-        class="btn btn-success rounded-3 text-white px-4"
-      >
+      <router-link to="/modify" class="btn btn-success rounded-3 text-white px-4">
         수정
       </router-link>
     </div>

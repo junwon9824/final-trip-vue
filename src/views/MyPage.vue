@@ -4,18 +4,13 @@
       <div class="col-md-12">
         <MyPageCard></MyPageCard>
 
-        <div
-          class="col-md-12 mb-3 d-flex align-items-end justify-content-center"
-        >
+        <div class="col-md-12 mb-3 d-flex align-items-end justify-content-center">
           <p class="text-center fw-bold fs-2 col-10 mt-5">내가 정복한 산</p>
           <router-link
             to="/conqueredmountain"
             class="d-flex flex-row align-items-center nav-link ms-5"
           >
-            <button
-              type="button"
-              class="btn btn-secondary rounded-pill col-12 ms-2 mb-0"
-            >
+            <button type="button" class="btn btn-secondary rounded-pill col-12 ms-2 mb-0">
               추가하기<i class="bi bi-arrow-right"></i>
             </button>
           </router-link>
@@ -54,11 +49,15 @@
 </template>
 
 <script setup>
-import MyPageCard from "@/components/Mypage/MyPageCard.vue";
+import MyPageCard from '@/components/Mypage/MyPageCard.vue';
 // Add your ref imports if needed
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import router from "../router";
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import router from '../router';
+import { storeToRefs } from 'pinia';
+import { useMemberStore } from '@/stores/member';
+
+const { userInfo } = storeToRefs(useMemberStore());
 const items = ref([
   // {
   //     mntilistno: 1,
@@ -74,8 +73,8 @@ const items = ref([
   // },
 ]);
 const gotomountaindetail = async (mntilistno) => {
-  console.log("goto mtndetail");
-  router.push({ name: "MountainDetail", params: { id: mntilistno } });
+  console.log('goto mtndetail');
+  router.push({ name: 'MountainDetail', params: { id: mntilistno } });
   //   try {
   //     const response = await axios.get(
   //       `http://localhost:80/mountain/getdetail/${mntilistno}`,
@@ -95,14 +94,11 @@ const gotomountaindetail = async (mntilistno) => {
 
 const conqueredmountain = async () => {
   try {
-    const response = await axios.get(
-      "http://localhost:80/mountain/getConqueredMountains",
-      {
-        params: {
-          userId: sessionStorage.getItem("userId"),
-        },
-      }
-    );
+    const response = await axios.get('http://localhost:80/mountain/getConqueredMountains', {
+      params: {
+        userId: userInfo.value.userId,
+      },
+    });
 
     items.value = response.data;
     console.log(items.value);

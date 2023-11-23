@@ -3,7 +3,10 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useRoute, useRouter } from 'vue-router';
 import { deleteArticle } from '../api/board.js';
+import { storeToRefs } from 'pinia';
+import { useMemberStore } from '@/stores/member';
 
+const { userInfo } = storeToRefs(useMemberStore());
 const route = useRoute();
 const router = useRouter();
 console.log(route.params);
@@ -15,7 +18,7 @@ onMounted(() => {
 });
 
 const checkIsYou = (thisid) => {
-  if (sessionStorage.getItem('userId') === thisid) {
+  if (userInfo.value.userId === thisid) {
     isYou.value = true;
   }
 };

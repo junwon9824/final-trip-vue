@@ -1,11 +1,14 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { listSido, listGugun, AddconqueredMountain } from "@/api/mountain";
-import axios from "axios";
-import { useRouter } from "vue-router";
+import { ref, onMounted } from 'vue';
+import { listSido, listGugun, AddconqueredMountain } from '@/api/mountain';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { useMemberStore } from '@/stores/member';
 
-const editedMountainName = ref("");
-const editedFileInfo = ref("");
+const { userInfo } = storeToRefs(useMemberStore());
+const editedMountainName = ref('');
+const editedFileInfo = ref('');
 const router = useRouter();
 
 const param = ref({
@@ -16,9 +19,9 @@ const param = ref({
 const sidoList = ref([]);
 const gugunList = ref([]);
 
-const selectedSido = ref("시/도");
-const selectedGugun = ref("구/군");
-const userIdv = sessionStorage.getItem("userId");
+const selectedSido = ref('시/도');
+const selectedGugun = ref('구/군');
+const userIdv = userInfo.value.userId;
 
 console.log(userIdv);
 
@@ -43,14 +46,14 @@ const onChangeSido = (val) => {
 };
 
 const onChangeGugun = (val) => {
-  console.log("ssss", val);
+  console.log('ssss', val);
 
   selectedGugun.value = val;
 
   param.value.sidoCode = selectedSido.value;
   param.value.gugunCode = selectedGugun.value;
-  console.log("codeeee", selectedSido.value);
-  console.log("codeeee", selectedGugun.value);
+  console.log('codeeee', selectedSido.value);
+  console.log('codeeee', selectedGugun.value);
 };
 
 // const onChangeGugun = (event) => {
@@ -110,7 +113,7 @@ const handleImageChange = (event) => {
 
 const insertData = async () => {
   try {
-    console.log("in");
+    console.log('in');
 
     const payload = {
       userId: userIdv,
@@ -120,22 +123,22 @@ const insertData = async () => {
     };
 
     const response = await axios.post(
-      "http://localhost:80/mountain/add/conqueredMountain",
+      'http://localhost:80/mountain/add/conqueredMountain',
       payload
     );
 
     console.log(userIdv);
-    console.log("codeeee", selectedSido.value);
+    console.log('codeeee', selectedSido.value);
 
-    console.log("codeeee" + selectedGugun.value);
+    console.log('codeeee' + selectedGugun.value);
 
     console.log(response.data);
-    router.push("/mypage");
+    router.push('/mypage');
 
     // Handle the response if needed
   } catch (error) {
     console.log(error);
-    alert("해당하는 산이 없습니다.");
+    alert('해당하는 산이 없습니다.');
 
     throw new Error(error);
   }
@@ -160,11 +163,7 @@ const insertData = async () => {
               @change="onChangeSido(selectedSido)"
             >
               <option selected disabled>시/도</option>
-              <option
-                v-for="sido in sidoList"
-                :key="sido.value"
-                :value="sido.value"
-              >
+              <option v-for="sido in sidoList" :key="sido.value" :value="sido.value">
                 {{ sido.text }}
               </option>
             </select>
@@ -180,11 +179,7 @@ const insertData = async () => {
               @change="onChangeGugun(selectedGugun)"
             >
               <option selected disabled>구/군</option>
-              <option
-                v-for="gugun in gugunList"
-                :key="gugun.value"
-                :value="gugun.value"
-              >
+              <option v-for="gugun in gugunList" :key="gugun.value" :value="gugun.value">
                 {{ gugun.text }}
               </option>
             </select>
@@ -200,10 +195,7 @@ const insertData = async () => {
         </div>
 
         <div class="d-flex justify-content-end mb-3">
-          <button
-            @click="insertData"
-            class="btn btn-secondary btn-lg rounded-pill"
-          >
+          <button @click="insertData" class="btn btn-secondary btn-lg rounded-pill">
             등록<i class="bi bi-arrow-right"></i>
           </button>
         </div>

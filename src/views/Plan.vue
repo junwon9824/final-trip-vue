@@ -1,20 +1,22 @@
 <script setup>
-import { onMounted, ref, watch } from "vue";
-import RecommendCard from "../components/Plan/RecommendCard.vue";
-import MyWishList from "../components/wishlist/MyWishList.vue";
+import { onMounted, ref, watch } from 'vue';
+import RecommendCard from '../components/Plan/RecommendCard.vue';
+import MyWishList from '../components/wishlist/MyWishList.vue';
 import {
   listSido,
   listGugun,
   getMountainList,
   getUnconqueredMountainsAscendingByHeight,
   getNearestUnconqueredMountains,
-} from "../api/mountain";
-import { getWishList } from "../api/wishlist";
-
+} from '../api/mountain';
+import { getWishList } from '../api/wishlist';
+import { useMemberStore } from '@/stores/member';
+import { storeToRefs } from 'pinia';
+const { userInfo } = storeToRefs(useMemberStore());
 const sidoList = ref([]);
 const gugunList = ref([]);
-const selectedSido = ref("시/도");
-const selectedGugun = ref("구/군");
+const selectedSido = ref('시/도');
+const selectedGugun = ref('구/군');
 const mountains = ref([]);
 const positions = ref([]);
 const markers = ref([]);
@@ -24,9 +26,9 @@ const items = ref([]);
 
 const sidogugun = ref({
   sido_code: 0,
-  sido_name: "",
+  sido_name: '',
   gugun_code: 0,
-  gugun_name: "",
+  gugun_name: '',
 });
 
 const onChangeSido = (val) => {
@@ -144,15 +146,15 @@ onMounted(() => {
   getWishLists();
   getNearItems();
   // 카카오맵 API 스크립트 로드
-  const script = document.createElement("script");
+  const script = document.createElement('script');
   script.src =
-    "https://dapi.kakao.com/v2/maps/sdk.js?appkey=1cb3368408f311c9f8b57defc83d416f&autoload=false";
+    'https://dapi.kakao.com/v2/maps/sdk.js?appkey=1cb3368408f311c9f8b57defc83d416f&autoload=false';
   document.head.appendChild(script);
 
   script.onload = () => {
     // 카카오맵 초기화
     kakao.maps.load(() => {
-      const container = document.getElementById("map");
+      const container = document.getElementById('map');
       const options = {
         center: new kakao.maps.LatLng(37.5665, 126.978),
         level: 3,
@@ -165,10 +167,10 @@ onMounted(() => {
 });
 
 const getWishLists = () => {
-  console.log("getWishLists");
+  console.log('getWishLists');
   wishlists.value = [];
   getWishList(
-    { userId: sessionStorage.userId },
+    { userId: userInfo.value.userId },
     ({ data }) => {
       data.forEach((mountain) => {
         wishlists.value.push(mountain);
@@ -182,20 +184,20 @@ const getWishLists = () => {
   console.log(wishlists.value);
 };
 
-const folderimg = ref("src/assets/recommend_img1.png");
+const folderimg = ref('src/assets/recommend_img1.png');
 
 const closest = () => {
-  folderimg.value = "src/assets/recommend_img1.png";
+  folderimg.value = 'src/assets/recommend_img1.png';
   getNearItems();
 };
 const high = () => {
-  folderimg.value = "src/assets/recommend_img2.png";
+  folderimg.value = 'src/assets/recommend_img2.png';
   getHighItems();
 };
 const getHighItems = () => {
   items.value = [];
   getUnconqueredMountainsAscendingByHeight(
-    { memberId: sessionStorage.userId },
+    { memberId: userInfo.value.userId },
     ({ data }) => {
       data.forEach((mountain) => {
         items.value.push(mountain);
@@ -210,7 +212,7 @@ const getHighItems = () => {
 const getNearItems = () => {
   items.value = [];
   getNearestUnconqueredMountains(
-    { memberId: sessionStorage.userId },
+    { memberId: userInfo.value.userId },
     ({ data }) => {
       items.value = [];
       data.forEach((mountain) => {
@@ -236,11 +238,7 @@ const getNearItems = () => {
             @change="onChangeSido(selectedSido)"
           >
             <option selected disabled>시/도</option>
-            <option
-              v-for="sido in sidoList"
-              :key="sido.value"
-              :value="sido.value"
-            >
+            <option v-for="sido in sidoList" :key="sido.value" :value="sido.value">
               {{ sido.text }}
             </option>
           </select>
@@ -251,11 +249,7 @@ const getNearItems = () => {
             @change="onChangeGugun()"
           >
             <option selected disabled>구/군</option>
-            <option
-              v-for="gugun in gugunList"
-              :key="gugun.value"
-              :value="gugun.value"
-            >
+            <option v-for="gugun in gugunList" :key="gugun.value" :value="gugun.value">
               {{ gugun.text }}
             </option>
           </select>
@@ -291,11 +285,7 @@ const getNearItems = () => {
     >
       <div class="mt-4 ms-5 ps-3">
         <div class="d-flex flex-row">
-          <button
-            type="button"
-            class="btn text-primary ms-3 me-5"
-            @click="closest()"
-          >
+          <button type="button" class="btn text-primary ms-3 me-5" @click="closest()">
             가까운 순 <i class="bi bi-chevron-down"></i>
           </button>
           <button type="button" class="btn text-primary ms-5" @click="high()">
