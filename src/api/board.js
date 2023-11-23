@@ -1,11 +1,18 @@
 // board.js
-import { localAxios } from '@/util/http-commons';
+import { localAxios } from "@/util/http-commons";
 
 const local = localAxios();
 
 async function writeArticle(formData, success, fail) {
   await local.post(`/article/write`, formData).then(success).catch(fail);
 }
+async function writeComments(comments, success, fail) {
+  await local
+    .post(`/comments/writeComment`, JSON.stringify(comments))
+    .then(success)
+    .catch(fail);
+}
+
 function listArticle(param, success, fail) {
   local.get(`/board`, { params: param }).then(success).catch(fail);
 }
@@ -15,7 +22,7 @@ function detailArticle(articleno, success, fail) {
 }
 
 function registArticle(article, success, fail) {
-  console.log('boardjs article', article);
+  console.log("boardjs article", article);
   local.post(`/board`, JSON.stringify(article)).then(success).catch(fail);
 }
 
@@ -50,4 +57,5 @@ export {
   deleteArticle,
   toggleLike,
   writeArticle,
+  writeComments,
 };

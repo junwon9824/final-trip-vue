@@ -119,6 +119,11 @@ const goToMyPage = () => {
   }
 };
 
+const goToMyInfo = () => {
+  const isLoggedIn = sessionStorage.getItem("userId") !== null;
+
+  router.push("/myinfo");
+};
 const goToPlan = () => {
   const isLoggedIn = sessionStorage.getItem("userId") !== null;
 
@@ -197,6 +202,9 @@ const goToBoard = () => {
             마이페이지
           </p>
 
+          <p @click="goToMyInfo" class="text-primary fs-4 fw-bold me-3">
+            공지사항
+          </p>
           <div v-html="headerhtml"></div>
 
           <div
