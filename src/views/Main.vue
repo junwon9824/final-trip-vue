@@ -110,7 +110,7 @@ const items2 = ref([
 <template>
   <div v-if="isDialogOpen1" class="image-popup">
     <!-- <img src="src/assets/정기산행공지.png" alt="Popup Image" /> -->
-    <img src="src/assets/겨울산행전대비.png" alt="Popup Image" />
+    <img src="src/assets/첫눈맞이등산.png" alt="Popup Image" />
     <button @click="closeDialog1">닫기</button>
   </div>
   <div v-if="isDialogOpen2" class="image-popup">
@@ -137,10 +137,10 @@ const items2 = ref([
     </div>
 
     <div class="d-flex flex-column mt-5 align-items-center">
-      <div class="d-flex justify-content-between align-items-center col-10">
-        <p class="text-secondary fw-bold fs-4 px-5 m-0">
-          아래 산들도 정복 해 보세요!
-        </p>
+      <div
+        class="d-flex flex-row justify-content-center align-items-center col-10 mx-5"
+      >
+        <p class="text-secondary fw-bold fs-4 px-5 mx-5">이번 달 추천 산</p>
 
         <router-link to="/search">
           <button
@@ -152,19 +152,21 @@ const items2 = ref([
         </router-link>
       </div>
 
-      <div class="d-flex align-items-center col-10">
-        <MainCard
-          v-for="item in items"
-          :key="item.mntilistno"
-          :MainCard="item"
-        ></MainCard>
-      </div>
-      <div class="d-flex align-items-center col-10">
-        <MainCard
-          v-for="item in items2"
-          :key="item.mntilistno"
-          :MainCard="item"
-        ></MainCard>
+      <div class="d-flex flex-column align-items-center">
+        <div class="d-flex flex-row">
+          <MainCard
+            v-for="item in items"
+            :key="item.mntilistno"
+            :MainCard="item"
+          ></MainCard>
+        </div>
+        <div class="d-flex flex-row">
+          <MainCard
+            v-for="item in items2"
+            :key="item.mntilistno"
+            :MainCard="item"
+          ></MainCard>
+        </div>
       </div>
       <!-- <img src="src/assets/가을기념단풍산행.png" alt="Popup Image" /> -->
       <div class="col-10 image_slider" slideWidth="100%">
@@ -219,7 +221,7 @@ p {
   z-index: 1001;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: 500px; /* 팝업창의 최대 너비를 줄임 */
+  max-width: 800px; /* 팝업창의 최대 너비를 줄임 */
 }
 
 .image-popup img {
