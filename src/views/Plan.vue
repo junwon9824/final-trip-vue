@@ -147,7 +147,7 @@ onMounted(() => {
     getNearItems();
     // 카카오맵 API 스크립트 로드
     const script = document.createElement('script');
-    script.src = 'https://dapi.kakao.com/v2/maps/sdk.js?appkey=1cb3368408f311c9f8b57defc83d416f&autoload=false';
+    script.src = 'https://dapi.kakao.com/v2/maps/sdk.js?appkey=yourappkey&autoload=false';
     document.head.appendChild(script);
 
     script.onload = () => {
